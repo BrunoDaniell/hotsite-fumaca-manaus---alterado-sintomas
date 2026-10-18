@@ -39,6 +39,8 @@
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
   [hidden]{display:none!important}
   main{scroll-margin-top:64px}
+  .skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--primary);color:#fff;padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}
+  .skip:focus{top:12px}
   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
   /* Topo */
@@ -94,7 +96,12 @@
   .air-big .ring strong{font-size:2.6rem}
   .scale{display:flex;border-radius:12px;overflow:hidden;margin:14px 0 6px}
   .scale div{flex:1;padding:8px 4px;text-align:center;font-size:.75rem;font-weight:700;color:var(--ink)}
-  .scale-labels{display:flex;font-size:.72rem;color:var(--ink-soft)}
+  .scale-labels{display:flex;font-size:.72rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .scale-wrap{position:relative;margin-top:16px}
+  .scale-wrap .scale{margin:0 0 4px}
+  .scale-pin{position:absolute;top:-12px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--ink);transform:translateX(-7px);transition:left .4s}
+  .pm-explica{font-size:.85rem;color:var(--ink-soft);margin:8px 0 0}
+  .rank-dica{font-size:.82rem;color:var(--ink-soft);margin:-4px 0 10px}
   .scale-labels span{flex:1;text-align:center}
   .advice li{margin:6px 0}
   .stations{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:16px}
@@ -122,6 +129,12 @@
   section.panel{scroll-margin-top:90px}
   .result{margin-top:14px;border-radius:14px;padding:16px 18px;background:var(--primary-soft);display:none}
   .result.show{display:block}
+  .urgente{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#F4E4E4;border:1px solid #E2BDBD;border-radius:14px;padding:12px 16px;margin:0 0 16px}
+  .urgente p{margin:0;font-weight:700}
+  .urgente a{white-space:nowrap}
+  .checker-acoes{display:flex;justify-content:flex-end;margin-top:10px}
+  .linkbtn{background:none;border:0;color:var(--primary);font-weight:700;cursor:pointer;padding:6px 4px;font:inherit}
+  .usf-mais{display:none;width:100%;justify-content:center;margin-top:10px}
   .result h4{margin:0 0 4px;font-size:1.05rem}
   .risk-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .risk-list span{background:var(--sky-soft);border-radius:999px;padding:6px 12px;font-size:.9rem;font-weight:600}
@@ -148,6 +161,8 @@
   /* Denúncias */
   .channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
   .channel{display:flex;flex-direction:column;gap:6px}
+  .channel .tag{align-self:flex-start}
+  .channel .horario{font-size:.82rem;color:var(--ink-soft);margin:-2px 0 0}
   .channel h3{margin:0;font-size:1.05rem}
   .channel .num{font-size:1.25rem;font-weight:800}
   .channel .btn{margin-top:auto;justify-content:center}
@@ -201,6 +216,23 @@
   .worst .b{font-weight:700;flex:1}
   .worst .v{font-weight:800}
   .worst .l{font-size:.82rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--c)}
+  .worst li.zona{margin-top:6px}
+  .worst li.zona:first-child{margin-top:0}
+  .worst li.zona .b{font-size:1.02rem}
+  .worst li.sub{margin-left:22px;padding:6px 12px;border-left-width:4px;background:transparent;border-bottom:1px solid var(--surface-2);border-radius:0 8px 8px 0;font-size:.92rem}
+  .worst li.sub .b{font-weight:600}
+  .worst li.sub .v{font-weight:700}
+  .worst li.sub .l{font-size:.74rem;padding:2px 8px}
+  .worst li.zona-wrap{display:block;padding:0;background:none;border:0;border-radius:0}
+  .worst details.zona-det{margin:0;box-shadow:none;background:var(--surface-2);border-radius:12px;border-left:6px solid var(--c);overflow:hidden}
+  .worst details.zona-det summary{display:flex;align-items:center;gap:12px;padding:10px 44px 10px 14px}
+  .worst details.zona-det summary::after{right:14px}
+  .worst details.zona-det .b{font-weight:700;flex:1}
+  .worst details.zona-det .dica{display:block;font-size:.78rem;font-weight:400;opacity:.7}
+  .worst details.zona-det[open] .dica-fechada{display:none}
+  .worst details.zona-det:not([open]) .dica-aberta{display:none}
+  .worst ol.sensores{list-style:none;margin:0;padding:0 10px 10px 10px;display:grid;gap:4px}
+  .worst ol.sensores li.sub{margin-left:0;background:var(--surface);border-radius:8px}
   details.more{background:none;box-shadow:none;margin:10px 0 0}
   details.more summary{padding:8px 0;color:var(--primary);font-weight:700}
   details.more summary::after{right:4px}
@@ -231,10 +263,17 @@
     .today{flex-direction:column;text-align:center}
     .wrap{padding:0 16px}
   }
+  @media (max-width:860px){
+    .site-head .tabs{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 28px),transparent);padding:0 14px}
+    .usf-list:not(.todas) .usf-extra{display:none}
+    .usf-list:not(.todas) + .usf-mais:not([hidden]){display:flex}
+    .worst details.zona-det summary{flex-wrap:wrap;row-gap:4px}
+  }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <header class="site-head">
   <div class="wrap head-row">
@@ -252,7 +291,7 @@
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="conteudo" tabindex="-1">
 
   <!-- ================= QUALIDADE DO AR (início) ================= -->
   <section class="panel active" id="ar" role="tabpanel" aria-labelledby="tab-ar">
@@ -261,7 +300,7 @@
       <p id="updated"></p>
     </div>
 
-    <div class="demo-flag" id="demoFlag">Dados de demonstração até a integração com o Selva/UEA.</div>
+    <div class="demo-flag" id="demoFlag" hidden></div>
 
     <div class="home-grid">
       <div class="card" aria-live="polite">
@@ -273,29 +312,38 @@
           </div>
         </div>
         <ul class="advice" id="advice"></ul>
-        <div class="scale" aria-hidden="true">
-          <div style="background:var(--lv-boa)">Boa</div>
-          <div style="background:var(--lv-moderada)">Moderada</div>
-          <div style="background:var(--lv-ruim)">Ruim</div>
-          <div style="background:var(--lv-muito-ruim)">Muito ruim</div>
-          <div style="background:var(--lv-pessima)">Péssima</div>
+        <div class="scale-wrap" aria-hidden="true">
+          <span class="scale-pin" id="scalePin" hidden></span>
+          <div class="scale">
+            <div style="background:var(--lv-boa)">Boa</div>
+            <div style="background:var(--lv-moderada)">Moderada</div>
+            <div style="background:var(--lv-ruim)">Ruim</div>
+            <div style="background:var(--lv-muito-ruim)">Muito ruim</div>
+            <div style="background:var(--lv-pessima)">Péssima</div>
+          </div>
+          <div class="scale-labels"><span>até 25</span><span>26 a 50</span><span>51 a 75</span><span>76 a 125</span><span>acima de 125</span></div>
         </div>
+        <p class="pm-explica">Valores de PM2,5, as partículas finas da fumaça, em µg/m³. A Organização Mundial da Saúde recomenda no máximo 15 na média do dia.</p>
 
-        <h2 class="mini-h">Bairros mais afetados</h2>
-        <ol class="worst" id="stations"></ol>
-        <details class="more"><summary>Ver todos os bairros</summary><ol class="worst" id="allStations"></ol></details>
+        <div id="bairrosBox">
+          <h2 class="mini-h" id="rankTitle">Bairros mais afetados</h2>
+          <p class="rank-dica" id="rankDica" hidden>Toque numa zona para ver a leitura de cada sensor.</p>
+          <ol class="worst" id="stations"></ol>
+          <details class="more"><summary id="rankMore">Ver todos os bairros</summary><ol class="worst" id="allStations"></ol></details>
+        </div>
+        <p class="note" id="airSource" style="margin:12px 0 0"></p>
       </div>
 
       <div class="card fire-card">
-        <h2 class="mini-h">Focos de queimada no Amazonas</h2>
+        <h2 class="mini-h">Focos de queimada na região</h2>
         <p class="note" style="margin:0">A fumaça que chega a Manaus vem desses focos.</p>
-        <div id="fireMap" role="img" aria-label="Mapa do Amazonas com os focos de queimada"></div>
-        <div class="legend"><span><i style="background:#C98B6B"></i>Foco de queimada</span><span><i style="background:#3F7F73"></i>Manaus</span></div>
-        <p class="note" style="margin:6px 0 0">Mapa ilustrativo. Dados oficiais de focos: Inpe.</p>
+        <div id="fireMap" role="img" aria-label="Mapa do Amazonas com os focos de queimada das últimas 48 horas"></div>
+        <div class="legend"><span><i style="background:#C98B6B"></i>Foco de queimada</span><span><i style="background:#3F7F73;outline:2px solid #fff;box-shadow:0 0 0 1px #ccc"></i>Manaus (cor = qualidade do ar)</span></div>
+        <p class="note" id="focosInfo" style="margin:6px 0 0" aria-live="polite">Carregando focos…</p>
       </div>
     </div>
 
-    <p class="credit-line">Qualidade do ar: <strong>Selva — Universidade do Estado do Amazonas (UEA)</strong>.</p>
+    <p class="credit-line">Sensores: <strong>Universidade do Estado do Amazonas (UEA), rede Selva</strong>, Sema, FAS e Ufam, via <a href="https://map.purpleair.com/" target="_blank" rel="noopener">PurpleAir</a>. Reserva: Open-Meteo. Focos de queimada: NASA FIRMS.</p>
 
     <div class="quick">
       <button class="btn btn-primary" data-go="sintomas">Estou sentindo algo</button>
@@ -308,6 +356,11 @@
     <div class="panel-head">
       <h2>Marque seus sintomas</h2>
       <p>Toque no que você está sentindo e veja o que fazer. Esta ferramenta orienta, mas não substitui uma consulta.</p>
+    </div>
+
+    <div class="urgente" role="note">
+      <p>Falta de ar forte, dor no peito ou lábios arroxeados? Não espere.</p>
+      <a class="btn btn-primary" href="tel:192">Ligar 192 (Samu)</a>
     </div>
 
     <div class="card checker" style="margin-top:0">
@@ -326,6 +379,7 @@
         <label><input type="checkbox" data-sev="3"> Lábios arroxeados</label>
         <label><input type="checkbox" data-sev="3"> Tontura ou desmaio</label>
       </fieldset>
+      <div class="checker-acoes"><button type="button" class="linkbtn" id="limparSintomas" hidden>Limpar seleção</button></div>
       <div class="result" id="result" aria-live="polite"></div>
     </div>
 
@@ -404,7 +458,10 @@
 
     <div class="usf-layout">
       <div id="map" role="region" aria-label="Mapa das USFs"></div>
-      <div class="usf-list" id="usfList" aria-live="polite"></div>
+      <div>
+        <div class="usf-list" id="usfList" aria-live="polite"></div>
+        <button type="button" class="btn btn-soft usf-mais" id="usfMais" hidden>Mostrar todas as unidades</button>
+      </div>
     </div>
     <p class="note" style="margin-top:12px">Lista: Unidades de Saúde da Família de horário ampliado, conforme a <a href="https://www.manaus.am.gov.br/semsa/unidades-basicas-de-saude-ubs/unidades-basicas-de-saude-de-horario-ampliado/" target="_blank" rel="noopener">Semsa</a>. <a href="https://www.manaus.am.gov.br/semsa/unidades/unidades-basicas-de-saude/" target="_blank" rel="noopener">Ver todas as unidades de saúde por zona</a>.</p>
 
@@ -415,24 +472,32 @@
   <section class="panel" id="denuncias" role="tabpanel" aria-labelledby="tab-denuncias">
     <div class="panel-head">
       <h2>Denuncie queimadas</h2>
-      <p>Cada foco apagado é ar mais limpo para a cidade inteira. Queimar mata, lixo ou terreno é proibido e pode ser crime ambiental. A denúncia pode ser anônima.</p>
+      <p>Cada foco apagado é ar mais limpo para a cidade inteira. Desde setembro de 2026, o uso do fogo está proibido em todo o Amazonas, e queimar mata, lixo ou terreno pode ser crime ambiental. A denúncia pode ser anônima.</p>
     </div>
 
     <div class="channels">
       <!-- ATENÇÃO: confirmar todos os números e links com a Prefeitura antes de publicar -->
       <div class="card channel">
-        <span class="tag">Queimada urbana</span>
-        <h3>Semmas — WhatsApp</h3>
-        <span class="num">(92) 98842-2161</span>
-        <p class="note">Terrenos, lixo e pequenos focos na cidade. Envie foto e localização.</p>
-        <a class="btn btn-primary" href="https://wa.me/5592988422161?text=Ol%C3%A1%2C%20quero%20denunciar%20uma%20queimada." target="_blank" rel="noopener">Abrir no WhatsApp</a>
-      </div>
-      <div class="card channel">
         <span class="tag">Fogo agora</span>
         <h3>Corpo de Bombeiros</h3>
         <span class="num">193</span>
-        <p class="note">Incêndio em andamento, com risco a pessoas ou imóveis.</p>
-        <a class="btn btn-soft" href="tel:193">Ligar 193</a>
+        <p class="note">Incêndio em andamento, com risco a pessoas ou imóveis. Atende 24 horas.</p>
+        <a class="btn btn-primary" href="tel:193">Ligar 193</a>
+      </div>
+      <div class="card channel">
+        <span class="tag">Queimada urbana</span>
+        <h3>Semmas — WhatsApp</h3>
+        <span class="num">(92) 98842-2161</span>
+        <p class="note">Terrenos, lixo e pequenos focos na cidade. Envie foto, endereço, dia e horário.</p>
+        <a class="btn btn-soft" href="https://wa.me/5592988422161?text=Ol%C3%A1%2C%20quero%20denunciar%20uma%20queimada." target="_blank" rel="noopener">Abrir no WhatsApp</a>
+      </div>
+      <div class="card channel">
+        <span class="tag">Floresta e zona rural</span>
+        <h3>Ibama — Central de Atendimento</h3>
+        <span class="num">0800 061 8080</span>
+        <p class="horario">Segunda a sexta, das 7h às 19h. Ligação gratuita.</p>
+        <p class="note">Queimadas e desmatamento em áreas de floresta. Fora do horário, ligue 193 se o fogo estiver acontecendo.</p>
+        <a class="btn btn-soft" href="tel:08000618080">Ligar grátis</a>
       </div>
       <div class="card channel">
         <span class="tag">Risco à população</span>
@@ -440,13 +505,6 @@
         <span class="num">199</span>
         <p class="note">Situações de risco e emergência na cidade.</p>
         <a class="btn btn-soft" href="tel:199">Ligar 199</a>
-      </div>
-      <div class="card channel">
-        <span class="tag">Floresta e zona rural</span>
-        <h3>Ibama — Linha Verde</h3>
-        <span class="num">0800 061 8080</span>
-        <p class="note">Queimadas e desmatamento em áreas de floresta. Ligação gratuita.</p>
-        <a class="btn btn-soft" href="tel:08000618080">Ligar grátis</a>
       </div>
     </div>
 
@@ -476,16 +534,27 @@
       <p>Respostas simples para as perguntas mais comuns sobre a fumaça.</p>
     </div>
 
-    <details><summary>De onde vem essa fumaça?</summary><div class="ans">A maior parte vem de queimadas em áreas de floresta e pasto no interior do Amazonas. Com o tempo seco e pouco vento, a fumaça viaja centenas de quilômetros e fica parada sobre a cidade.</div></details>
-    <details><summary>Máscara de pano ou cirúrgica protege?</summary><div class="ans">Pouco. As partículas da fumaça são muito finas. A máscara indicada é a PFF2 (ou N95), bem ajustada ao rosto, cobrindo nariz e boca. Ela pode ser reutilizada enquanto estiver limpa e inteira.</div></details>
+    <h3 class="mini-h" style="margin:4px 0 10px">Sobre as queimadas</h3>
+    <details><summary>De onde vem essa fumaça?</summary><div class="ans">De queimadas no próprio Amazonas, muitas delas perto de Manaus. De 1º de janeiro a 12 de outubro de 2026, o Inpe registrou <strong>7.815 focos de calor</strong> no estado. Nos 30 dias até 12 de outubro, cerca de <strong>31% dos focos</strong> estavam na região metropolitana de Manaus, principalmente em Autazes (313), Itacoatiara (200), Careiro da Várzea (134) e Manacapuru (133). O sul do estado também queima muito, com destaque para Lábrea, Novo Aripuanã e Boca do Acre. Com o tempo seco e pouco vento, a fumaça fica parada sobre a cidade.</div></details>
+    <details><summary>As queimadas são criminosas ou naturais?</summary><div class="ans">Quase todas são causadas por pessoas. Um levantamento do Laboratório de Aplicações de Satélites Ambientais da UFRJ (Lasa/UFRJ), que cruza dados de satélite com registros de raios, estima que <strong>cerca de 99% dos incêndios no Brasil têm origem humana</strong>. Só cerca de 1% começa por raio. Na floresta amazônica, que é úmida, o fogo natural é raro.<br><br>Muitas queimadas começam para limpar ou renovar pasto e plantações e depois fogem do controle para a floresta seca. Outras são ligadas ao desmatamento. O Ministério do Meio Ambiente afirma que focos no meio da mata indicam queimada criminosa.<br><br><strong>Desde setembro de 2026, o Governo do Amazonas proibiu o uso do fogo em todo o estado por 120 dias.</strong> Ou seja, hoje qualquer queimada no Amazonas é irregular, seja qual for o motivo.</div></details>
+    <details><summary>Por que a fumaça está tão forte este ano?</summary><div class="ans">Por uma soma de fatores. O El Niño deixou o tempo mais seco e quente, quase não choveu em agosto e os ventos ficaram mais fracos, o que prende a fumaça sobre Manaus. Ao mesmo tempo, os focos aumentaram: só em setembro de 2026 foram 3.726 no Amazonas, quase 4 vezes os 942 de setembro de 2025. No ano, os focos mais que dobraram (+116%) em relação a 2025. Mesmo assim, o total de 2026 ainda está cerca de 12% abaixo da média histórica do Inpe, e bem abaixo de 2024, quando o estado teve 23.475 focos no mesmo período.</div></details>
+    <details><summary>O que fazer se eu vir alguém queimando?</summary><div class="ans">Denuncie. Como o uso do fogo está proibido no Amazonas, qualquer queimada pode ser denunciada, mesmo pequena. Veja na aba <a href="#denuncias" data-go="denuncias" style="color:var(--primary);font-weight:700">Denúncias</a> os telefones e o que informar. Não tente apagar um fogo grande sozinho: afaste-se e ligue 193.</div></details>
+
+    <h3 class="mini-h" style="margin:22px 0 10px">Saúde e proteção</h3>
+    <details><summary>A fumaça faz mal mesmo para quem é saudável?</summary><div class="ans">Sim. A fumaça tem partículas muito finas, chamadas PM2,5, que entram fundo no pulmão e chegam ao sangue. Elas podem causar tosse, ardência nos olhos, dor de cabeça e falta de ar, e pioram asma, bronquite e doenças do coração. A Organização Mundial da Saúde recomenda não passar de <strong>15 µg/m³ de PM2,5 na média de 24 horas</strong>. Nos dias de fumaça, os sensores de Manaus chegam a marcar mais de 10 vezes esse valor.</div></details>
+    <details><summary>Máscara de pano ou cirúrgica protege?</summary><div class="ans">Pouco. As partículas da fumaça são finas demais para esses tecidos. A máscara indicada é a <strong>PFF2 (ou N95)</strong>, bem ajustada ao rosto, cobrindo nariz e boca, sem folga nas laterais. Ela pode ser reutilizada enquanto estiver limpa, seca e sem danos. Barba atrapalha a vedação.</div></details>
     <details><summary>Posso fazer exercício ao ar livre?</summary><div class="ans">Quando o ar estiver ruim ou pior, evite. Durante o exercício respiramos mais fundo e mais rápido, e mais fumaça entra no pulmão. Prefira atividades leves em lugar fechado.</div></details>
-    <details><summary>Como deixar o ar de casa melhor?</summary><div class="ans">Mantenha portas e janelas fechadas nas horas de mais fumaça, use purificador de ar se tiver, deixe uma bacia com água ou um umidificador no ambiente e passe pano úmido em vez de vassoura.</div></details>
+    <details><summary>Como deixar o ar de casa melhor?</summary><div class="ans">Feche portas e janelas nas horas de mais fumaça. Se tiver purificador de ar com filtro HEPA, deixe ligado no cômodo onde a família passa mais tempo. Limpe com pano úmido em vez de vassoura, para não levantar a poeira. Uma bacia com água ou um umidificador ajuda no conforto com o ar seco, mas <strong>não tira a fumaça do ar</strong>.</div></details>
     <details><summary>Ventilador ou ar-condicionado ajudam?</summary><div class="ans">O ar-condicionado com o filtro limpo ajuda, desde que esteja no modo de recircular o ar de dentro. O ventilador só movimenta o ar e não limpa a fumaça.</div></details>
-    <details><summary>Vai ter aula? E os eventos?</summary><div class="ans">As decisões sobre aulas e eventos seguem o nível de qualidade do ar e são anunciadas pelos canais oficiais da Prefeitura, de preferência na véspera. Eventos como o Boi Manaus foram adiados para proteger a saúde de todos: a festa volta quando o ar voltar.</div></details>
-    <details><summary>Gestantes e bebês correm mais risco?</summary><div class="ans">Sim. Gestantes, bebês e crianças pequenas devem ficar o máximo possível em ambientes fechados e protegidos. Em caso de falta de ar, cansaço diferente ou chiado, procure a USF.</div></details>
+    <details><summary>Gestantes, bebês e idosos correm mais risco?</summary><div class="ans">Sim. Gestantes, bebês, crianças pequenas, idosos e pessoas com asma, bronquite ou doença do coração devem ficar o máximo possível em ambientes fechados. Em caso de falta de ar, chiado, dor no peito ou cansaço diferente, procure a USF. Em emergência, ligue 192.</div></details>
     <details><summary>E os animais de estimação?</summary><div class="ans">Eles também sofrem. Deixe água fresca à vontade, evite passeios longos nas horas piores e observe sinais como tosse, olhos irritados ou respiração difícil.</div></details>
-    <details><summary>Quando a fumaça vai acabar?</summary><div class="ans">A melhora depende da volta das chuvas e da redução das queimadas. Acompanhe a qualidade do ar nesta página: ela muda ao longo do dia e costuma ser pior de manhã cedo e à noite.</div></details>
-    <details><summary>Onde vejo a qualidade do ar do meu bairro?</summary><div class="ans">Na aba "Qualidade do ar" desta página, com dados do Selva, o sistema de monitoramento da Universidade do Estado do Amazonas (UEA).</div></details>
+
+    <h3 class="mini-h" style="margin:22px 0 10px">Avisos e informações</h3>
+    <details><summary>Vai ter aula? E os eventos?</summary><div class="ans">As decisões sobre aulas e eventos seguem o nível de qualidade do ar e são anunciadas pelos canais oficiais da Prefeitura. Em outubro de 2026, a Prefeitura já suspendeu as aulas da rede municipal em dias de ar grave. Acompanhe os canais oficiais antes de sair de casa.</div></details>
+    <details><summary>Quando a fumaça vai acabar?</summary><div class="ans">A melhora depende da volta das chuvas e da redução das queimadas. A qualidade do ar muda bastante ao longo do dia e de um dia para o outro: em 9 de outubro, a média em Manaus chegou a 196 µg/m³, e no dia seguinte caiu para cerca de 80. Acompanhe na aba Qualidade do ar.</div></details>
+    <details><summary>De onde vêm os dados de qualidade do ar desta página?</summary><div class="ans">Dos sensores de PM2,5 instalados em Manaus, a maioria da rede da Universidade do Estado do Amazonas (UEA), que alimenta o sistema Selva. Também há sensores da Sema, da FAS e da Ufam. As leituras são atualizadas a cada 10 minutos pela plataforma PurpleAir. São sensores de baixo custo: mostram bem as diferenças entre zonas e bairros, mas podem marcar um pouco acima dos equipamentos oficiais em fumaça densa. Os focos de queimada no mapa vêm da NASA (FIRMS).</div></details>
+
+    <p class="note" style="margin-top:16px">Dados de focos: Inpe, até 12/10/2026, publicados pela <a href="https://www.bahianoticias.com.br/folha/noticia/412516-incendios-florestais-dobram-no-amazonas-em-2026-mas-indice-esta-abaixo-da-media-historica" target="_blank" rel="noopener">Folha de S.Paulo (via Bahia Notícias)</a> e pelo <a href="https://www.dgabc.com.br/Noticia/4352036/queimadas-no-amazonas-quase-quadruplicam-e-fumaca-encobre-manaus-governo-envia-reforco" target="_blank" rel="noopener">Diário do Grande ABC</a>. Causas dos incêndios: <a href="https://www.opovo.com.br/noticias/brasil/2024/09/20/monitoramento-mostra-que-99-dos-incendios-sao-por-acao-humana.html" target="_blank" rel="noopener">Lasa/UFRJ, via Agência Brasil</a>. Referência de saúde: Organização Mundial da Saúde (2021).</p>
   </section>
 </main>
 
@@ -494,7 +563,7 @@
     <div>
       <h4>Respira Manaus</h4>
       <p style="margin:0">Uma iniciativa da Prefeitura de Manaus para informar e proteger a população durante o período de fumaça.</p>
-      <p class="note" style="margin-top:10px">Dados de qualidade do ar: Selva / Universidade do Estado do Amazonas (UEA).</p>
+      <p class="note" style="margin-top:10px">Qualidade do ar: sensores da UEA (rede Selva), Sema, FAS e Ufam, via PurpleAir. Focos de queimada: NASA FIRMS.</p>
     </div>
     <div>
       <h4>Emergências</h4>
@@ -515,6 +584,13 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+  // Se o unpkg falhar ou estiver bloqueado, carrega o Leaflet de outro CDN
+  if (!window.L){
+    document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">');
+    document.write('<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"><\/script>');
+  }
+</script>
+<script>
 /* =====================================================================
    CONFIGURAÇÃO — o que a equipe técnica precisa ajustar
    ===================================================================== */
@@ -522,6 +598,16 @@ const CONFIG = {
   // Quando a UEA liberar o acesso, coloque aqui a URL da API do Selva.
   // Enquanto for null, o site usa dados de demonstração.
   SELVA_API_URL: null,
+  // Sensores PurpleAir (por bairro), via o intermediário purpleair-worker.js publicado no Cloudflare.
+  // Cole aqui o endereço do Worker, ex.: 'https://respira-manaus-ar.seu-usuario.workers.dev'
+  PURPLEAIR_PROXY_URL: 'https://respira-manaus-ar.bruno-lemos.workers.dev',
+  // Sensores por bairro do World Air Quality Index (aqicn.org). Token gratuito em
+  // https://aqicn.org/data-platform/token/ — este token pode ficar no site (é feito para isso).
+  WAQI_TOKEN: '49f30e29995df8ec5b35f7a5fbe814e3230a2663',
+  WAQI_BOUNDS: '-3.20,-60.15,-2.90,-59.85',  // sul,oeste,norte,leste: área urbana de Manaus
+  // Enquanto o Selva não estiver ligado, usa a média da cidade estimada pela Open-Meteo
+  // (modelo Copernicus CAMS, gratuito, sem chave). Não tem dados por bairro.
+  OPEN_METEO_URL: 'https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-3.10&longitude=-60.02&current=pm2_5&timezone=GMT',
   REFRESH_MS: 5 * 60 * 1000,
   MAP_CENTER: [-3.0880, -60.0170],
   MAP_ZOOM: 12
@@ -537,21 +623,6 @@ function normalizeSelva(json){
   };
 }
 
-/* Dados de demonstração (substituídos automaticamente pela API) */
-const DEMO_AIR = {
-  updatedAt: new Date().toISOString(),
-  stations: [
-    { bairro:'Aleixo', zona:'Centro-Sul', pm25:112.4 },
-    { bairro:'Parque 10', zona:'Centro-Sul', pm25:104.9 },
-    { bairro:'Centro', zona:'Sul', pm25:98.1 },
-    { bairro:'Distrito Industrial', zona:'Leste/Sul', pm25:131.7 },
-    { bairro:'Compensa', zona:'Oeste', pm25:86.3 },
-    { bairro:'Cidade Nova', zona:'Norte', pm25:62.0 },
-    { bairro:'Jorge Teixeira', zona:'Leste', pm25:118.5 },
-    { bairro:'Ponta Negra', zona:'Oeste', pm25:71.2 },
-    { bairro:'Petrópolis', zona:'Sul', pm25:93.8 }
-  ]
-};
 
 /* Centro aproximado de cada bairro (usado para posicionar as USFs no mapa).
    Quando a Semsa fornecer as coordenadas exatas, preencha lat/lng em cada unidade e elas serão usadas no lugar. */
@@ -714,31 +785,157 @@ function isOpen(u){
 
 /* Níveis (escala Selva, µg/m³ de PM2,5) */
 const LEVELS = [
-  { max:25,  name:'Boa',        color:'var(--lv-boa)',        msg:'O ar está bom. Aproveite com tranquilidade.',
+  { max:25,  name:'Boa', ar:'bom',        color:'var(--lv-boa)',        msg:'O ar está bom. Aproveite com tranquilidade.',
     advice:['Atividades ao ar livre liberadas.','Continue bebendo bastante água.'] },
-  { max:50,  name:'Moderada',   color:'var(--lv-moderada)',   msg:'Pessoas sensíveis podem sentir algum desconforto.',
+  { max:50,  name:'Moderada', ar:'moderado',   color:'var(--lv-moderada)',   msg:'Pessoas sensíveis podem sentir algum desconforto.',
     advice:['Grupos de risco: reduzam esforço ao ar livre.','Mantenha-se hidratado.','Observe sintomas em crianças e idosos.'] },
-  { max:75,  name:'Ruim',       color:'var(--lv-ruim)',       msg:'Evite esforço prolongado ao ar livre.',
+  { max:75,  name:'Ruim', ar:'ruim',       color:'var(--lv-ruim)',       msg:'Evite esforço prolongado ao ar livre.',
     advice:['Use máscara PFF2 ao sair.','Evite exercícios ao ar livre.','Feche janelas nas horas de mais fumaça.','Beba água com frequência.'] },
-  { max:125, name:'Muito ruim', color:'var(--lv-muito-ruim)', msg:'Fique em ambientes fechados sempre que puder.',
+  { max:125, name:'Muito ruim', ar:'muito ruim', color:'var(--lv-muito-ruim)', msg:'Fique em ambientes fechados sempre que puder.',
     advice:['Saia só se necessário, com máscara PFF2.','Crianças, idosos e gestantes: fiquem em casa.','Mantenha portas e janelas fechadas.','Use soro fisiológico nos olhos e no nariz.'] },
-  { max:Infinity, name:'Péssima', color:'var(--lv-pessima)', msg:'Proteja-se: evite sair de casa.',
+  { max:Infinity, name:'Péssima', ar:'péssimo', color:'var(--lv-pessima)', msg:'Proteja-se: evite sair de casa.',
     advice:['Permaneça em local fechado e protegido.','Use máscara PFF2 se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] }
 ];
 const levelOf = v => LEVELS.find(l => v <= l.max);
+const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = n => n.toLocaleString('pt-BR', { minimumFractionDigits:1, maximumFractionDigits:1 });
 
 /* ===================== Qualidade do ar ===================== */
 async function loadAir(){
-  let data, demo = false;
+  // 1º Selva/UEA (por bairro)
   if (CONFIG.SELVA_API_URL){
     try {
       const r = await fetch(CONFIG.SELVA_API_URL, { cache:'no-store' });
       if (!r.ok) throw new Error(r.status);
-      data = normalizeSelva(await r.json());
-    } catch(e){ data = DEMO_AIR; demo = true; }
-  } else { data = { ...DEMO_AIR, updatedAt: new Date().toISOString() }; demo = true; }
-  renderAir(data, demo);
+      return renderAir({ ...normalizeSelva(await r.json()), fonte:'selva' });
+    } catch(e){ console.warn('Selva:', e); }
+  }
+  // 2º Sensores PurpleAir (por bairro)
+  if (CONFIG.PURPLEAIR_PROXY_URL){
+    try {
+      const r = await fetch(CONFIG.PURPLEAIR_PROXY_URL, { cache:'no-store' });
+      if (!r.ok) throw new Error(r.status);
+      const j = await r.json();
+      const stations = agruparPorBairro(j.sensores || []);
+      if (!stations.length) throw new Error('nenhum sensor com dado');
+      return renderAir({ updatedAt: j.updatedAt, stations, fonte:'purpleair', nSensores: j.sensores.length, sensores: localizarSensores(j.sensores) });
+    } catch(e){ console.warn('PurpleAir:', e); }
+  }
+  // 2b Sensores do WAQI (por bairro)
+  if (CONFIG.WAQI_TOKEN && !CONFIG.WAQI_TOKEN.startsWith('COLE_')){
+    try {
+      const r = await fetch(`https://api.waqi.info/v2/map/bounds?latlng=${CONFIG.WAQI_BOUNDS}&networks=all&token=${CONFIG.WAQI_TOKEN}`, { cache:'no-store' });
+      const j = await r.json();
+      if (j.status !== 'ok') throw new Error(j.data || j.status);
+      const stations = j.data.map(s => ({
+        bairro: limparNomeEstacao(s.station && s.station.name),
+        zona: '', pm25: aqiParaPm25(Number(s.aqi)), hora: s.station && s.station.time
+      })).filter(s => s.bairro && Number.isFinite(s.pm25));
+      if (!stations.length) throw new Error('nenhuma estação com dado');
+      const horas = stations.map(s => Date.parse(s.hora)).filter(Number.isFinite);
+      return renderAir({ updatedAt: horas.length ? new Date(Math.max(...horas)).toISOString() : new Date().toISOString(), stations, fonte:'waqi' });
+    } catch(e){ console.warn('WAQI:', e); }
+  }
+  // 3º Open-Meteo (só a média da cidade)
+  try {
+    const r = await fetch(CONFIG.OPEN_METEO_URL, { cache:'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    const v = Number(j.current && j.current.pm2_5);
+    if (!Number.isFinite(v)) throw new Error('sem pm2_5');
+    return renderAir({ updatedAt: j.current.time + 'Z', stations:[{ bairro:'Manaus', zona:'', pm25:v }], fonte:'openmeteo' });
+  } catch(e){ console.warn('Open-Meteo:', e); }
+  // 4º Nada disponível: não mostra número inventado
+  renderAirIndisponivel();
+}
+
+/* Cada sensor vai para o bairro cujo ponto central está mais perto (aprox.).
+   Bairros com mais de um sensor ficam com a média deles. */
+function agruparPorBairro(sensores){
+  const nomes = Object.keys(BAIRROS);
+  const grupos = {};
+  sensores.forEach(s => {
+    if (!Number.isFinite(s.pm25)) return;
+    let melhor = null, dist = Infinity;
+    nomes.forEach(n => { const [la, lo] = BAIRROS[n]; const d = (la - s.lat) ** 2 + ((lo - s.lng) * Math.cos(la * Math.PI / 180)) ** 2; if (d < dist){ dist = d; melhor = n; } });
+    // até ~4 km: bairro mais próximo; mais longe que isso: "Arredores de <bairro>"
+    const bairro = Math.sqrt(dist) * 111 > 4 ? 'Arredores de ' + melhor : melhor;
+    (grupos[bairro] = grupos[bairro] || []).push(s.pm25);
+  });
+  return Object.entries(grupos).map(([bairro, v]) => ({ bairro, zona: zonaDoBairro(bairro.replace(/^Arredores de /, '')), pm25: v.reduce((a, b) => a + b, 0) / v.length, n: v.length, soma: v.reduce((a, b) => a + b, 0) }));
+}
+
+/* Cada sensor com o bairro mais próximo e a zona desse bairro (um item por sensor) */
+function localizarSensores(sensores){
+  const nomes = Object.keys(BAIRROS);
+  return sensores.filter(s => Number.isFinite(s.pm25)).map(s => {
+    let melhor = null, dist = Infinity;
+    nomes.forEach(n => { const [la, lo] = BAIRROS[n]; const d = (la - s.lat) ** 2 + ((lo - s.lng) * Math.cos(la * Math.PI / 180)) ** 2; if (d < dist){ dist = d; melhor = n; } });
+    const longe = Math.sqrt(dist) * 111 > 4;
+    return { bairro: longe ? 'Arredores de ' + melhor : melhor, zona: zonaDoBairro(melhor), pm25: s.pm25, nome: s.nome };
+  });
+}
+
+/* Zona de cada bairro, tirada da lista de USFs (zonas dos distritos de saúde da Semsa) */
+const ZONA_DO_BAIRRO = {};
+USF_RAW.forEach(r => { if (r[2] && r[3] && !ZONA_DO_BAIRRO[r[2]]) ZONA_DO_BAIRRO[r[2]] = r[3]; });
+const zonaDoBairro = b => ZONA_DO_BAIRRO[b] || '';
+
+/* Média por zona usando todos os sensores da zona (cada sensor pesa igual) */
+function agruparPorZona(stations){
+  const z = {};
+  stations.forEach(s => {
+    if (!s.zona) return;
+    const g = z[s.zona] = z[s.zona] || { soma:0, n:0, bairros:[] };
+    g.soma += s.soma ?? s.pm25 * (s.n || 1); g.n += s.n || 1; g.bairros.push(s);
+  });
+  return Object.entries(z).map(([zona, g]) => ({ zona, pm25: g.soma / g.n, n: g.n, bairros: g.bairros.sort((a, b) => b.pm25 - a.pm25) }))
+    .sort((a, b) => b.pm25 - a.pm25);
+}
+
+/* "Japiim, Manaus, Brazil" -> "Japiim" */
+function limparNomeEstacao(n){
+  if (!n) return '';
+  return String(n).split(',')[0].replace(/\s*-?\s*Manaus\s*$/i, '').trim();
+}
+/* O WAQI informa o índice americano (US AQI). Convertemos de volta para PM2,5 em µg/m³
+   (faixas da EPA usadas pelo WAQI) para usar a mesma escala do site. Valor aproximado. */
+function aqiParaPm25(aqi){
+  if (!Number.isFinite(aqi) || aqi < 0) return NaN;
+  const F = [[0,50,0,12],[51,100,12.1,35.4],[101,150,35.5,55.4],[151,200,55.5,150.4],[201,300,150.5,250.4],[301,400,250.5,350.4],[401,500,350.5,500.4]];
+  const f = F.find(([, ah]) => aqi <= ah) || F[F.length - 1];
+  const [al, ah, cl, ch] = f;
+  return cl + (aqi - al) * (ch - cl) / (ah - al);
+}
+
+/* Seta sobre a escala colorida, na posição do valor atual */
+function marcarEscala(v){
+  const pin = document.getElementById('scalePin');
+  if (!Number.isFinite(v)){ pin.hidden = true; return; }
+  const faixas = [0, 25, 50, 75, 125, 250];
+  let i = faixas.findIndex((f, k) => k > 0 && v <= f); if (i < 0) i = 5;
+  const ini = faixas.at(i - 1), fim = faixas.at(i);
+  const pos = Math.min(99, ((i - 1) + Math.min(1, (v - ini) / (fim - ini))) * 20);
+  pin.style.left = pos + '%'; pin.hidden = false;
+}
+function haQuanto(d){
+  const min = Math.round((Date.now() - d.getTime()) / 60000);
+  if (!Number.isFinite(min) || min < 0) return '';
+  if (min < 1) return ' (agora há pouco)';
+  if (min < 60) return ` (há ${min} min)`;
+  const h = Math.floor(min / 60); return ` (há ${h} h)`;
+}
+
+function renderAirIndisponivel(){
+  marcarEscala(NaN);
+  document.getElementById('demoFlag').classList.remove('show');
+  document.getElementById('bigVal').textContent = '--';
+  const bl = document.getElementById('bigLvl');
+  bl.textContent = 'Dados indisponíveis'; bl.style.background = '#E3E8E6';
+  document.getElementById('airMsg').textContent = 'Não foi possível carregar a qualidade do ar agora. Tentaremos de novo em alguns minutos.';
+  document.getElementById('advice').innerHTML = '';
+  document.getElementById('bairrosBox').hidden = true;
+  document.getElementById('airSource').textContent = '';
 }
 
 function setRing(el, v, lvl){
@@ -747,53 +944,162 @@ function setRing(el, v, lvl){
   el.style.setProperty('--p', pct + '%');
 }
 
-function renderAir(data, demo){
-  document.getElementById('demoFlag').classList.toggle('show', demo);
+function renderAir(data){
+  document.getElementById('demoFlag').classList.remove('show');
+  const porBairro = ['selva', 'waqi', 'purpleair'].includes(data.fonte);
+  document.getElementById('bairrosBox').hidden = !porBairro;
+  document.getElementById('airSource').textContent = porBairro
+    ? (data.fonte === 'selva' ? 'Fonte: rede de sensores Selva/UEA.'
+       : data.fonte === 'purpleair' ? `Fonte: ${data.nSensores} sensores PurpleAir em Manaus (PM2,5, média de 10 min). Bairro e zona definidos pela localização aproximada do sensor; zonas dos distritos de saúde.`
+       : `Fonte: ${data.stations.length} sensores do World Air Quality Index (aqicn.org). PM2,5 aproximado a partir do índice.`)
+    : 'Estimativa para Manaus (PM2,5) por modelo de satélite e clima. Fonte: Open-Meteo / Copernicus CAMS. Dados por bairro em breve.';
   const st = data.stations.filter(s => Number.isFinite(s.pm25));
   if (!st.length) return;
-  const avg = st.reduce((a, s) => a + s.pm25, 0) / st.length;
+  const nTot = st.reduce((a, s) => a + (s.n || 1), 0);
+  const avg = data.sensores && data.sensores.length
+    ? data.sensores.reduce((a, s) => a + s.pm25, 0) / data.sensores.length
+    : st.reduce((a, s) => a + s.pm25 * (s.n || 1), 0) / nTot;
   const lvl = levelOf(avg);
 
   document.getElementById('bigVal').textContent = Math.round(avg);
+  marcarArNoMapa(avg);
+  marcarEscala(avg);
   setRing(document.getElementById('bigRing'), avg, lvl);
   const bl = document.getElementById('bigLvl');
-  bl.textContent = 'Ar ' + lvl.name.toLowerCase(); bl.style.background = lvl.color;
+  bl.textContent = 'Ar ' + lvl.ar; bl.style.background = lvl.color;
   document.getElementById('airMsg').textContent = lvl.msg;
   document.getElementById('advice').innerHTML = lvl.advice.slice(0, 3).map(a => `<li>${a}</li>`).join('');
   const t = new Date(data.updatedAt);
-  document.getElementById('updated').textContent = 'Média da cidade · atualizado às ' + t.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+  document.getElementById('updated').textContent = 'Média da cidade · atualizado às ' + t.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit', timeZone:'America/Manaus' }) + haQuanto(t);
 
-  const item = s => { const l = levelOf(s.pm25); return `<li style="--c:${l.color}"><span class="b">${s.bairro}</span><span class="v">${Math.round(s.pm25)}</span><span class="l">${l.name}</span></li>`; };
+  const item = s => { const l = levelOf(s.pm25); return `<li style="--c:${l.color}"><span class="b">${esc(s.bairro)}</span><span class="v">${Math.round(s.pm25)}</span><span class="l">${l.name}</span></li>`; };
   const sorted = [...st].sort((a, b) => b.pm25 - a.pm25);
-  document.getElementById('stations').innerHTML = sorted.slice(0, 4).map(item).join('');
-  document.getElementById('allStations').innerHTML = sorted.slice(4).map(item).join('');
+  // Com sensores individuais: zona (média) e, embaixo, cada sensor com seu valor
+  const porZona = {};
+  (data.sensores || []).forEach(x => { if (x.zona) (porZona[x.zona] = porZona[x.zona] || []).push(x); });
+  const zonas = Object.entries(porZona).map(([zona, xs]) => ({ zona, xs: xs.sort((a, b) => b.pm25 - a.pm25), pm25: xs.reduce((a, x) => a + x.pm25, 0) / xs.length }))
+    .sort((a, b) => b.pm25 - a.pm25);
+  if (zonas.length >= 2){
+    const sens = n => n === 1 ? '1 sensor' : n + ' sensores';
+    const zonaItem = (z, sensoresHtml) => { const l = levelOf(z.pm25); return `<li class="zona-wrap"><details class="zona-det" style="--c:${l.color}"><summary><span class="b">Zona ${esc(z.zona)}<span class="dica">média de ${sens(z.xs.length)}</span></span><span class="v">${Math.round(z.pm25)}</span><span class="l">${l.name}</span></summary><ol class="sensores">${sensoresHtml}</ol></details></li>`; };
+    const sensorItem = (x, i) => { const l = levelOf(x.pm25); return `<li class="sub" style="--c:${l.color}" title="${esc(x.nome || '')}"><span class="b"><small style="font-weight:400;opacity:.7">Sensor ${i + 1} ·</small> ${esc(x.bairro)}</span><span class="v">${Math.round(x.pm25)}</span><span class="l">${l.name}</span></li>`; };
+    document.getElementById('rankTitle').textContent = 'Qualidade do ar por zona';
+    document.getElementById('rankDica').hidden = false;
+    document.getElementById('stations').innerHTML = zonas.map(z => zonaItem(z, z.xs.map(sensorItem).join(''))).join('');
+    const semZona = (data.sensores || []).filter(x => !x.zona).sort((a, b) => b.pm25 - a.pm25);
+    document.getElementById('allStations').innerHTML = semZona.map(x => item({ bairro: x.bairro, pm25: x.pm25 })).join('');
+    document.getElementById('rankMore').textContent = 'Outros pontos';
+    document.querySelector('#bairrosBox details.more').hidden = !semZona.length;
+  } else {
+    document.getElementById('rankDica').hidden = true;
+    document.getElementById('rankTitle').textContent = 'Bairros mais afetados';
+    document.getElementById('rankMore').textContent = 'Ver todos os bairros';
+    document.querySelector('#bairrosBox details.more').hidden = false;
+    document.getElementById('stations').innerHTML = sorted.slice(0, 4).map(item).join('');
+    document.getElementById('allStations').innerHTML = sorted.slice(4).map(item).join('');
+  }
 }
 
-/* ===================== Mapa de focos no Amazonas ===================== */
-/* ILUSTRATIVO: pontos gerados para demonstração. Para dados reais, use o BDQueimadas do Inpe
-   e preencha FOCOS_REAIS com [[lat, lng], ...]. */
-const FOCOS_REAIS = null;
-const REGIOES_FOCO = [ // [lat, lng, quantidade, raio em graus]
-  [-3.58,-59.13,14,.35], [-3.77,-60.37,10,.3], [-3.43,-60.46,6,.2], [-3.28,-60.19,5,.15], [-3.30,-60.62,6,.25],
-  [-3.14,-58.44,8,.3], [-7.51,-63.03,18,.6], [-7.26,-64.80,16,.7], [-7.20,-59.89,18,.7], [-5.12,-60.38,10,.5],
-  [-5.81,-61.30,12,.6], [-8.75,-67.40,10,.5], [-6.53,-64.38,8,.5], [-5.62,-63.18,6,.4], [-3.90,-61.37,5,.3], [-3.77,-61.64,4,.3]
-];
-function focosIlustrativos(){
-  let seed = 20261014; const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
-  const pts = [];
-  REGIOES_FOCO.forEach(([la, lo, n, r]) => { for (let i = 0; i < n; i++){ const a = rnd() * 6.283, d = Math.sqrt(rnd()) * r; pts.push([la + Math.sin(a) * d, lo + Math.cos(a) * d]); } });
-  return pts;
+/* ===================== Mapa de focos (NASA FIRMS) ===================== */
+/* Focos reais detectados por satélite (VIIRS), últimas 48h.
+   Chave gratuita: https://firms.modaps.eosdis.nasa.gov/api/map_key/  */
+const FIRMS = {
+  KEY: 'ff026d7b2fe2f66dadc08a1ea8b53c4b',
+  SENSOR: 'VIIRS_NOAA20_NRT',         // alternativa: 'VIIRS_SNPP_NRT'
+  AREA: '-73.8,-9.9,-56.1,2.3',       // oeste, sul, leste, norte (cobre o Amazonas)
+  DIAS: 3,                             // a API conta dias em UTC; pegamos 3 e filtramos as últimas 48h
+  CACHE_MS: 3 * 60 * 60 * 1000         // guarda no navegador por 3h para poupar a cota
+};
+
+async function carregarFocos(){
+  const cacheKey = 'focos:v3:' + FIRMS.SENSOR + ':' + FIRMS.AREA + ':' + FIRMS.DIAS;
+  try {
+    const c = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+    if (c && Date.now() - c.t < FIRMS.CACHE_MS) return c.focos;
+  } catch(e){}
+
+  const url = `https://firms.modaps.eosdis.nasa.gov/api/area/csv/${FIRMS.KEY}/${FIRMS.SENSOR}/${FIRMS.AREA}/${FIRMS.DIAS}`;
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const txt = (await r.text()).trim();
+  const [cab, ...linhas] = txt.split('\n');
+  const col = cab.split(',');
+  const i = n => col.indexOf(n);
+  const iLat = i('latitude'), iLng = i('longitude'), iData = i('acq_date'), iHora = i('acq_time');
+  if (iLat < 0 || iLng < 0) throw new Error('Resposta inesperada: ' + txt.slice(0, 120));
+
+  const focos = linhas.map(l => l.split(',')).map(c => ({
+    lat: +c[iLat], lng: +c[iLng], data: c[iData] || '', hora: c[iHora] || ''
+  })).filter(f => Number.isFinite(f.lat) && Number.isFinite(f.lng))
+     .filter(f => { const t = dataFoco(f); return !t || Date.now() - t < 48 * 60 * 60 * 1000; });
+
+  if (focos.length) try { localStorage.setItem(cacheKey, JSON.stringify({ t: Date.now(), focos })); } catch(e){}
+  return focos;
 }
+
+/* acq_date "2026-10-17" + acq_time "0412" (UTC) -> Date */
+function dataFoco(f){
+  if (!f.data) return null;
+  const h = String(f.hora).padStart(4, '0');
+  const d = new Date(`${f.data}T${h.slice(0,2)}:${h.slice(2)}:00Z`);
+  return isNaN(d) ? null : d;
+}
+/* -> "17/10 às 00:12" no horário de Manaus */
+function quandoFoco(f){
+  if (!f.data) return '';
+  const d = dataFoco(f);
+  if (!d) return f.data;
+  return d.toLocaleString('pt-BR', { timeZone:'America/Manaus', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' }).replace(',', ' às');
+}
+
 let fireMap;
-function initFireMap(){
-  if (fireMap || typeof L === 'undefined') return;
-  fireMap = L.map('fireMap', { scrollWheelZoom:false });
+const FIRE_BOUNDS = [[-9.6, -70.5], [-1.2, -57.5]];
+async function initFireMap(){
+  if (fireMap) return;
+  if (typeof L === 'undefined'){
+    document.getElementById('focosInfo').textContent = 'Não foi possível carregar o mapa. Verifique sua conexão e recarregue a página.';
+    return;
+  }
+  fireMap = L.map('fireMap', { scrollWheelZoom:false, preferCanvas:true }); // canvas aguenta milhares de pontos
   addBase(fireMap);
-  fireMap.fitBounds([[-9.6, -70.5], [-1.2, -57.5]]);
-  (FOCOS_REAIS || focosIlustrativos()).forEach(([la, lo]) =>
-    L.circleMarker([la, lo], { radius:5, stroke:false, fillColor:'#C98B6B', fillOpacity:.75 }).addTo(fireMap));
-  L.circleMarker([-3.119, -60.022], { radius:9, color:'#fff', weight:3, fillColor:'#3F7F73', fillOpacity:1 })
+  fireMap.fitBounds(FIRE_BOUNDS);
+  // Reenquadra o Amazonas sempre que o mapa muda de tamanho, até a pessoa mexer nele
+  let mexeu = false;
+  fireMap.on('mousedown touchstart wheel', () => { mexeu = true; });
+  if (window.ResizeObserver) new ResizeObserver(() => { fireMap.invalidateSize(); if (!mexeu) fireMap.fitBounds(FIRE_BOUNDS); })
+    .observe(document.getElementById('fireMap'));
+
+  const info = document.getElementById('focosInfo');
+  if (!FIRMS.KEY || FIRMS.KEY.startsWith('COLE_')){
+    info.textContent = 'Configure a chave da NASA FIRMS para exibir os focos.';
+  } else {
+    try {
+      const focos = await carregarFocos();
+      focos.forEach(f => L.circleMarker([f.lat, f.lng], { radius:4, stroke:false, fillColor:'#C98B6B', fillOpacity:.75 })
+        .bindTooltip('Foco detectado em ' + quandoFoco(f)).addTo(fireMap));
+      info.textContent = focos.length
+        ? `${focos.length.toLocaleString('pt-BR')} ${focos.length === 1 ? 'foco detectado' : 'focos detectados'} nas últimas 48h. Fonte: NASA FIRMS (satélite VIIRS).`
+        : 'Nenhum foco detectado na região nas últimas 48h. Fonte: NASA FIRMS.';
+    } catch(e){
+      console.warn('Focos FIRMS:', e);
+      info.innerHTML = 'Não foi possível carregar os focos agora. Veja os dados oficiais no <a href="https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/" target="_blank" rel="noopener">BDQueimadas do Inpe</a>.';
+    }
+  }
+  // Manaus por cima dos focos
+  manausMarker = L.circleMarker([-3.119, -60.022], { radius:10, color:'#fff', weight:3, fillColor:'#3F7F73', fillOpacity:1 })
     .addTo(fireMap).bindTooltip('Manaus', { permanent:true, direction:'right', offset:[8,0] });
+  if (arAtual) marcarArNoMapa(arAtual);
+}
+
+/* Pinta Manaus no mapa com a cor do nível de qualidade do ar */
+let manausMarker = null, arAtual = null;
+function marcarArNoMapa(v){
+  arAtual = v;
+  if (!manausMarker) return;
+  const lvl = levelOf(v);
+  const cor = getComputedStyle(document.documentElement).getPropertyValue(lvl.color.slice(4, -1)).trim() || '#3F7F73';
+  manausMarker.setStyle({ fillColor: cor, radius: 12 });
+  manausMarker.setTooltipContent(`Manaus · ar ${lvl.ar} (${Math.round(v)} µg/m³)`);
 }
 
 /* ===================== Abas ===================== */
@@ -811,7 +1117,7 @@ function openTab(id, focus, init){
   panels.forEach(p => p.classList.toggle('active', p.id === id));
   if (!init && history.replaceState) history.replaceState(null, '', '#' + id);
   if (id === 'usf') initMap();
-  if (id === 'ar'){ initFireMap(); if (fireMap) setTimeout(() => fireMap.invalidateSize(), 50); }
+  if (id === 'ar'){ initFireMap(); if (fireMap) setTimeout(() => { fireMap.invalidateSize(); fireMap.fitBounds(FIRE_BOUNDS); }, 50); }
 }
 tabs.forEach((t, i) => {
   t.addEventListener('click', () => openTab(t.getAttribute('aria-controls')));
@@ -836,15 +1142,24 @@ const RESULTS = {
 document.getElementById('checker').addEventListener('change', () => {
   const sev = Math.max(0, ...[...document.querySelectorAll('#checker input:checked')].map(i => +i.dataset.sev));
   const box = document.getElementById('result');
-  if (!sev){ box.classList.remove('show'); return; }
+  document.getElementById('limparSintomas').hidden = !sev;
+  if (!sev){ box.classList.remove('show'); box.dataset.sev = ''; return; }
+  const subiu = String(sev) !== box.dataset.sev; box.dataset.sev = sev;
   const r = RESULTS[sev];
   box.style.background = r.bg;
   box.innerHTML = `<h4>${r.t}</h4><p style="margin:0 0 10px">${r.d}</p>` +
     (r.go ? '<button class="btn btn-primary" type="button" id="goUsf">Encontrar uma USF →</button>' : '') +
     (r.call ? '<a class="btn btn-primary" href="tel:192">Ligar 192</a>' : '');
   box.classList.add('show');
+  // Se o resultado mudou e está fora da tela (comum no celular), leva a pessoa até ele
+  if (subiu){ const r = box.getBoundingClientRect(); if (r.top > innerHeight - 80 || r.bottom < 0) box.scrollIntoView({ behavior:'smooth', block:'center' }); }
   const g = document.getElementById('goUsf');
   if (g) g.addEventListener('click', () => { openTab('usf'); document.querySelector('main').scrollIntoView({ behavior:'smooth' }); });
+});
+
+document.getElementById('limparSintomas').addEventListener('click', () => {
+  document.querySelectorAll('#checker input:checked').forEach(i => { i.checked = false; });
+  document.getElementById('checker').dispatchEvent(new Event('change'));
 });
 
 /* ===================== Mapa de USFs ===================== */
@@ -880,6 +1195,10 @@ function initMap(){
   setTimeout(() => map.invalidateSize(), 50);
   renderUsf();
 }
+document.getElementById('usfMais').addEventListener('click', () => {
+  document.getElementById('usfList').classList.add('todas');
+  document.getElementById('usfMais').hidden = true;
+});
 function renderUsf(){
   const q = document.getElementById('usfSearch').value.trim().toLowerCase();
   const onlyOpen = document.getElementById('onlyOpen').checked;
@@ -898,7 +1217,7 @@ function renderUsf(){
 
   list.forEach((u, i) => {
     const el = document.createElement('div');
-    el.className = 'usf';
+    el.className = i >= 8 ? 'usf usf-extra' : 'usf';
     el.tabIndex = 0;
     const route = 'https://www.google.com/maps/dir/?api=1&destination=' + (u.exata ? `${u.lat},${u.lng}` : encodeURIComponent(`${u.nome}, ${u.endereco}, ${u.bairro}, Manaus - AM`));
     el.innerHTML = `<h4>${u.nome}</h4><p>${u.endereco} · ${u.bairro} (Zona ${u.zona})</p><p>${u.horario}</p>
@@ -922,6 +1241,10 @@ function renderUsf(){
       m.on('click', () => { if (selected) selected.classList.remove('sel'); el.classList.add('sel'); selected = el; el.scrollIntoView({ block:'nearest', behavior:'smooth' }); });
     }
   });
+  box.classList.remove('todas');
+  const mais = document.getElementById('usfMais');
+  mais.hidden = list.length <= 8;
+  mais.textContent = `Mostrar todas as ${list.length} unidades`;
   if (map && userPos && list.length){
     map.fitBounds(L.latLngBounds([[userPos.lat, userPos.lng], [list[0].lat, list[0].lng]]).pad(0.4));
   }
