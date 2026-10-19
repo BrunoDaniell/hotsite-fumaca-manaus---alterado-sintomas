@@ -294,6 +294,26 @@
     .usf-list:not(.todas) + .usf-mais:not([hidden]){display:flex}
     .worst details.zona-det summary{flex-wrap:wrap;row-gap:4px}
   }
+
+  /* Faixa de avisos da Prefeitura (notícias de hoje e de ontem) */
+  .avisos{background:var(--pmm-marinho);color:#fff}
+  .avisos-row{display:flex;align-items:center;gap:14px;min-height:46px}
+  .avisos-tag{flex:none;background:var(--pmm-laranja);color:var(--ink);font-weight:800;font-size:.82rem;padding:5px 12px;border-radius:999px;white-space:nowrap}
+  .avisos-trilho{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+  .avisos-fita{display:inline-flex;gap:44px;white-space:nowrap;padding:12px 0;animation:avisos-rolar var(--dur,40s) linear infinite}
+  .avisos-trilho:hover .avisos-fita, .avisos-trilho:focus-within .avisos-fita{animation-play-state:paused}
+  .avisos-fita a{color:#fff;text-decoration:none;font-weight:600;font-size:.95rem}
+  .avisos-fita a:hover, .avisos-fita a:focus-visible{text-decoration:underline}
+  .avisos-fita a:focus-visible{outline:2px solid var(--pmm-laranja);outline-offset:3px;border-radius:4px}
+  .avisos-quando{display:inline-block;color:#FFD49A;font-weight:800;margin-right:8px;font-size:.85rem}
+  @keyframes avisos-rolar{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .avisos.parado .avisos-fita{animation:none}
+  .avisos.parado .avisos-trilho{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  @media (prefers-reduced-motion:reduce){
+    .avisos-fita{animation:none}
+    .avisos-trilho{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  }
+  @media (max-width:860px){ .avisos-tag{font-size:.75rem;padding:4px 10px} .avisos-fita a{font-size:.9rem} }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -314,6 +334,13 @@
     </div>
   </div>
 </header>
+
+<div class="avisos" id="avisos" role="region" aria-label="Avisos da Prefeitura" hidden>
+  <div class="wrap avisos-row">
+    <span class="avisos-tag">Avisos da Prefeitura</span>
+    <div class="avisos-trilho" id="avisosTrilho"><div class="avisos-fita" id="avisosFita"></div></div>
+  </div>
+</div>
 
 <main class="wrap" id="conteudo" tabindex="-1">
 
@@ -367,7 +394,7 @@
       </div>
     </div>
 
-    <p class="credit-line">Sensores: <strong>Universidade do Estado do Amazonas (UEA), rede Selva</strong>, Sema, FAS e Ufam, via <a href="https://map.purpleair.com/" target="_blank" rel="noopener">PurpleAir</a>. Reserva: Open-Meteo. Focos de queimada: NASA FIRMS.</p>
+    <p class="credit-line">Sensores: Universidade do Estado do Amazonas (UEA), rede Selva, Sema, FAS e Ufam, via <a href="https://map.purpleair.com/" target="_blank" rel="noopener">PurpleAir</a>. Reserva: Open-Meteo. Focos de queimada: NASA FIRMS.</p>
 
     <div class="quick">
       <button class="btn btn-alerta" data-go="sintomas">Estou sentindo algo</button>
@@ -496,7 +523,7 @@
   <section class="panel" id="denuncias" role="tabpanel" aria-labelledby="tab-denuncias">
     <div class="panel-head">
       <h2>Denuncie queimadas</h2>
-      <p>Cada foco apagado é ar mais limpo para a cidade inteira. Desde setembro de 2026, o uso do fogo está proibido em todo o Amazonas, e queimar mata, lixo ou terreno pode ser crime ambiental. A denúncia pode ser anônima.</p>
+      <p>Cada foco apagado é ar mais limpo para a cidade inteira. Queimar mato, lixo ou terreno faz mal à saúde de todos e pode ser crime ambiental. A denúncia pode ser anônima.</p>
     </div>
 
     <div class="channels">
@@ -559,16 +586,15 @@
     </div>
 
     <h3 class="mini-h" style="margin:4px 0 10px">Sobre as queimadas</h3>
-    <details><summary>De onde vem essa fumaça?</summary><div class="ans">De queimadas no próprio Amazonas, muitas delas perto de Manaus. De 1º de janeiro a 12 de outubro de 2026, o Inpe registrou <strong>7.815 focos de calor</strong> no estado. Nos 30 dias até 12 de outubro, cerca de <strong>31% dos focos</strong> estavam na região metropolitana de Manaus, principalmente em Autazes (313), Itacoatiara (200), Careiro da Várzea (134) e Manacapuru (133). O sul do estado também queima muito, com destaque para Lábrea, Novo Aripuanã e Boca do Acre. Com o tempo seco e pouco vento, a fumaça fica parada sobre a cidade.</div></details>
-    <details><summary>As queimadas são criminosas ou naturais?</summary><div class="ans">Quase todas são causadas por pessoas. Um levantamento do Laboratório de Aplicações de Satélites Ambientais da UFRJ (Lasa/UFRJ), que cruza dados de satélite com registros de raios, estima que <strong>cerca de 99% dos incêndios no Brasil têm origem humana</strong>. Só cerca de 1% começa por raio. Na floresta amazônica, que é úmida, o fogo natural é raro.<br><br>Muitas queimadas começam para limpar ou renovar pasto e plantações e depois fogem do controle para a floresta seca. Outras são ligadas ao desmatamento. O Ministério do Meio Ambiente afirma que focos no meio da mata indicam queimada criminosa.<br><br><strong>Desde setembro de 2026, o Governo do Amazonas proibiu o uso do fogo em todo o estado por 120 dias.</strong> Ou seja, hoje qualquer queimada no Amazonas é irregular, seja qual for o motivo.</div></details>
-    <details><summary>Por que a fumaça está tão forte este ano?</summary><div class="ans">Por uma soma de fatores. O El Niño deixou o tempo mais seco e quente, quase não choveu em agosto e os ventos ficaram mais fracos, o que prende a fumaça sobre Manaus. Ao mesmo tempo, os focos aumentaram: só em setembro de 2026 foram 3.726 no Amazonas, quase 4 vezes os 942 de setembro de 2025. No ano, os focos mais que dobraram (+116%) em relação a 2025. Mesmo assim, o total de 2026 ainda está cerca de 12% abaixo da média histórica do Inpe, e bem abaixo de 2024, quando o estado teve 23.475 focos no mesmo período.</div></details>
-    <details><summary>O que fazer se eu vir alguém queimando?</summary><div class="ans">Denuncie. Como o uso do fogo está proibido no Amazonas, qualquer queimada pode ser denunciada, mesmo pequena. Veja na aba <a href="#denuncias" data-go="denuncias" style="color:var(--primary);font-weight:700">Denúncias</a> os telefones e o que informar. Não tente apagar um fogo grande sozinho: afaste-se e ligue 193.</div></details>
+    <details><summary>De onde vem essa fumaça?</summary><div class="ans">De queimadas em outros municípios e estados. Com o tempo seco e pouco vento, a fumaça viaja até Manaus e fica parada sobre a cidade.</div></details>
+    <details><summary>As queimadas são criminosas ou naturais?</summary><div class="ans">Quase todas são causadas por pessoas. Um levantamento do Laboratório de Aplicações de Satélites Ambientais da UFRJ (Lasa/UFRJ), que cruza dados de satélite com registros de raios, estima que <strong>cerca de 99% dos incêndios no Brasil têm origem humana</strong>. Só cerca de 1% começa por raio. Na floresta amazônica, que é úmida, o fogo natural é raro.<br><br>Muitas queimadas começam para limpar ou renovar pasto e plantações e depois fogem do controle para a floresta seca. Outras são ligadas ao desmatamento. O Ministério do Meio Ambiente afirma que focos no meio da mata indicam queimada criminosa.</div></details>
+    <details><summary>O que fazer se eu vir alguém queimando?</summary><div class="ans">Denuncie. Toda queimada pode ser denunciada, mesmo as pequenas, como lixo ou mato queimando num terreno. Veja na aba <a href="#denuncias" data-go="denuncias" style="color:var(--primary);font-weight:700">Denúncias</a> os telefones e o que informar. Não tente apagar um fogo grande sozinho: afaste-se e ligue 193.</div></details>
 
     <h3 class="mini-h" style="margin:22px 0 10px">Saúde e proteção</h3>
     <details><summary>A fumaça faz mal mesmo para quem é saudável?</summary><div class="ans">Sim. A fumaça tem partículas muito finas, chamadas PM2,5, que entram fundo no pulmão e chegam ao sangue. Elas podem causar tosse, ardência nos olhos, dor de cabeça e falta de ar, e pioram asma, bronquite e doenças do coração. A Organização Mundial da Saúde recomenda não passar de <strong>15 µg/m³ de PM2,5 na média de 24 horas</strong>. Nos dias de fumaça, os sensores de Manaus chegam a marcar mais de 10 vezes esse valor.</div></details>
     <details><summary>Máscara de pano ou cirúrgica protege?</summary><div class="ans">Pouco. As partículas da fumaça são finas demais para esses tecidos. A máscara indicada é a <strong>PFF2 (ou N95)</strong>, bem ajustada ao rosto, cobrindo nariz e boca, sem folga nas laterais. Ela pode ser reutilizada enquanto estiver limpa, seca e sem danos. Barba atrapalha a vedação.</div></details>
-    <details><summary>Posso fazer exercício ao ar livre?</summary><div class="ans">Quando o ar estiver ruim ou pior, evite. Durante o exercício respiramos mais fundo e mais rápido, e mais fumaça entra no pulmão. Prefira atividades leves em lugar fechado.</div></details>
-    <details><summary>Como deixar o ar de casa melhor?</summary><div class="ans">Feche portas e janelas nas horas de mais fumaça. Se tiver purificador de ar com filtro HEPA, deixe ligado no cômodo onde a família passa mais tempo. Limpe com pano úmido em vez de vassoura, para não levantar a poeira. Uma bacia com água ou um umidificador ajuda no conforto com o ar seco, mas <strong>não tira a fumaça do ar</strong>.</div></details>
+    <details><summary>Posso fazer exercício ao ar livre?</summary><div class="ans">Quando a qualidade do ar estiver ruim ou péssima, evite. Durante o exercício respiramos mais fundo e mais rápido, e mais fumaça entra no pulmão. Prefira atividades leves em lugar fechado.</div></details>
+    <details><summary>Como deixar o ar de casa melhor?</summary><div class="ans">Feche portas e janelas nas horas de mais fumaça. Se tiver purificador de ar, deixe ligado no cômodo onde a família passa mais tempo. Limpe com pano úmido em vez de vassoura, para não levantar a poeira. Uma bacia com água ou um umidificador ajuda no conforto com o ar seco, mas <strong>não tira a fumaça do ar</strong>.</div></details>
     <details><summary>Ventilador ou ar-condicionado ajudam?</summary><div class="ans">O ar-condicionado com o filtro limpo ajuda, desde que esteja no modo de recircular o ar de dentro. O ventilador só movimenta o ar e não limpa a fumaça.</div></details>
     <details><summary>Gestantes, bebês e idosos correm mais risco?</summary><div class="ans">Sim. Gestantes, bebês, crianças pequenas, idosos e pessoas com asma, bronquite ou doença do coração devem ficar o máximo possível em ambientes fechados. Em caso de falta de ar, chiado, dor no peito ou cansaço diferente, procure a USF. Em emergência, ligue 192.</div></details>
     <details><summary>E os animais de estimação?</summary><div class="ans">Eles também sofrem. Deixe água fresca à vontade, evite passeios longos nas horas piores e observe sinais como tosse, olhos irritados ou respiração difícil.</div></details>
@@ -576,7 +602,7 @@
     <h3 class="mini-h" style="margin:22px 0 10px">Avisos e informações</h3>
     <details><summary>Vai ter aula? E os eventos?</summary><div class="ans">As decisões sobre aulas e eventos seguem o nível de qualidade do ar e são anunciadas pelos canais oficiais da Prefeitura. Em outubro de 2026, a Prefeitura já suspendeu as aulas da rede municipal em dias de ar grave. Acompanhe os canais oficiais antes de sair de casa.</div></details>
     <details><summary>Quando a fumaça vai acabar?</summary><div class="ans">A melhora depende da volta das chuvas e da redução das queimadas. A qualidade do ar muda bastante ao longo do dia e de um dia para o outro: em 9 de outubro, a média em Manaus chegou a 196 µg/m³, e no dia seguinte caiu para cerca de 80. Acompanhe na aba Qualidade do ar.</div></details>
-    <details><summary>De onde vêm os dados de qualidade do ar desta página?</summary><div class="ans">Dos sensores de PM2,5 instalados em Manaus, a maioria da rede da Universidade do Estado do Amazonas (UEA), que alimenta o sistema Selva. Também há sensores da Sema, da FAS e da Ufam. As leituras são atualizadas a cada 10 minutos pela plataforma PurpleAir. São sensores de baixo custo: mostram bem as diferenças entre zonas e bairros, mas podem marcar um pouco acima dos equipamentos oficiais em fumaça densa. Os focos de queimada no mapa vêm da NASA (FIRMS).</div></details>
+    <details><summary>De onde vêm os dados de qualidade do ar desta página?</summary><div class="ans">Dos sensores de PM2,5 instalados em Manaus, a maioria da rede da Universidade do Estado do Amazonas (UEA), que alimenta o sistema Selva. Também há sensores da Sema, da FAS e da Ufam. As leituras são atualizadas a cada 10 minutos pela plataforma PurpleAir. Os focos de queimada no mapa vêm da NASA (FIRMS).</div></details>
 
     <p class="note" style="margin-top:16px">Dados de focos: Inpe, até 12/10/2026, publicados pela <a href="https://www.bahianoticias.com.br/folha/noticia/412516-incendios-florestais-dobram-no-amazonas-em-2026-mas-indice-esta-abaixo-da-media-historica" target="_blank" rel="noopener">Folha de S.Paulo (via Bahia Notícias)</a> e pelo <a href="https://www.dgabc.com.br/Noticia/4352036/queimadas-no-amazonas-quase-quadruplicam-e-fumaca-encobre-manaus-governo-envia-reforco" target="_blank" rel="noopener">Diário do Grande ABC</a>. Causas dos incêndios: <a href="https://www.opovo.com.br/noticias/brasil/2024/09/20/monitoramento-mostra-que-99-dos-incendios-sao-por-acao-humana.html" target="_blank" rel="noopener">Lasa/UFRJ, via Agência Brasil</a>. Referência de saúde: Organização Mundial da Saúde (2021).</p>
   </section>
@@ -1129,7 +1155,6 @@ function marcarArNoMapa(v){
   const lvl = levelOf(v);
   const cor = getComputedStyle(document.documentElement).getPropertyValue(lvl.color.slice(4, -1)).trim() || '#007A73';
   manausMarker.setStyle({ fillColor: cor, radius: 12 });
-  manausMarker.setTooltipContent(`<strong>Manaus</strong><span>Ar ${lvl.ar} · ${Math.round(v)} µg/m³</span>`);
 }
 
 /* ===================== Abas ===================== */
@@ -1299,6 +1324,92 @@ document.getElementById('locateBtn').addEventListener('click', () => {
 });
 
 /* ===================== Início ===================== */
+
+/* ===================== Faixa de avisos da Prefeitura =====================
+   Lê as notícias de HOJE e de ONTEM no site oficial (manaus.am.gov.br, Semed e Semsa)
+   e mostra só as que falam da fumaça, qualidade do ar, queimadas, aulas por causa do ar,
+   Boi Manaus e Defesa Civil. As "NOTAS" oficiais têm o título só "NOTA": nesses casos
+   o aviso usa a primeira frase do texto. */
+const AVISOS = {
+  FONTES: ['https://www.manaus.am.gov.br', 'https://www.manaus.am.gov.br/semed', 'https://www.manaus.am.gov.br/semsa'],
+  PALAVRAS: ['fumaca', 'qualidade do ar', 'material particulado', 'queimad', 'incendio florestal', 'incendios florestais', 'focos de calor', 'boi manaus',
+             'ar livre', 'pff2', 'estiagem', 'crise climatica', 'sepdec', 'defesa civil'],
+  MAX: 8,
+  ATUALIZA_MS: 10 * 60 * 1000
+};
+const semAcento = t => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const textoLimpo = html => { const d = document.createElement('textarea'); d.innerHTML = String(html || '').replace(/<[^>]+>/g, ' '); return d.value.replace(/\s+/g, ' ').replace(/\[?…\]?|\[&hellip;\]/g, '').trim(); };
+function dataManaus(deslocDias){
+  const p = new Intl.DateTimeFormat('en-CA', { timeZone:'America/Manaus', year:'numeric', month:'2-digit', day:'2-digit' }).format(new Date(Date.now() - deslocDias * 864e5));
+  return p; // AAAA-MM-DD
+}
+function fraseDoAviso(titulo, resumo){
+  const t = textoLimpo(titulo);
+  if (!/^nota\b/i.test(t) || !resumo) return t;
+  let f = textoLimpo(resumo);
+  const m = f.match(/^A Prefeitura de Manaus,?\s*(por meio d[aoe]s?\s.*?,\s*)?(informa|comunica|alerta|esclarece|orienta)\s+(que\s+)?/i);
+  if (m){
+    f = f.slice(m[0].length);
+    // "informa que mantém as aulas…" → "A Prefeitura mantém as aulas…"; "informa que a capital…" → "A capital…"
+    const inicio = semAcento(f.split(/\s/)[0] || '');
+    const semSujeito = !/^(a|o|as|os|um|uma|nesta|neste|nestas|nestes|no|na|nos|nas|em|de|do|da|hoje|amanha|segundo|devido|por|para|com|todas|todos|toda|todo|cerca|as|aulas|escolas)$/.test(inicio);
+    if (semSujeito) f = 'A Prefeitura ' + f;
+  }
+  const fim = f.search(/\.\s/); if (fim > 40) f = f.slice(0, fim + 1);
+  if (f.length > 170) f = f.slice(0, 167).replace(/\s\S*$/, '') + '…';
+  return f.charAt(0).toUpperCase() + f.slice(1);
+}
+async function carregarAvisos(){
+  const hoje = dataManaus(0), ontem = dataManaus(1);
+  const listas = await Promise.all(AVISOS.FONTES.map(base =>
+    fetch(`${base}/wp-json/wp/v2/posts?after=${ontem}T00:00:00&per_page=50&_fields=id,date,link,title,excerpt`, { cache:'no-store' })
+      .then(r => r.ok ? r.json() : []).then(l => l.map(p => Object.assign(p, { base }))).catch(() => [])));
+  const posts = [], vistos = new Set();
+  listas.flat().forEach(p => {
+    if (!p || !p.link || vistos.has(p.link)) return;
+    const dia = String(p.date).slice(0, 10);
+    if (dia !== hoje && dia !== ontem) return;
+    vistos.add(p.link); posts.push(p);
+  });
+  // As "NOTAS" oficiais vêm sem resumo: busca o texto só delas
+  await Promise.all(posts.filter(p => /^nota\b/i.test(textoLimpo(p.title && p.title.rendered)) && !textoLimpo(p.excerpt && p.excerpt.rendered))
+    .map(p => fetch(`${p.base}/wp-json/wp/v2/posts/${p.id}?_fields=content`, { cache:'no-store' })
+      .then(r => r.ok ? r.json() : null).then(j => { if (j && j.content) p.resumo = textoLimpo(j.content.rendered).slice(0, 700); }).catch(() => {})));
+  const itens = [], textosVistos = new Set();
+  posts.forEach(p => {
+    const titulo = p.title && p.title.rendered, resumo = p.resumo || (p.excerpt && p.excerpt.rendered);
+    const tudo = semAcento(textoLimpo(titulo) + ' ' + textoLimpo(resumo));
+    if (!AVISOS.PALAVRAS.some(k => tudo.includes(k))) return;
+    const dia = String(p.date).slice(0, 10), texto = fraseDoAviso(titulo, resumo), chave = semAcento(texto).slice(0, 80);
+    if (textosVistos.has(chave)) return;   // a mesma nota sai no site da Prefeitura e no da secretaria
+    textosVistos.add(chave);
+    itens.push({ data: String(p.date), link: p.link, texto: texto,
+                 quando: (dia === hoje ? 'Hoje' : 'Ontem') + ', ' + String(p.date).slice(11, 13) + 'h' + String(p.date).slice(14, 16) });
+  });
+  itens.sort((a, b) => b.data.localeCompare(a.data));
+  mostrarAvisos(itens.slice(0, AVISOS.MAX), listas.some(l => l.length));
+}
+function mostrarAvisos(itens, siteRespondeu){
+  const caixa = document.getElementById('avisos'), fita = document.getElementById('avisosFita');
+  if (!itens.length){
+    if (!siteRespondeu){ caixa.hidden = true; return; }
+    itens = [{ link:'https://www.manaus.am.gov.br/', quando:'Hoje', texto:'Sem novos avisos da Prefeitura sobre a fumaça. Veja todas as notícias no site oficial.' }];
+  }
+  const umItem = (i, oculto) => `<a href="${i.link}" target="_blank" rel="noopener"${oculto ? ' tabindex="-1" aria-hidden="true"' : ''}><span class="avisos-quando">${i.quando}</span>${i.texto.replace(/</g, '&lt;')}</a>`;
+  const normal = itens.map(i => umItem(i, false)).join('');
+  fita.innerHTML = normal + itens.map(i => umItem(i, true)).join('');  // repetido para a fita girar sem emenda
+  caixa.hidden = false;
+  requestAnimationFrame(() => {
+    const larguraMetade = fita.scrollWidth / 2, visivel = document.getElementById('avisosTrilho').clientWidth;
+    const parado = larguraMetade <= visivel;
+    caixa.classList.toggle('parado', parado);
+    if (parado) fita.innerHTML = normal;
+    fita.style.setProperty('--dur', Math.max(20, Math.round(larguraMetade / 70)) + 's');  // ~70 px por segundo
+  });
+}
+carregarAvisos();
+setInterval(carregarAvisos, AVISOS.ATUALIZA_MS);
+
 loadAir();
 setInterval(loadAir, CONFIG.REFRESH_MS);
 openTab((location.hash || '#ar').slice(1), false, true);
