@@ -37,6 +37,12 @@
     --lv-ruim:#F29A38;
     --lv-muito-ruim:#EC6F66;
     --lv-pessima:#A97CF0;
+    /* Cor do texto escrito sobre cada nível */
+    --lv-boa-txt:var(--ink);
+    --lv-moderada-txt:var(--ink);
+    --lv-ruim-txt:var(--ink);
+    --lv-muito-ruim-txt:var(--ink);
+    --lv-pessima-txt:var(--ink);
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -45,7 +51,7 @@
   img{max-width:100%}
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
   [hidden]{display:none!important}
-  main{scroll-margin-top:64px}
+  main{scroll-margin-top:calc(var(--topo,150px) + 8px)}
   .skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--primary);color:#fff;padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}
   .skip:focus{top:12px}
   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -138,7 +144,7 @@
   .checker fieldset{border:0;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
   .checker label{display:flex;gap:10px;align-items:center;background:var(--surface-2);border-radius:12px;padding:10px 12px;cursor:pointer}
   .checker input{width:20px;height:20px;flex:none;accent-color:var(--primary)}
-  section.panel{scroll-margin-top:90px}
+  section.panel{scroll-margin-top:calc(var(--topo,150px) + 12px)}
   .result{margin-top:14px;border-radius:14px;padding:16px 18px;background:var(--primary-soft);display:none}
   .result.show{display:block}
   .urgente{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#F4E4E4;border:1px solid #E2BDBD;border-radius:14px;padding:12px 16px;margin:0 0 16px}
@@ -202,7 +208,8 @@
 
 
   /* Cabeçalho fixo com menu */
-  .site-head{position:sticky;top:0;z-index:1000;background:var(--primary);border-bottom:4px solid var(--pmm-turquesa);box-shadow:0 2px 10px rgba(0,60,56,.15)}
+  .topo-fixo{position:sticky;top:0;z-index:1000}
+  .site-head{position:relative;background:var(--primary);border-bottom:4px solid var(--pmm-turquesa);box-shadow:0 2px 10px rgba(0,60,56,.15)}
   .site-head .logo{display:block;height:52px;width:auto}
   .site-head .logo-txt{color:#fff;font-weight:800;font-size:1.1rem;line-height:1.1}
   .site-head .logo-txt small{display:block;font-weight:600;font-size:.78rem;opacity:.85}
@@ -218,7 +225,7 @@
   .site-head .tab:focus-visible{outline-color:#fff}
   .tab{display:inline-flex;align-items:center;gap:7px;min-height:44px}
   .tab svg{flex:none}
-  main{scroll-margin-top:80px}
+  main{scroll-margin-top:calc(var(--topo,150px) + 8px)}
 
   /* Página inicial */
   .home-head{margin-bottom:16px}
@@ -237,7 +244,7 @@
   .worst li{display:flex;align-items:center;gap:12px;background:var(--surface-2);border-radius:12px;padding:10px 14px;border-left:6px solid var(--c)}
   .worst .b{font-weight:700;flex:1}
   .worst .v{font-weight:800}
-  .worst .l{font-size:.82rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--c)}
+  .worst .l{font-size:.82rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--c);color:var(--ci,var(--ink))}
   .worst li.zona{margin-top:6px}
   .worst li.zona:first-child{margin-top:0}
   .worst li.zona .b{font-size:1.02rem}
@@ -259,7 +266,18 @@
   details.more summary{padding:8px 0;color:var(--primary);font-weight:700}
   details.more summary::after{right:4px}
   details.more .worst{margin-top:6px}
-  #fireMap{height:440px;border-radius:14px;margin-top:10px;z-index:1}
+  #fireMap{height:400px;border-radius:14px;margin-top:10px;z-index:1}
+  .col-mapas{display:grid;gap:16px;align-content:start}
+  #zonaMap{height:360px;border-radius:14px;margin-top:10px;z-index:1;background:#EEF2F3}
+  .zona-card .mini-h{margin-top:0}
+  .legend.legend-niveis{gap:4px 12px;font-size:.82rem}
+  .legend.legend-niveis i{border-radius:4px;width:12px;height:12px;margin-right:4px}
+  .leaflet-tooltip.zona-label{padding:4px 10px 5px;border-radius:10px;border:0;border-left:6px solid var(--c,#C9D1D4);box-shadow:0 2px 8px rgba(0,0,0,.22);font:600 12px/1.3 'Nunito',system-ui,sans-serif;color:var(--ink);text-align:left}
+  .leaflet-tooltip.zona-label::before{display:none}
+  .leaflet-tooltip.zona-label strong{display:block;font-size:13px;font-weight:800;color:var(--pmm-marinho)}
+  .leaflet-tooltip.zona-label span{display:block;white-space:nowrap}
+  .leaflet-tooltip.zona-label em{font-style:normal}
+  @media (max-width:600px){ .leaflet-tooltip.zona-label{padding:3px 8px 4px;border-left-width:5px;font-size:11px} .leaflet-tooltip.zona-label strong{font-size:12px} .leaflet-tooltip.zona-label em{display:none} }
   .leaflet-tooltip.manaus-label{padding:5px 10px;border-radius:10px;border:0;box-shadow:0 2px 8px rgba(0,0,0,.2);text-align:center;font:600 12px/1.3 'Nunito',system-ui,sans-serif;color:var(--ink)}
   .leaflet-tooltip.manaus-label strong{display:block;font-size:13px;font-weight:800;color:var(--pmm-marinho)}
   .leaflet-tooltip.manaus-label span{display:block;white-space:nowrap}
@@ -271,9 +289,10 @@
   @media (max-width:860px){
     .head-row{flex-wrap:wrap;gap:6px}
     .site-head .tabs{margin-left:0;width:100%}
-    main{scroll-margin-top:130px}
+    main{scroll-margin-top:calc(var(--topo,190px) + 8px)}
     .home-grid,.quick{grid-template-columns:1fr}
     #fireMap{height:320px}
+    #zonaMap{height:340px}
     .air-main .ring{width:120px;height:120px}
     .air-main .ring strong{font-size:2rem}
   }
@@ -301,25 +320,38 @@
   .avisos-tag{flex:none;background:var(--pmm-laranja);color:var(--ink);font-weight:800;font-size:.82rem;padding:5px 12px;border-radius:999px;white-space:nowrap}
   .avisos-trilho{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
   .avisos-fita{display:inline-flex;gap:44px;white-space:nowrap;padding:12px 0;animation:avisos-rolar var(--dur,40s) linear infinite}
-  .avisos-trilho:hover .avisos-fita, .avisos-trilho:focus-within .avisos-fita{animation-play-state:paused}
+  .avisos-trilho:hover .avisos-fita, .avisos-trilho:focus-within .avisos-fita{animation-play-state:paused!important}
   .avisos-fita a{color:#fff;text-decoration:none;font-weight:600;font-size:.95rem}
   .avisos-fita a:hover, .avisos-fita a:focus-visible{text-decoration:underline}
   .avisos-fita a:focus-visible{outline:2px solid var(--pmm-laranja);outline-offset:3px;border-radius:4px}
+  .avisos-carregando{color:#C9D6F2;font-size:.92rem}
+  .no-js .avisos{display:none}
   .avisos-quando{display:inline-block;color:#FFD49A;font-weight:800;margin-right:8px;font-size:.85rem}
   @keyframes avisos-rolar{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .avisos.parado .avisos-fita{animation:none}
-  .avisos.parado .avisos-trilho{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
-  @media (prefers-reduced-motion:reduce){
-    .avisos-fita{animation:none}
-    .avisos-trilho{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
-  }
+  .avisos.parado .avisos-trilho{-webkit-mask-image:none;mask-image:none}
+  .avisos.parado .avisos-trilho{overflow-x:hidden}
   @media (max-width:860px){ .avisos-tag{font-size:.75rem;padding:4px 10px} .avisos-fita a{font-size:.9rem} }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  /* A faixa de avisos continua andando (mais devagar) e para ao passar o mouse ou focar com o teclado */
+  @media (prefers-reduced-motion:reduce){.avisos:not(.parado) .avisos-fita{animation:avisos-rolar calc(var(--dur,40s) * 1.5) linear infinite!important}.avisos .avisos-trilho:hover .avisos-fita,.avisos .avisos-trilho:focus-within .avisos-fita{animation-play-state:paused!important}}
+
+  /* ===== TESTE A: cores dos níveis mais saturadas ===== */
+  :root{
+    --lv-boa:#12A84A;
+    --lv-moderada:#FFD000;
+    --lv-ruim:#FF7A00;
+    --lv-muito-ruim:#E0262C;
+    --lv-pessima:#7E3FBF;
+    --lv-muito-ruim-txt:#fff;   /* texto branco nos tons escuros, para ler bem */
+    --lv-pessima-txt:#fff;
+  }
 </style>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
+<div class="topo-fixo" id="topoFixo">
 <header class="site-head">
   <div class="wrap head-row">
     <a class="brand" href="#ar" data-go="ar" aria-label="Prefeitura de Manaus · Respira Manaus, página inicial">
@@ -335,11 +367,12 @@
   </div>
 </header>
 
-<div class="avisos" id="avisos" role="region" aria-label="Avisos da Prefeitura" hidden>
+<div class="avisos" id="avisos" role="region" aria-label="Avisos da Prefeitura">
   <div class="wrap avisos-row">
     <span class="avisos-tag">Avisos da Prefeitura</span>
-    <div class="avisos-trilho" id="avisosTrilho"><div class="avisos-fita" id="avisosFita"></div></div>
+    <div class="avisos-trilho" id="avisosTrilho"><div class="avisos-fita" id="avisosFita"><span class="avisos-carregando">Buscando os avisos mais recentes…</span></div></div>
   </div>
+</div>
 </div>
 
 <main class="wrap" id="conteudo" tabindex="-1">
@@ -355,6 +388,7 @@
 
     <div class="home-grid">
       <div class="card" aria-live="polite">
+        <div class="air-hero" id="airHero">
         <div class="air-main">
           <div class="ring" id="bigRing"><div><strong id="bigVal">--</strong><span>µg/m³</span></div></div>
           <div>
@@ -363,14 +397,15 @@
           </div>
         </div>
         <ul class="advice" id="advice"></ul>
+        </div>
         <div class="scale-wrap" aria-hidden="true">
           <span class="scale-pin" id="scalePin" hidden></span>
           <div class="scale">
-            <div style="background:var(--lv-boa)">Boa</div>
-            <div style="background:var(--lv-moderada)">Moderada</div>
-            <div style="background:var(--lv-ruim)">Ruim</div>
-            <div style="background:var(--lv-muito-ruim)">Muito ruim</div>
-            <div style="background:var(--lv-pessima)">Péssima</div>
+            <div style="background:var(--lv-boa);color:var(--lv-boa-txt)">Boa</div>
+            <div style="background:var(--lv-moderada);color:var(--lv-moderada-txt)">Moderada</div>
+            <div style="background:var(--lv-ruim);color:var(--lv-ruim-txt)">Ruim</div>
+            <div style="background:var(--lv-muito-ruim);color:var(--lv-muito-ruim-txt)">Muito ruim</div>
+            <div style="background:var(--lv-pessima);color:var(--lv-pessima-txt)">Péssima</div>
           </div>
           <div class="scale-labels"><span>até 25</span><span>26 a 50</span><span>51 a 75</span><span>76 a 125</span><span>acima de 125</span></div>
         </div>
@@ -385,12 +420,22 @@
         <p class="note" id="airSource" style="margin:12px 0 0"></p>
       </div>
 
+      <div class="col-mapas">
+      <div class="card zona-card">
+        <h2 class="mini-h">Mapa do ar por zona</h2>
+        <p class="note" style="margin:0">A cor de cada zona é a média dos sensores que estão nela.</p>
+        <div id="zonaMap" role="img" aria-label="Mapa de Manaus com a qualidade do ar em cada zona da cidade"></div>
+        <div class="legend legend-niveis"><span><i style="background:var(--lv-boa)"></i>Boa</span><span><i style="background:var(--lv-moderada)"></i>Moderada</span><span><i style="background:var(--lv-ruim)"></i>Ruim</span><span><i style="background:var(--lv-muito-ruim)"></i>Muito ruim</span><span><i style="background:var(--lv-pessima)"></i>Péssima</span><span><i style="background:#C9D1D4"></i>Sem sensor</span></div>
+        <p class="note" id="zonaInfo" style="margin:6px 0 0" aria-live="polite">Carregando…</p>
+      </div>
+
       <div class="card fire-card">
         <h2 class="mini-h">Focos de queimada na região</h2>
         <p class="note" style="margin:0">A fumaça que chega a Manaus vem desses focos.</p>
         <div id="fireMap" role="img" aria-label="Mapa do Amazonas com os focos de queimada das últimas 48 horas"></div>
-        <div class="legend"><span><i style="background:#B8401F"></i>Foco de queimada</span><span><i style="background:#007A73;outline:2px solid #fff;box-shadow:0 0 0 1px #ccc"></i>Manaus (cor = qualidade do ar)</span></div>
+        <div class="legend"><span><i style="background:#B8401F"></i>Foco de queimada</span></div>
         <p class="note" id="focosInfo" style="margin:6px 0 0" aria-live="polite">Carregando focos…</p>
+      </div>
       </div>
     </div>
 
@@ -841,15 +886,15 @@ function isOpen(u){
 
 /* Níveis (escala Selva, µg/m³ de PM2,5) */
 const LEVELS = [
-  { max:25,  name:'Boa', ar:'bom',        color:'var(--lv-boa)',        msg:'O ar está bom. Aproveite com tranquilidade.',
+  { max:25,  name:'Boa', ar:'bom',        color:'var(--lv-boa)', ink:'var(--lv-boa-txt)',        msg:'O ar está bom. Aproveite com tranquilidade.',
     advice:['Atividades ao ar livre liberadas.','Continue bebendo bastante água.'] },
-  { max:50,  name:'Moderada', ar:'moderado',   color:'var(--lv-moderada)',   msg:'Pessoas sensíveis podem sentir algum desconforto.',
+  { max:50,  name:'Moderada', ar:'moderado',   color:'var(--lv-moderada)', ink:'var(--lv-moderada-txt)',   msg:'Pessoas sensíveis podem sentir algum desconforto.',
     advice:['Grupos de risco: reduzam esforço ao ar livre.','Mantenha-se hidratado.','Observe sintomas em crianças e idosos.'] },
-  { max:75,  name:'Ruim', ar:'ruim',       color:'var(--lv-ruim)',       msg:'Evite esforço prolongado ao ar livre.',
+  { max:75,  name:'Ruim', ar:'ruim',       color:'var(--lv-ruim)', ink:'var(--lv-ruim-txt)',       msg:'Evite esforço prolongado ao ar livre.',
     advice:['Use máscara PFF2 ao sair.','Evite exercícios ao ar livre.','Feche janelas nas horas de mais fumaça.','Beba água com frequência.'] },
-  { max:125, name:'Muito ruim', ar:'muito ruim', color:'var(--lv-muito-ruim)', msg:'Fique em ambientes fechados sempre que puder.',
+  { max:125, name:'Muito ruim', ar:'muito ruim', color:'var(--lv-muito-ruim)', ink:'var(--lv-muito-ruim-txt)', msg:'Fique em ambientes fechados sempre que puder.',
     advice:['Saia só se necessário, com máscara PFF2.','Crianças, idosos e gestantes: fiquem em casa.','Mantenha portas e janelas fechadas.','Use soro fisiológico nos olhos e no nariz.'] },
-  { max:Infinity, name:'Péssima', ar:'péssimo', color:'var(--lv-pessima)', msg:'Proteja-se: evite sair de casa.',
+  { max:Infinity, name:'Péssima', ar:'péssimo', color:'var(--lv-pessima)', ink:'var(--lv-pessima-txt)', msg:'Proteja-se: evite sair de casa.',
     advice:['Permaneça em local fechado e protegido.','Use máscara PFF2 se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] }
 ];
 const levelOf = v => LEVELS.find(l => v <= l.max);
@@ -921,14 +966,48 @@ function agruparPorBairro(sensores){
   return Object.entries(grupos).map(([bairro, v]) => ({ bairro, zona: zonaDoBairro(bairro.replace(/^Arredores de /, '')), pm25: v.reduce((a, b) => a + b, 0) / v.length, n: v.length, soma: v.reduce((a, b) => a + b, 0) }));
 }
 
-/* Cada sensor com o bairro mais próximo e a zona desse bairro (um item por sensor) */
+/* Limites dos bairros (OpenStreetMap, ODbL), compactados: 1º par = lat,lng ×-1000; depois diferenças */
+const BAIRROS_OSM_RAW = {"Colonia Terra Nova":["2994,60031,-1,-3,1,-7,2,-2,5,-10,0,-3,3,-1,1,-4,4,0,7,0,5,-2,1,1,0,1,1,0,1,2,2,1,0,1,2,0,-2,4,-1,0,0,2,-3,-2,0,3,-3,0,1,2,-1,1,3,3,3,0,1,-2,2,2,-8,9,-11,6,-15,-2"],"Lago Azul":["2975,59973,1,8,-3,8,10,4,-2,7,0,5,-2,2,0,2,-2,5,-2,0,-1,2,-3,0,-5,5,-4,9,-3,2,-2,1,-11,1,-1,-10,-2,-1,0,-1,5,-7,-3,-2,-3,-2,-8,-1,-9,-11,-8,-4,-3,-2,0,-2,0,-7,9,-2,52,-9"],"Nova Cidade":["3013,59980,0,-6,-3,0,0,-1,3,-8,-1,-2,-1,1,-4,2,0,2,-32,5,1,8,-3,8,10,4,0,-2,1,-1,2,0,1,-1,12,0,1,3,10,-1,2,1,5,-1,0,1,2,-1,0,-4,3,-1,1,-3,0,-2,-4,0,0,-2,-6,1"],"Santa Etelvina":["2974,60016,3,0,3,1,14,14,-1,-3,0,-6,3,-3,5,-9,1,-6,-2,-6,-4,1,-4,0,0,-4,-1,0,0,-1,-5,1,1,-5,-3,0,-1,5,-2,5,0,5,-2,2,0,2,-2,5,-3,0,0,2"],"Adrianópolis":["3086,60004,3,2,1,3,10,1,0,4,3,0,0,2,13,1,0,-6,-8,-1,-2,-3,-1,1,-3,-2,-3,0,-1,1,-3,-2,0,-2,-1,1,-2,-1,0,1,-1,-1,0,-1,-3,-2,0,2,-2,2"],"Educandos":["3136,60010,2,-2,3,0,1,-3,2,1,3,4,-3,3,0,4,-5,-1,1,-4,-1,-1,-2,0,-1,-1"],"Cachoeirinha":["3116,60011,0,0,-1,0,2,-4,3,-1,0,-5,1,-1,7,1,5,0,3,4,1,2,-1,3,-2,0,-8,-1,-5,2,-4,-2,0,3,-1,-1"],"Raiz":["3121,60000,0,-3,3,-2,0,-2,4,0,3,4,2,4,-5,0,-7,-1"],"Parque Dez de Novembro":["3087,60009,3,5,2,1,1,0,0,1,1,2,2,3,3,1,2,2,-22,0,-2,-8,-2,0,0,-5,-5,-1,0,-4,-1,-1,-1,1,-5,-1,0,-16,1,0,1,-2,5,0,2,-1,3,-1,4,9,0,1,4,6,-1,3,3,0,0,1,2,4"],"São Raimundo":["3131,60036,-1,4,-3,3,-4,2,-4,7,0,-11,-1,-4,7,1,2,-5,4,3"],"Glória":["3119,60036,-3,-2,4,0,2,-2,2,1,2,-1,1,1,-2,5,-6,-2"],"Aparecida":["3132,60030,-1,0,1,1,-2,1,1,0,0,4,-5,-4,-3,0,1,-1,-2,-3,9,0,0,0,2,1,-2,0,1,1"],"Centro":["3133,60029,0,3,2,-2,1,1,1,-4,4,-3,1,-3,-1,-2,-3,-4,1,-1,-1,-3,-1,1,-1,-2,-2,0,-6,0,0,7,-12,0,0,7,5,1,1,3,9,0,0,0,2,1"],"Coroado":["3094,59948,1,2,3,3,3,4,5,2,3,4,-3,1,1,1,-3,1,-3,2,7,12,-12,6,-3,2,-1,0,-5,-2,-3,-7,-5,-5,-5,-2,1,-11,1,-2,0,-3,3,0,9,-7,6,-1"],"Aleixo":["3087,60009,3,0,-1,-3,-3,-2,2,-2,0,-2,3,2,0,1,1,1,0,-1,2,1,1,-1,0,2,3,2,3,-1,4,2,1,-1,-1,-2,0,-5,-2,-2,-3,-2,-2,-3,-3,-3,-8,-4,-3,-7,-6,-5,-3,-2,-4,2,1,4,3,5,0,2,4,9,0,1,4,6,-1,3,3,0,0,1,2,4"],"Cidade de Deus":["3007,59966,-1,-8,4,0,-2,-18,11,-2,6,-4,12,6,-4,11,-5,9,-1,0,0,-3,-9,0,-1,2,-6,4,0,1,-4,2"],"Novo Aleixo":["3065,59987,4,0,2,-1,4,-1,0,-1,-7,-16,-3,-3,-4,-5,-6,-5,-6,-8,-3,-3,0,-1,-9,-3,-4,11,-6,10,6,3,2,-2,1,-2,3,2,3,4,1,4,2,3,1,5,2,2,2,-1,0,6,6,1,8,3,1,-2"],"São José Operário":["3055,59953,3,5,3,2,4,5,3,3,0,3,3,3,4,-2,-1,-1,0,-2,1,-8,1,-1,0,-8,-5,-8,-1,-2,0,-3,-4,0,-2,-2,-2,5,-4,4,-1,5,-2,2"],"São Geraldo":["3102,60027,1,2,2,0,1,1,3,-1,1,2,2,-1,3,3,1,-6,0,-3,-15,0,1,3"],"Nossa Senhora das Graças":["3100,60014,3,0,0,2,13,1,0,7,-15,0,0,-1,-5,-2,-2,-6,1,0,0,-2,5,1"],"Santo Antonio":["3118,60038,0,-1,1,-1,-3,-2,-1,0,-2,3,1,2,0,2,-4,10,5,1,1,-2,2,-1,1,-1,-1,-10"],"Petrópolis":["3120,60001,1,-1,0,-3,3,-2,0,-2,-4,-2,-3,2,-2,-1,-1,1,-3,-4,-1,1,-3,-2,-2,-1,0,1,-3,1,0,-6,-6,3,-2,2,0,1,10,10,6,-1,1,3,5,1,4,-1"],"Crespo":["3138,59984,0,1,2,5,-1,0,-2,0,-1,3,-3,-1,-3,3,-2,-2,-1,-4,-5,-7,3,0,2,3,4,1,1,0,2,0,3,0,1,-2"],"Flores":["3070,60010,5,1,0,5,2,0,2,8,7,0,0,7,-10,0,-8,-6,-20,0,-2,0,0,-7,-2,-5,-1,-3,-1,-20,3,0,0,-5,11,1,7,3,0,16,5,1,1,-1,1,1,0,4"],"Cidade Nova":["3043,60010,-1,-20,3,0,0,-5,5,0,0,-6,-2,1,-2,-2,-1,-6,-2,-2,-1,-4,-3,-4,-3,-2,-1,2,-2,2,-6,-4,0,-3,-9,0,-1,2,-2,1,-3,3,1,2,-3,8,0,1,3,0,0,6,6,-1,0,2,4,0,0,2,-1,3,-3,1,0,2,0,2,1,0,3,2,-1,-1,-1,2,0,0,0,1,2,3,-1,3,1,0,1,2,2,1,0,1,2,0,-2,4,-1,0,0,2,-3,-2,0,3,-3,0,1,2,-1,1,3,3,3,0,1,-2,2,2,4,0,5,6,2,1,7,0,0,-7,-2,-5,-1,-3"],"São Francisco":["3110,59998,1,3,5,1,4,-1,0,5,-3,1,-2,4,-7,-1,-3,-5,0,-5,-1,-1,6,-1"],"Japiim":["3102,59983,0,6,3,-1,0,-1,2,1,3,2,1,-1,3,4,1,-1,2,1,3,-2,5,2,3,0,-1,-4,-12,-18,-3,-3,-3,-5,-3,1,1,1,-3,1,-3,2,7,12,-6,3"],"Colônia Oliveira Machado":["3145,60001,4,-5,1,-2,3,-1,1,-3,2,-1,3,-1,-4,6,-2,6,-3,7,-3,3,-5,-5,3,-4"],"Tancredo Neves":["3045,59942,4,-5,2,-4,-1,-1,1,-2,7,3,2,0,2,-1,3,2,-1,1,0,2,-2,5,-4,4,-1,5,-2,2,-9,-9,-1,-2"],"Vila da Prata":["3113,60043,-4,0,0,2,-5,-1,-2,5,1,1,3,-1,4,2,3,-8"],"São Jorge":["3113,60043,-4,0,0,2,-5,-1,-1,3,-6,2,-1,2,-2,1,-1,-4,2,-1,3,-9,3,-3,0,-5,2,0,0,-1,2,0,1,1,3,-1,2,2,1,-1,4,4,-2,0,-1,3,1,3,-1,3"],"Compensa":["3089,60061,5,-2,1,2,8,5,-1,2,-5,4,1,3,8,-4,2,-1,0,-1,2,1,-1,-1,2,0,0,-1,1,0,-1,-1,2,-6,3,-1,0,-3,2,-2,1,-3,0,-4,-1,1,-2,1,-2,3,-6,-3,-2,-1,-3,1,-1,-1,1,-2,-6,2,-1,2,-4,2,-3,8,0,0"],"Dom Pedro I":["3096,60043,-1,-1,-3,-5,-3,2,0,-2,2,-3,0,-4,-7,1,-1,2,0,4,-2,6,-2,4,0,3,3,0,1,1,1,0,0,1,5,0,0,1,1,-2,1,-3,4,-1,1,-4"],"Alvorada":["3089,60053,0,-1,-5,0,0,-1,-1,0,-1,-1,-3,0,0,-3,2,-3,2,-7,0,-4,1,-2,-8,0,-7,-5,0,3,-1,2,-2,1,-1,2,-2,0,0,4,-4,0,0,6,2,0,0,2,1,0,10,1,0,4,-1,3,2,2,2,0,0,3,6,-2,0,-1,1,0,3,-2,3,0,1,-1"],"Da Paz":["3058,60037,0,-3,-2,-1,-4,0,-1,2,-2,-1,-1,1,-1,0,-2,-10,23,0,1,1,-1,5,-2,1,-1,2,-3,0,-3,3,-1,0"],"Planalto":["3074,60063,-5,-6,3,-4,0,-6,-10,-1,-2,3,-1,3,-4,2,0,2,-2,8,2,1,1,0,4,1,1,1,3,0,2,2,5,-2,1,-4,2,0"],"Nova Esperança":["3089,60053,1,-2,1,-3,2,0,1,4,-2,1,-3,9,-3,1,-3,-1,-3,1,-1,1,-5,-3,0,-2,7,-2,0,-1,1,0,3,-2,3,0,1,-1"],"Lírio do Vale":["3066,60069,5,6,1,4,2,3,-1,3,4,0,-1,-4,1,-2,9,-6,-1,-8,1,-2,-3,-1,-2,1,-3,2,-2,0,-2,-2,-2,0,-1,4,-5,2"],"Santo Agostinho":["3086,60070,7,-1,3,1,1,2,6,-4,0,-2,-8,-5,-1,-2,-4,2,-1,0,0,1,-4,2,1,6"],"Tarumã-Açú":["2983,60052,1,0,3,5,3,2,-2,1,3,1,1,2,2,-1,1,1,2,0,2,5,0,2,-2,5,3,2,-1,4,1,5,4,2,0,2,1,11,-10,6,-10,1,-12,-3,-10,1,-7,-5,1,-11,-4,-8,0,-2,1,-2,0,-2,-3,-2,-8,-16,-10,-11,-1,-4,-4,-4,-1,-4,12,-1,19,-1,3,-2,5,-10,5,-5,2,0,5,0,3,2,13,13,-1,0,-3,3,-2,6,-4,2,-1,10"],"Tarumã":["2983,60052,1,0,3,5,3,2,-1,1,2,1,1,2,2,-1,1,1,2,0,2,6,-2,6,3,2,-1,4,1,5,3,1,1,1,1,-3,2,-2,2,0,4,-2,3,0,7,-2,9,-3,1,-3,1,-5,4,1,6,5,3,1,8,6,2,3,16,1,1,-2,-3,-5,0,-3,-7,-8,-3,0,-1,-1,-7,-2,-2,4,-6,-43,-5,0,-2,-1,-6,-6,-4,1,-9,8,-9,6,-2,0,-15,-2,-3,3,-2,6,-4,2,-1,10"],"Zumbi dos Palmares":["3070,59940,0,2,1,3,5,7,0,4,3,0,7,-5,-1,-3,0,-2,-2,-2,1,-2,0,-2,-5,-4,-7,2,-2,2"],"Armando Mendes":["3086,59951,3,-2,9,-2,1,-8,-1,-2,-5,-1,-2,-2,-3,-6,-1,1,-6,4,-2,3,5,4,0,2,-1,2,2,2,0,2,1,3"],"Mauazinho":["3105,59936,-2,0,-2,-3,-1,0,-1,-3,-2,-2,0,-4,2,-2,-1,-4,1,-3,3,3,4,0,5,3,3,7,4,0,3,0,1,0,1,1,0,3,-1,0,0,1,1,1,0,1,1,-1,3,1,3,3,-2,1,2,0,2,1,0,-1,0,-1,3,1,-5,8,-3,2,-5,0,-1,4,-5,-1,-3,-7,-5,-3,-2,-1,1,-2,-2,-3"],"Gilberto Mestrinho":["3081,59915,5,7,2,6,-1,1,-6,4,-2,3,-7,2,-2,2,0,-1,-4,0,-2,-2,0,-2,1,-1,-3,-2,-2,1,-2,0,-3,-2,1,-5,-1,-5,1,0,2,0,1,-2,0,-4,6,1,5,-2,5,0,5,2,1,-1"],"São Lázaro":["3146,60000,-3,-2,-4,1,0,-3,-2,0,-1,-3,3,-3,6,2,1,4,0,4"],"Santa Lúzia":["3142,60005,-1,3,-5,0,1,-2,2,-1,1,-3,1,0,2,2,-1,1"],"Morro da Liberdade":["3145,60001,-2,3,-2,-2,-1,0,-1,3,-2,1,-4,-5,2,-2,8,-1,3,2,-1,1"],"Betânia":["3133,59992,-3,3,3,6,2,-2,4,0,0,-3,-2,0,-1,-3,-3,-1"],"Ponta Negra":["3005,60101,13,-4,4,4,16,6,9,9,2,-2,5,2,-1,-2,1,-1,1,1,1,-1,2,0,1,-2,2,-1,4,-2,0,-4,1,-5,4,-4,2,-2,1,-2,4,-2,2,1,2,0,2,-6,4,-4,5,-1,1,-2,5,-2,-1,-4,-4,-2,-7,1,0,2,-1,2,-8,5,-1,2,1,4,-20,-1,-2,-3,-8,-6,-3,-1,-6,-5,-4,-1,-1,5,-1,3,-9,3,-7,2,-3,0,-2,1,-5,2,-2,6,1,11"],"Presidente Vargas":["3116,60024,-1,9,4,1,2,-2,2,0,1,-1,-3,-6,-5,-1"],"Chapada":["3085,60031,6,-1,0,4,-2,3,0,2,3,-2,3,6,1,0,2,-5,3,-3,0,-5,2,-1,-2,-5,-15,0,-1,7"],"Redenção":["3058,60037,0,-3,-2,-1,-4,0,-1,2,-2,-1,-1,1,-1,0,4,33,2,-5,2,-9,4,-2,1,-3,2,-3,-1,0,0,-2,-2,0,0,-6,4,0,0,-4,-4,3,-1,0"],"Vila Buriti":["3150,59994,3,-1,1,-3,5,-2,1,-5,2,-2,0,-2,0,-1,-2,2,-2,0,-4,-4,-1,0,0,2,-1,-3,-1,2,0,3,-2,1,2,-2,-1,0,1,-1,0,-3,-2,0,0,2,-2,0,2,-2,-2,0,-1,0,-1,-1,1,0,0,0,-1,-1,2,1,1,-1,0,1,3,0,4,1,0,-1,-4,-4,-3,-7,-2,3,0,-2,-2,0,-1,1,-1,-1,1,0,0,-1,4,0,1,-2,-2,-1,2,0,0,0,3,0,-1,-2,-4,0,-3,-2,5,1,1,0,0,-5,-7,-7,-2,-4,-3,0,-2,-2,-5,8,3,2,5,2,0,3,-2,0,1,1,2,10,-1,20,2,5,5,3,1,4,-1,4,4,-5,1,-2"],"Distrito Industrial I":["3131,59948,2,1,5,2,0,3,-2,0,1,1,2,10,-1,20,0,-1,0,2,-4,0,-2,0,-1,0,-4,-1,-2,-3,-3,0,-7,-11,-8,-10,-6,-4,-3,-4,-3,-3,-1,-2,4,-1,14,-2,2,2,2,5,5,1,1,-4,5,0,3,-2,1,1"],"Colônia Antônio Aleixo":["3099,59915,2,-2,-8,-10,1,-3,-5,2,-4,-2,-5,-5,-1,0,0,-4,3,-3,0,0,2,-5,4,-2,2,2,2,5,2,3,2,1,1,1,3,0,4,2,0,1,-1,-1,1,2,-1,1,2,-1,0,0,1,-1,4,0,7,11,1,5,-1,2,1,0,1,2,0,4,1,0,2,8,-1,0,-3,0,-4,0,-3,-7,-5,-3,-4,0,-3,-3"]};
+const BAIRROS_OSM = Object.fromEntries(Object.entries(BAIRROS_OSM_RAW).map(([n, aneis]) => [n, aneis.map(txt => {
+  const v = txt.split(',').map(Number), pts = []; let a = 0, g = 0;
+  for (let i = 0; i < v.length; i += 2){ a += v.at(i); g += v.at(i + 1); pts.push([-a / 1000, -g / 1000]); }
+  return pts;
+})]));
+/* Zona de cada bairro (Sul inclui Centro-Sul; Oeste inclui Centro-Oeste) */
+const ZONA_OSM = {"Betânia":"Sul","Cachoeirinha":"Sul","Centro":"Sul","Colônia Oliveira Machado":"Sul","Crespo":"Sul","Distrito Industrial I":"Sul","Educandos":"Sul","Japiim":"Sul","Morro da Liberdade":"Sul","Aparecida":"Sul","Petrópolis":"Sul","Praça 14 de Janeiro":"Sul","Presidente Vargas":"Sul","Raiz":"Sul","Santa Lúzia":"Sul","São Francisco":"Sul","São Lázaro":"Sul","Vila Buriti":"Sul","Adrianópolis":"Sul","Aleixo":"Sul","Chapada":"Sul","Flores":"Sul","Nossa Senhora das Graças":"Sul","Parque Dez de Novembro":"Sul","São Geraldo":"Sul","Compensa":"Oeste","Glória":"Oeste","Nova Esperança":"Oeste","Ponta Negra":"Oeste","Santo Agostinho":"Oeste","Santo Antonio":"Oeste","São Jorge":"Oeste","São Raimundo":"Oeste","Tarumã":"Oeste","Tarumã-Açú":"Oeste","Vila da Prata":"Oeste","Lírio do Vale":"Oeste","Alvorada":"Oeste","Da Paz":"Oeste","Dom Pedro I":"Oeste","Planalto":"Oeste","Redenção":"Oeste","Cidade de Deus":"Norte","Cidade Nova":"Norte","Colonia Terra Nova":"Norte","Lago Azul":"Norte","Nova Cidade":"Norte","Novo Aleixo":"Norte","Santa Etelvina":"Norte","Novo Israel":"Norte","Colônia Santo Antônio":"Norte","Monte das Oliveiras":"Norte","Armando Mendes":"Leste","Colônia Antônio Aleixo":"Leste","Coroado":"Leste","Gilberto Mestrinho":"Leste","Mauazinho":"Leste","São José Operário":"Leste","Tancredo Neves":"Leste","Zumbi dos Palmares":"Leste","Jorge Teixeira":"Leste","Puraquequara":"Leste","Distrito Industrial II":"Leste"};
+const NOME_BAIRRO = { 'Aparecida':'Nossa Senhora Aparecida', 'Santo Antonio':'Santo Antônio', 'Santa Lúzia':'Santa Luzia', 'Colonia Terra Nova':'Colônia Terra Nova', 'Tarumã-Açú':'Tarumã-Açu' };
+function dentro(lat, lng, anel){
+  let ok = false;
+  for (let i = 0, j = anel.length - 1; i < anel.length; j = i++){
+    const [yi, xi] = anel.at(i), [yj, xj] = anel.at(j);
+    if ((yi > lat) !== (yj > lat) && lng < (xj - xi) * (lat - yi) / (yj - yi) + xi) ok = !ok;
+  }
+  return ok;
+}
+function bairroOsm(lat, lng){
+  for (const [n, aneis] of Object.entries(BAIRROS_OSM)) if (aneis.some(a => dentro(lat, lng, a))) return n;
+  // Caiu numa fresta entre dois bairros: usa o limite de bairro mais próximo (até ~600 m)
+  let melhor = '', dist = Infinity;
+  for (const [n, aneis] of Object.entries(BAIRROS_OSM)) for (const a of aneis) for (const [la, lo] of a){
+    const d = Math.hypot(la - lat, lo - lng); if (d < dist){ dist = d; melhor = n; }
+  }
+  return dist * 111 <= 0.6 ? melhor : '';
+}
+function zonaPeloMapa(lat, lng){
+  for (const [z, aneis] of Object.entries(ZONAS_GEO.aneis)) if (aneis.some(a => dentro(lat, lng, a))) return z;
+  return '';
+}
+
+/* Cada sensor com o seu bairro e zona, pelos limites reais (um item por sensor) */
 function localizarSensores(sensores){
   const nomes = Object.keys(BAIRROS);
   return sensores.filter(s => Number.isFinite(s.pm25)).map(s => {
     let melhor = null, dist = Infinity;
     nomes.forEach(n => { const [la, lo] = BAIRROS[n]; const d = (la - s.lat) ** 2 + ((lo - s.lng) * Math.cos(la * Math.PI / 180)) ** 2; if (d < dist){ dist = d; melhor = n; } });
     const longe = Math.sqrt(dist) * 111 > 4;
-    return { bairro: longe ? 'Arredores de ' + melhor : melhor, zona: zonaDoBairro(melhor), pm25: s.pm25, nome: s.nome };
+    const real = bairroOsm(s.lat, s.lng);
+    return { bairro: real ? (NOME_BAIRRO[real] || real) : (longe ? 'Arredores de ' + melhor : melhor),
+             zona: ZONA_OSM[real] || zonaPeloMapa(s.lat, s.lng) || zonaDoBairro(melhor), pm25: s.pm25, nome: s.nome, lat: s.lat, lng: s.lng };
   });
 }
 
@@ -987,7 +1066,9 @@ function renderAirIndisponivel(){
   document.getElementById('demoFlag').classList.remove('show');
   document.getElementById('bigVal').textContent = '--';
   const bl = document.getElementById('bigLvl');
-  bl.textContent = 'Dados indisponíveis'; bl.style.background = '#E3E8E6';
+  bl.textContent = 'Dados indisponíveis'; bl.style.background = '#E3E8E6'; bl.style.color = '';
+  const hero = document.getElementById('airHero'); hero.style.setProperty('--c', '#E3E8E6'); hero.style.setProperty('--ci', 'var(--ink)');
+  pintarZonas(null);
   document.getElementById('airMsg').textContent = 'Não foi possível carregar a qualidade do ar agora. Tentaremos de novo em alguns minutos.';
   document.getElementById('advice').innerHTML = '';
   document.getElementById('bairrosBox').hidden = true;
@@ -1022,23 +1103,25 @@ function renderAir(data){
   marcarEscala(avg);
   setRing(document.getElementById('bigRing'), avg, lvl);
   const bl = document.getElementById('bigLvl');
-  bl.textContent = 'Ar ' + lvl.ar; bl.style.background = lvl.color;
+  bl.textContent = 'Ar ' + lvl.ar; bl.style.background = lvl.color; bl.style.color = lvl.ink;
+  const hero = document.getElementById('airHero'); hero.style.setProperty('--c', lvl.color); hero.style.setProperty('--ci', lvl.ink);
   document.getElementById('airMsg').textContent = lvl.msg;
   document.getElementById('advice').innerHTML = lvl.advice.slice(0, 3).map(a => `<li>${a}</li>`).join('');
   const t = new Date(data.updatedAt);
   document.getElementById('updated').textContent = 'Média da cidade · atualizado às ' + t.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit', timeZone:'America/Manaus' }) + haQuanto(t);
 
-  const item = s => { const l = levelOf(s.pm25); return `<li style="--c:${l.color}"><span class="b">${esc(s.bairro)}</span><span class="v">${Math.round(s.pm25)}</span><span class="l">${l.name}</span></li>`; };
+  const item = s => { const l = levelOf(s.pm25); return `<li style="--c:${l.color};--ci:${l.ink}"><span class="b">${esc(s.bairro)}</span><span class="v">${Math.round(s.pm25)}</span><span class="l">${l.name}</span></li>`; };
   const sorted = [...st].sort((a, b) => b.pm25 - a.pm25);
   // Com sensores individuais: zona (média) e, embaixo, cada sensor com seu valor
   const porZona = {};
   (data.sensores || []).forEach(x => { if (x.zona) (porZona[x.zona] = porZona[x.zona] || []).push(x); });
   const zonas = Object.entries(porZona).map(([zona, xs]) => ({ zona, xs: xs.sort((a, b) => b.pm25 - a.pm25), pm25: xs.reduce((a, x) => a + x.pm25, 0) / xs.length }))
     .sort((a, b) => b.pm25 - a.pm25);
+  pintarZonas(zonas);
   if (zonas.length >= 2){
     const sens = n => n === 1 ? '1 sensor' : n + ' sensores';
-    const zonaItem = (z, sensoresHtml) => { const l = levelOf(z.pm25); return `<li class="zona-wrap"><details class="zona-det" style="--c:${l.color}"><summary><span class="b">Zona ${esc(z.zona)}<span class="dica">média de ${sens(z.xs.length)}</span></span><span class="v">${Math.round(z.pm25)}</span><span class="l">${l.name}</span></summary><ol class="sensores">${sensoresHtml}</ol></details></li>`; };
-    const sensorItem = (x, i) => { const l = levelOf(x.pm25); return `<li class="sub" style="--c:${l.color}" title="${esc(x.nome || '')}"><span class="b"><small style="font-weight:400;opacity:.7">Sensor ${i + 1} ·</small> ${esc(x.bairro)}</span><span class="v">${Math.round(x.pm25)}</span><span class="l">${l.name}</span></li>`; };
+    const zonaItem = (z, sensoresHtml) => { const l = levelOf(z.pm25); return `<li class="zona-wrap"><details class="zona-det" style="--c:${l.color};--ci:${l.ink}"><summary><span class="b">Zona ${esc(z.zona)}<span class="dica">média de ${sens(z.xs.length)}</span></span><span class="v">${Math.round(z.pm25)}</span><span class="l">${l.name}</span></summary><ol class="sensores">${sensoresHtml}</ol></details></li>`; };
+    const sensorItem = (x, i) => { const l = levelOf(x.pm25); return `<li class="sub" style="--c:${l.color};--ci:${l.ink}" title="${esc(x.nome || '')}"><span class="b"><small style="font-weight:400;opacity:.7">Sensor ${i + 1} ·</small> ${esc(x.bairro)}</span><span class="v">${Math.round(x.pm25)}</span><span class="l">${l.name}</span></li>`; };
     document.getElementById('rankTitle').textContent = 'Qualidade do ar por zona';
     document.getElementById('rankDica').hidden = false;
     document.getElementById('stations').innerHTML = zonas.map(z => zonaItem(z, z.xs.map(sensorItem).join(''))).join('');
@@ -1054,6 +1137,62 @@ function renderAir(data){
     document.getElementById('stations').innerHTML = sorted.slice(0, 4).map(item).join('');
     document.getElementById('allStations').innerHTML = sorted.slice(4).map(item).join('');
   }
+}
+
+/* ===================== Mapa do ar por zona ===================== */
+/* Contornos das 4 zonas (distritos de saúde), formados pelos limites dos bairros do
+   OpenStreetMap (© colaboradores do OpenStreetMap, licença ODbL). Sul inclui a Centro-Sul e
+   Oeste inclui a Centro-Oeste. Pequenas frestas entre bairros foram preenchidas. O Jorge Teixeira
+   não tem limite no OpenStreetMap: foi traçado em volta do ponto oficial do bairro, só nas áreas livres. */
+const ZONAS_GEO = {"aneis":{"Leste":[[[-3.1349,-59.9393],[-3.1297,-59.9372],[-3.1267,-59.9349],[-3.1239,-59.9317],[-3.1231,-59.929],[-3.122,-59.9275],[-3.1205,-59.9211],[-3.1189,-59.9177],[-3.117,-59.9071],[-3.1106,-59.8968],[-3.1096,-59.8959],[-3.1051,-59.8955],[-3.0998,-59.8929],[-3.096,-59.8921],[-3.092,-59.8881],[-3.0901,-59.8832],[-3.088,-59.8811],[-3.0837,-59.8836],[-3.0822,-59.8874],[-3.0791,-59.8908],[-3.0791,-59.8946],[-3.0873,-59.9019],[-3.0903,-59.9019],[-3.0937,-59.9038],[-3.0981,-59.9093],[-3.0992,-59.9135],[-3.0988,-59.9158],[-3.0969,-59.9192],[-3.0941,-59.9213],[-3.0907,-59.922],[-3.0869,-59.9213],[-3.0842,-59.9194],[-3.0808,-59.9152],[-3.0778,-59.9152],[-3.0755,-59.9141],[-3.0691,-59.9145],[-3.0657,-59.9137],[-3.0634,-59.9122],[-3.0617,-59.9101],[-3.0602,-59.9052],[-3.0501,-59.897],[-3.03,-59.8929],[-3.0122,-59.8978],[-3.0041,-59.9146],[-3.0043,-59.9179],[-3.006,-59.9359],[-3.008,-59.9383],[-3.0179,-59.9383],[-3.0255,-59.9342],[-3.0372,-59.9402],[-3.0448,-59.9425],[-3.0534,-59.9518],[-3.0575,-59.9575],[-3.0604,-59.9595],[-3.0681,-59.9681],[-3.0681,-59.9711],[-3.071,-59.9739],[-3.0748,-59.972],[-3.0786,-59.9739],[-3.0841,-59.9791],[-3.0867,-59.9855],[-3.0877,-59.9864],[-3.0922,-59.9883],[-3.0933,-59.9883],[-3.0964,-59.9857],[-3.1079,-59.9798],[-3.1011,-59.9681],[-3.1032,-59.9664],[-3.1062,-59.9652],[-3.1068,-59.9647],[-3.1064,-59.9639],[-3.1083,-59.9628],[-3.1066,-59.9607],[-3.1004,-59.9563],[-3.0939,-59.948],[-3.0979,-59.947],[-3.1028,-59.9425],[-3.1055,-59.9436],[-3.1123,-59.9448],[-3.1136,-59.9461],[-3.1151,-59.9503],[-3.1165,-59.952],[-3.1206,-59.9531],[-3.1222,-59.9489],[-3.1271,-59.9489],[-3.129,-59.9478],[-3.1307,-59.9461],[-3.1349,-59.9393]]],"Norte":[[[-3.075,-59.9847],[-3.075,-59.9832],[-3.0727,-59.9791],[-3.0708,-59.9737],[-3.0681,-59.9711],[-3.0681,-59.9681],[-3.0604,-59.9595],[-3.0575,-59.9575],[-3.0534,-59.9518],[-3.0458,-59.9434],[-3.0448,-59.9425],[-3.0372,-59.9402],[-3.0247,-59.9342],[-3.0179,-59.9383],[-3.0084,-59.9383],[-3.0079,-59.9389],[-3.0094,-59.951],[-3.009,-59.954],[-3.0082,-59.9559],[-3.006,-59.9586],[-3.0063,-59.9609],[-3.0052,-59.965],[-3.0035,-59.9671],[-3.0012,-59.9686],[-2.9269,-59.9811],[-2.9144,-59.9838],[-2.9138,-59.9844],[-2.9138,-59.9927],[-2.9171,-59.9952],[-2.9235,-59.9982],[-2.9277,-60.0024],[-2.9341,-60.0099],[-2.939,-60.0111],[-2.9427,-60.0147],[-2.9438,-60.0188],[-2.943,-60.0219],[-2.9438,-60.0257],[-2.9423,-60.0302],[-2.9463,-60.0338],[-2.9572,-60.033],[-2.9599,-60.0315],[-2.9616,-60.0298],[-2.9658,-60.0211],[-2.9709,-60.016],[-2.9781,-60.016],[-2.9796,-60.0168],[-2.994,-60.0312],[-3.0092,-60.033],[-3.0187,-60.0274],[-3.0285,-60.0183],[-3.0319,-60.0179],[-3.0384,-60.0243],[-3.0399,-60.0251],[-3.0456,-60.0251],[-3.0461,-60.0245],[-3.0461,-60.0181],[-3.0439,-60.0132],[-3.0427,-60.0082],[-3.042,-59.9931],[-3.042,-59.99],[-3.0444,-59.9899],[-3.045,-59.9893],[-3.0452,-59.9849],[-3.0551,-59.9857],[-3.0638,-59.9891],[-3.0653,-59.9868],[-3.0695,-59.9868],[-3.075,-59.9847]]],"Oeste":[[[-3.1311,-60.0363],[-3.126,-60.0319],[-3.1218,-60.0319],[-3.1195,-60.0338],[-3.1161,-60.0338],[-3.1119,-60.03],[-3.1108,-60.0308],[-3.1089,-60.0289],[-3.1062,-60.03],[-3.1047,-60.0289],[-3.1032,-60.0289],[-3.1011,-60.0302],[-3.1011,-60.0347],[-3.0981,-60.0378],[-3.0962,-60.0427],[-3.0949,-60.0429],[-3.0918,-60.0372],[-3.0896,-60.0387],[-3.089,-60.0385],[-3.089,-60.037],[-3.0909,-60.0344],[-3.0909,-60.0306],[-3.0903,-60.03],[-3.085,-60.0312],[-3.0763,-60.0312],[-3.0683,-60.0251],[-3.0399,-60.0251],[-3.0384,-60.0243],[-3.0319,-60.0179],[-3.0278,-60.0186],[-3.0187,-60.0274],[-3.0107,-60.0323],[-3.008,-60.033],[-2.994,-60.0312],[-2.9796,-60.0168],[-2.9781,-60.016],[-2.9709,-60.016],[-2.9658,-60.0211],[-2.9612,-60.0306],[-2.9572,-60.033],[-2.9463,-60.0338],[-2.9421,-60.0304],[-2.9409,-60.0319],[-2.9379,-60.0338],[-2.9277,-60.0349],[-2.9271,-60.0355],[-2.9279,-60.0389],[-2.9317,-60.0431],[-2.9328,-60.0469],[-2.9396,-60.0541],[-2.9434,-60.0586],[-2.9506,-60.0734],[-2.9525,-60.076],[-2.9533,-60.0795],[-2.9529,-60.0821],[-2.9559,-60.0878],[-2.9567,-60.0912],[-2.9559,-60.1007],[-2.9626,-60.1058],[-2.9728,-60.105],[-2.9845,-60.1081],[-2.9936,-60.1073],[-2.9967,-60.1062],[-3.0062,-60.1005],[-3.0122,-60.0986],[-3.0156,-60.0982],[-3.019,-60.099],[-3.0232,-60.1016],[-3.0376,-60.1069],[-3.0471,-60.116],[-3.0497,-60.1153],[-3.0535,-60.1156],[-3.0651,-60.1075],[-3.0655,-60.1011],[-3.0674,-60.0976],[-3.0744,-60.091],[-3.0763,-60.0903],[-3.0808,-60.0899],[-3.0829,-60.0844],[-3.0854,-60.0815],[-3.0877,-60.08],[-3.0915,-60.0793],[-3.0949,-60.0762],[-3.11,-60.0694],[-3.1117,-60.0677],[-3.1114,-60.0673],[-3.1121,-60.0639],[-3.1136,-60.0617],[-3.1159,-60.0598],[-3.1163,-60.0575],[-3.1182,-60.0548],[-3.1186,-60.0529],[-3.1216,-60.0473],[-3.1233,-60.0452],[-3.1267,-60.0433],[-3.1299,-60.0401],[-3.1311,-60.0363]]],"Sul":[[[-3.1622,-59.9809],[-3.1622,-59.9787],[-3.1589,-59.9777],[-3.1567,-59.9762],[-3.1519,-59.9711],[-3.15,-59.9681],[-3.1493,-59.9643],[-3.1508,-59.9594],[-3.1493,-59.9563],[-3.1489,-59.9518],[-3.1424,-59.9453],[-3.1396,-59.941],[-3.1373,-59.9406],[-3.1351,-59.9391],[-3.1307,-59.9461],[-3.129,-59.9478],[-3.1271,-59.9489],[-3.1225,-59.9489],[-3.1216,-59.9499],[-3.1206,-59.9531],[-3.1161,-59.952],[-3.1136,-59.9461],[-3.1123,-59.9448],[-3.1055,-59.9436],[-3.1028,-59.9425],[-3.0979,-59.947],[-3.0956,-59.9474],[-3.0943,-59.9484],[-3.1004,-59.9563],[-3.1066,-59.9607],[-3.1087,-59.9631],[-3.107,-59.9637],[-3.1064,-59.9643],[-3.1066,-59.9652],[-3.1032,-59.9664],[-3.1011,-59.9681],[-3.1072,-59.9783],[-3.1079,-59.9798],[-3.1074,-59.9804],[-3.0964,-59.9857],[-3.0933,-59.9883],[-3.0922,-59.9883],[-3.0877,-59.9864],[-3.086,-59.984],[-3.0841,-59.9791],[-3.0786,-59.9739],[-3.0748,-59.972],[-3.0717,-59.9736],[-3.0712,-59.9753],[-3.075,-59.9832],[-3.075,-59.9847],[-3.0695,-59.9868],[-3.0653,-59.9868],[-3.0638,-59.9891],[-3.0551,-59.9857],[-3.0456,-59.9849],[-3.045,-59.9855],[-3.045,-59.9897],[-3.0425,-59.9899],[-3.042,-59.9904],[-3.0427,-60.0082],[-3.0439,-60.0132],[-3.0461,-60.0181],[-3.0461,-60.0245],[-3.0467,-60.0251],[-3.0683,-60.0251],[-3.0763,-60.0312],[-3.085,-60.0312],[-3.0907,-60.03],[-3.0909,-60.0344],[-3.0894,-60.0363],[-3.089,-60.0382],[-3.0896,-60.0387],[-3.0918,-60.0372],[-3.0943,-60.0419],[-3.0956,-60.0429],[-3.0966,-60.0419],[-3.0981,-60.0378],[-3.1011,-60.0347],[-3.1011,-60.0302],[-3.1032,-60.0289],[-3.1047,-60.0289],[-3.1059,-60.03],[-3.1089,-60.0289],[-3.1108,-60.0308],[-3.1119,-60.03],[-3.1161,-60.0338],[-3.1195,-60.0338],[-3.1218,-60.0319],[-3.126,-60.0319],[-3.1309,-60.0357],[-3.1328,-60.033],[-3.1364,-60.0302],[-3.1371,-60.0276],[-3.1413,-60.0234],[-3.1424,-60.0188],[-3.144,-60.0169],[-3.1443,-60.0139],[-3.1462,-60.0109],[-3.15,-60.0071],[-3.1531,-60.0003],[-3.1546,-59.995],[-3.1587,-59.9885],[-3.1599,-59.984],[-3.1622,-59.9809]]]},"centro":{"Leste":[-3.0725,-59.9393],"Norte":[-3.0046,-59.9991],"Oeste":[-3.0425,-60.0654],"Sul":[-3.1195,-60.0041]}};
+const SEM_SENSOR = '#C9D1D4';
+let zonaMap = null, zonaCamadas = {}, zonasAtuais = null;
+const corCss = v => v.startsWith('var(') ? (getComputedStyle(document.documentElement).getPropertyValue(v.slice(4, -1)).trim() || '#999') : v;
+function initZonaMap(){
+  if (zonaMap) return;
+  if (typeof L === 'undefined'){ document.getElementById('zonaInfo').textContent = 'Não foi possível carregar o mapa. Veja a lista de zonas ao lado.'; return; }
+  zonaMap = L.map('zonaMap', { scrollWheelZoom:false });
+  addBase(zonaMap);
+  const limites = L.latLngBounds([]);
+  Object.entries(ZONAS_GEO.aneis).forEach(([nome, aneis]) => {
+    const pol = L.polygon(aneis, { color:'#fff', weight:2.5, fillColor:SEM_SENSOR, fillOpacity:.72 }).addTo(zonaMap);
+    const rot = L.tooltip({ permanent:true, direction:'center', className:'zona-label', interactive:false })
+      .setLatLng(ZONAS_GEO.centro[nome]).setContent(`<strong><em>Zona </em>${nome}</strong><span>sem sensor</span>`);
+    zonaMap.openTooltip(rot);
+    zonaCamadas[nome] = { pol, rot };
+    limites.extend(pol.getBounds());
+  });
+  // Zoom inteiro (sem frestas no mapa); no celular estreito fica no 11 mesmo cortando um pouco as bordas
+  const enquadrar = () => zonaMap.setView(limites.getCenter(), Math.max(11, zonaMap.getBoundsZoom(limites, false, L.point(16, 16))));
+  enquadrar();
+  let mexeu = false;
+  zonaMap.on('mousedown touchstart wheel', () => { mexeu = true; });
+  if (window.ResizeObserver) new ResizeObserver(() => { zonaMap.invalidateSize(); if (!mexeu) enquadrar(); })
+    .observe(document.getElementById('zonaMap'));
+  pintarZonas(zonasAtuais);
+}
+function pintarZonas(zonas){
+  zonasAtuais = zonas;
+  const info = document.getElementById('zonaInfo');
+  const porNome = {}; (zonas || []).forEach(z => { porNome[z.zona] = z; });
+  const comDado = Object.keys(ZONAS_GEO.aneis).filter(n => porNome[n]).length;
+  info.textContent = comDado
+    ? 'Zonas formadas pelos limites dos bairros (OpenStreetMap). Sul inclui a Centro-Sul e Oeste, a Centro-Oeste. Toque numa zona para ver os detalhes.'
+    : 'Ainda sem leitura por zona agora. A média da cidade está no círculo ao lado.';
+  if (!zonaMap) return;
+  Object.entries(zonaCamadas).forEach(([nome, { pol, rot }]) => {
+    const z = porNome[nome];
+    if (!z){
+      pol.setStyle({ fillColor:SEM_SENSOR }).bindPopup(`<strong>Zona ${nome}</strong><br>Nenhum sensor com leitura nesta zona agora.`);
+      rot.setContent(`<strong><em>Zona </em>${nome}</strong><span>sem sensor</span>`);
+      rot.getElement() && rot.getElement().style.setProperty('--c', SEM_SENSOR);
+      return;
+    }
+    const l = levelOf(z.pm25), cor = corCss(l.color), v = Math.round(z.pm25), n = z.xs.length;
+    pol.setStyle({ fillColor:cor }).bindPopup(`<strong>Zona ${nome}: ar ${l.ar}</strong><br>${v} µg/m³ de PM2,5, média de ${n === 1 ? '1 sensor' : n + ' sensores'}.<br>${l.msg}`);
+    rot.setContent(`<strong><em>Zona </em>${nome}</strong><span>${v} µg/m³<em> · ${l.name}</em></span>`);
+    rot.getElement() && rot.getElement().style.setProperty('--c', cor);
+  });
 }
 
 /* ===================== Mapa de focos (NASA FIRMS) ===================== */
@@ -1141,10 +1280,6 @@ async function initFireMap(){
       info.innerHTML = 'Não foi possível carregar os focos agora. Veja os dados oficiais no <a href="https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/" target="_blank" rel="noopener">BDQueimadas do Inpe</a>.';
     }
   }
-  // Manaus por cima dos focos
-  manausMarker = L.circleMarker([-3.119, -60.022], { radius:10, color:'#fff', weight:3, fillColor:'#007A73', fillOpacity:1 })
-    .addTo(fireMap).bindTooltip('<strong>Manaus</strong>', { permanent:true, direction:'top', offset:[0,-14], className:'manaus-label' });
-  if (arAtual) marcarArNoMapa(arAtual);
 }
 
 /* Pinta Manaus no mapa com a cor do nível de qualidade do ar */
@@ -1172,7 +1307,7 @@ function openTab(id, focus, init){
   panels.forEach(p => p.classList.toggle('active', p.id === id));
   if (!init && history.replaceState) history.replaceState(null, '', '#' + id);
   if (id === 'usf') initMap();
-  if (id === 'ar'){ initFireMap(); if (fireMap) setTimeout(() => { fireMap.invalidateSize(); fireMap.fitBounds(FIRE_BOUNDS); }, 50); }
+  if (id === 'ar'){ initZonaMap(); initFireMap(); if (fireMap) setTimeout(() => { fireMap.invalidateSize(); fireMap.fitBounds(FIRE_BOUNDS); }, 50); }
 }
 tabs.forEach((t, i) => {
   t.addEventListener('click', () => openTab(t.getAttribute('aria-controls')));
@@ -1359,22 +1494,7 @@ function fraseDoAviso(titulo, resumo){
   if (f.length > 170) f = f.slice(0, 167).replace(/\s\S*$/, '') + '…';
   return f.charAt(0).toUpperCase() + f.slice(1);
 }
-async function carregarAvisos(){
-  const hoje = dataManaus(0), ontem = dataManaus(1);
-  const listas = await Promise.all(AVISOS.FONTES.map(base =>
-    fetch(`${base}/wp-json/wp/v2/posts?after=${ontem}T00:00:00&per_page=50&_fields=id,date,link,title,excerpt`, { cache:'no-store' })
-      .then(r => r.ok ? r.json() : []).then(l => l.map(p => Object.assign(p, { base }))).catch(() => [])));
-  const posts = [], vistos = new Set();
-  listas.flat().forEach(p => {
-    if (!p || !p.link || vistos.has(p.link)) return;
-    const dia = String(p.date).slice(0, 10);
-    if (dia !== hoje && dia !== ontem) return;
-    vistos.add(p.link); posts.push(p);
-  });
-  // As "NOTAS" oficiais vêm sem resumo: busca o texto só delas
-  await Promise.all(posts.filter(p => /^nota\b/i.test(textoLimpo(p.title && p.title.rendered)) && !textoLimpo(p.excerpt && p.excerpt.rendered))
-    .map(p => fetch(`${p.base}/wp-json/wp/v2/posts/${p.id}?_fields=content`, { cache:'no-store' })
-      .then(r => r.ok ? r.json() : null).then(j => { if (j && j.content) p.resumo = textoLimpo(j.content.rendered).slice(0, 700); }).catch(() => {})));
+function classificarAvisos(posts, hoje, ontem){
   const itens = [], textosVistos = new Set();
   posts.forEach(p => {
     const titulo = p.title && p.title.rendered, resumo = p.resumo || (p.excerpt && p.excerpt.rendered);
@@ -1387,7 +1507,49 @@ async function carregarAvisos(){
                  quando: (dia === hoje ? 'Hoje' : 'Ontem') + ', ' + String(p.date).slice(11, 13) + 'h' + String(p.date).slice(14, 16) });
   });
   itens.sort((a, b) => b.data.localeCompare(a.data));
-  mostrarAvisos(itens.slice(0, AVISOS.MAX), listas.some(l => l.length));
+  return itens.slice(0, AVISOS.MAX);
+}
+const AVISOS_MEMORIA = 'respira-manaus-avisos';
+function avisosGuardados(hoje, ontem){
+  try {
+    const m = JSON.parse(localStorage.getItem(AVISOS_MEMORIA) || 'null');
+    if (!m || !Array.isArray(m.itens)) return null;
+    // refaz o "Hoje/Ontem" e descarta o que ficou mais velho que ontem
+    return m.itens.filter(i => { const d = i.data.slice(0, 10); return d === hoje || d === ontem; })
+      .map(i => Object.assign({}, i, { quando: (i.data.slice(0, 10) === hoje ? 'Hoje' : 'Ontem') + i.quando.slice(i.quando.indexOf(',')) }));
+  } catch(e){ return null; }
+}
+function guardarAvisos(itens){ try { localStorage.setItem(AVISOS_MEMORIA, JSON.stringify({ itens: itens })); } catch(e){} }
+
+async function carregarAvisos(){
+  const hoje = dataManaus(0), ontem = dataManaus(1);
+  // Mostra na hora o que já estava guardado da última visita
+  const guardados = avisosGuardados(hoje, ontem);
+  if (guardados && guardados.length) mostrarAvisos(guardados, true);
+
+  const listas = await Promise.all(AVISOS.FONTES.map(base =>
+    fetch(`${base}/wp-json/wp/v2/posts?after=${ontem}T00:00:00&per_page=50&_fields=id,date,link,title,excerpt`, { cache:'no-store' })
+      .then(r => r.ok ? r.json() : []).then(l => l.map(p => Object.assign(p, { base }))).catch(() => [])));
+  const siteRespondeu = listas.some(l => l.length);
+  if (!siteRespondeu && guardados && guardados.length) return;   // site fora do ar: mantém os avisos guardados
+  const posts = [], vistos = new Set();
+  listas.flat().forEach(p => {
+    if (!p || !p.link || vistos.has(p.link)) return;
+    const dia = String(p.date).slice(0, 10);
+    if (dia !== hoje && dia !== ontem) return;
+    vistos.add(p.link); posts.push(p);
+  });
+  // 1ª etapa: já mostra as notícias com título; as "NOTAS" ainda sem texto ficam para a 2ª etapa
+  const notas = posts.filter(p => /^nota\b/i.test(textoLimpo(p.title && p.title.rendered)) && !textoLimpo(p.excerpt && p.excerpt.rendered));
+  const parcial = classificarAvisos(posts.filter(p => notas.indexOf(p) < 0), hoje, ontem);
+  if (parcial.length || !notas.length) mostrarAvisos(parcial, siteRespondeu);
+  // 2ª etapa: lê o texto das notas oficiais e completa a faixa
+  if (notas.length){
+    await Promise.all(notas.map(p => fetch(`${p.base}/wp-json/wp/v2/posts/${p.id}?_fields=content`, { cache:'no-store' })
+      .then(r => r.ok ? r.json() : null).then(j => { if (j && j.content) p.resumo = textoLimpo(j.content.rendered).slice(0, 700); }).catch(() => {})));
+    mostrarAvisos(classificarAvisos(posts, hoje, ontem), siteRespondeu);
+  }
+  if (siteRespondeu) guardarAvisos(classificarAvisos(posts, hoje, ontem));
 }
 function mostrarAvisos(itens, siteRespondeu){
   const caixa = document.getElementById('avisos'), fita = document.getElementById('avisosFita');
@@ -1397,16 +1559,33 @@ function mostrarAvisos(itens, siteRespondeu){
   }
   const umItem = (i, oculto) => `<a href="${i.link}" target="_blank" rel="noopener"${oculto ? ' tabindex="-1" aria-hidden="true"' : ''}><span class="avisos-quando">${i.quando}</span>${i.texto.replace(/</g, '&lt;')}</a>`;
   const normal = itens.map(i => umItem(i, false)).join('');
-  fita.innerHTML = normal + itens.map(i => umItem(i, true)).join('');  // repetido para a fita girar sem emenda
+  if (fita.dataset.atual === normal){ caixa.hidden = false; return; }   // nada mudou: não reinicia a fita
+  fita.dataset.atual = normal;
   caixa.hidden = false;
+  ajustarFita();
+}
+/* Gira a fita quando o texto não cabe; se couber inteiro, deixa parado */
+function ajustarFita(){
+  const caixa = document.getElementById('avisos'), fita = document.getElementById('avisosFita');
+  if (!fita.dataset.atual) return;
   requestAnimationFrame(() => {
-    const larguraMetade = fita.scrollWidth / 2, visivel = document.getElementById('avisosTrilho').clientWidth;
-    const parado = larguraMetade <= visivel;
+    fita.innerHTML = fita.dataset.atual;                        // mede um conjunto só
+    const largura = fita.scrollWidth, visivel = document.getElementById('avisosTrilho').clientWidth;
+    const parado = largura <= visivel;
     caixa.classList.toggle('parado', parado);
-    if (parado) fita.innerHTML = normal;
-    fita.style.setProperty('--dur', Math.max(20, Math.round(larguraMetade / 70)) + 's');  // ~70 px por segundo
+    if (!parado){
+      fita.innerHTML = fita.dataset.atual + fita.dataset.atual.replace(/<a /g, '<a tabindex="-1" aria-hidden="true" ');
+      fita.style.setProperty('--dur', Math.max(18, Math.round((largura + 44) / 60)) + 's');  // ~60 px por segundo
+    }
+    medirTopo();
   });
 }
+window.addEventListener('resize', () => { clearTimeout(ajustarFita.t); ajustarFita.t = setTimeout(ajustarFita, 200); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustarFita);
+
+/* Guarda a altura do topo fixo para as rolagens não esconderem títulos */
+function medirTopo(){ document.documentElement.style.setProperty('--topo', document.getElementById('topoFixo').offsetHeight + 'px'); }
+window.addEventListener('resize', medirTopo); medirTopo(); setTimeout(medirTopo, 800);
 carregarAvisos();
 setInterval(carregarAvisos, AVISOS.ATUALIZA_MS);
 
