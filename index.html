@@ -121,6 +121,7 @@
   .pm-explica{font-size:.85rem;color:var(--ink-soft);margin:8px 0 0}
   .rank-dica{font-size:.82rem;color:var(--ink-soft);margin:-4px 0 10px}
   .scale-labels span{flex:1;text-align:center}
+  @media (max-width:520px){ .scale div{font-size:.62rem;padding:7px 2px;line-height:1.15} .scale-labels{font-size:.62rem} }
   .advice li{margin:6px 0}
   .stations{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:16px}
   .st{background:var(--surface);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);border-left:6px solid var(--c,var(--lv-boa))}
@@ -343,8 +344,10 @@
     --lv-ruim:#FF7A00;
     --lv-muito-ruim:#E0262C;
     --lv-pessima:#7E3FBF;
+    --lv-perigoso:#7E0023;
     --lv-muito-ruim-txt:#fff;   /* texto branco nos tons escuros, para ler bem */
     --lv-pessima-txt:#fff;
+    --lv-perigoso-txt:#fff;
   }
 </style>
 </head>
@@ -390,7 +393,7 @@
       <div class="card" aria-live="polite">
         <div class="air-hero" id="airHero">
         <div class="air-main">
-          <div class="ring" id="bigRing"><div><strong id="bigVal">--</strong><span>µg/m³</span></div></div>
+          <div class="ring" id="bigRing"><div><strong id="bigVal">--</strong><span>índice AQI</span></div></div>
           <div>
             <span class="lvl" id="bigLvl">Carregando…</span>
             <p class="air-msg" id="airMsg"></p>
@@ -401,15 +404,16 @@
         <div class="scale-wrap" aria-hidden="true">
           <span class="scale-pin" id="scalePin" hidden></span>
           <div class="scale">
-            <div style="background:var(--lv-boa);color:var(--lv-boa-txt)">Boa</div>
-            <div style="background:var(--lv-moderada);color:var(--lv-moderada-txt)">Moderada</div>
-            <div style="background:var(--lv-ruim);color:var(--lv-ruim-txt)">Ruim</div>
-            <div style="background:var(--lv-muito-ruim);color:var(--lv-muito-ruim-txt)">Muito ruim</div>
-            <div style="background:var(--lv-pessima);color:var(--lv-pessima-txt)">Péssima</div>
+            <div style="background:var(--lv-boa);color:var(--lv-boa-txt)">Bom</div>
+            <div style="background:var(--lv-moderada);color:var(--lv-moderada-txt)">Moderado</div>
+            <div style="background:var(--lv-ruim);color:var(--lv-ruim-txt)">Ruim p/ sensíveis</div>
+            <div style="background:var(--lv-muito-ruim);color:var(--lv-muito-ruim-txt)">Ruim</div>
+            <div style="background:var(--lv-pessima);color:var(--lv-pessima-txt)">Muito ruim</div>
+            <div style="background:var(--lv-perigoso);color:var(--lv-perigoso-txt)">Perigoso</div>
           </div>
-          <div class="scale-labels"><span>até 25</span><span>26 a 50</span><span>51 a 75</span><span>76 a 125</span><span>acima de 125</span></div>
+          <div class="scale-labels"><span>0 a 50</span><span>51 a 100</span><span>101 a 150</span><span>151 a 200</span><span>201 a 300</span><span>301+</span></div>
         </div>
-        <p class="pm-explica">Valores de PM2,5, as partículas finas da fumaça, em µg/m³. A Organização Mundial da Saúde recomenda no máximo 15 na média do dia.</p>
+        <p class="pm-explica">Índice de qualidade do ar (AQI) da EPA dos EUA para PM2,5, as partículas finas da fumaça. É o mesmo índice do mapa do PurpleAir.</p>
 
         <div id="bairrosBox">
           <h2 class="mini-h" id="rankTitle">Bairros mais afetados</h2>
@@ -425,7 +429,7 @@
         <h2 class="mini-h">Mapa do ar por zona</h2>
         <p class="note" style="margin:0">A cor de cada zona é a média dos sensores que estão nela.</p>
         <div id="zonaMap" role="img" aria-label="Mapa de Manaus com a qualidade do ar em cada zona da cidade"></div>
-        <div class="legend legend-niveis"><span><i style="background:var(--lv-boa)"></i>Boa</span><span><i style="background:var(--lv-moderada)"></i>Moderada</span><span><i style="background:var(--lv-ruim)"></i>Ruim</span><span><i style="background:var(--lv-muito-ruim)"></i>Muito ruim</span><span><i style="background:var(--lv-pessima)"></i>Péssima</span><span><i style="background:#C9D1D4"></i>Sem sensor</span></div>
+        <div class="legend legend-niveis"><span><i style="background:var(--lv-boa)"></i>Bom</span><span><i style="background:var(--lv-moderada)"></i>Moderado</span><span><i style="background:var(--lv-ruim)"></i>Ruim p/ sensíveis</span><span><i style="background:var(--lv-muito-ruim)"></i>Ruim</span><span><i style="background:var(--lv-pessima)"></i>Muito ruim</span><span><i style="background:var(--lv-perigoso)"></i>Perigoso</span><span><i style="background:#C9D1D4"></i>Sem sensor</span></div>
         <p class="note" id="zonaInfo" style="margin:6px 0 0" aria-live="polite">Carregando…</p>
       </div>
 
@@ -884,19 +888,28 @@ function isOpen(u){
   return !!r && t >= r[0] && t < r[1];
 }
 
-/* Níveis (escala Selva, µg/m³ de PM2,5) */
+/* Níveis do índice de qualidade do ar da EPA dos EUA (US AQI) para PM2,5 — o mesmo do mapa do PurpleAir */
 const LEVELS = [
-  { max:25,  name:'Boa', ar:'bom',        color:'var(--lv-boa)', ink:'var(--lv-boa-txt)',        msg:'O ar está bom. Aproveite com tranquilidade.',
+  { max:50,  name:'Bom', ar:'bom', color:'var(--lv-boa)', ink:'var(--lv-boa-txt)', msg:'O ar está bom. Aproveite com tranquilidade.',
     advice:['Atividades ao ar livre liberadas.','Continue bebendo bastante água.'] },
-  { max:50,  name:'Moderada', ar:'moderado',   color:'var(--lv-moderada)', ink:'var(--lv-moderada-txt)',   msg:'Pessoas sensíveis podem sentir algum desconforto.',
-    advice:['Grupos de risco: reduzam esforço ao ar livre.','Mantenha-se hidratado.','Observe sintomas em crianças e idosos.'] },
-  { max:75,  name:'Ruim', ar:'ruim',       color:'var(--lv-ruim)', ink:'var(--lv-ruim-txt)',       msg:'Evite esforço prolongado ao ar livre.',
-    advice:['Use máscara PFF2 ao sair.','Evite exercícios ao ar livre.','Feche janelas nas horas de mais fumaça.','Beba água com frequência.'] },
-  { max:125, name:'Muito ruim', ar:'muito ruim', color:'var(--lv-muito-ruim)', ink:'var(--lv-muito-ruim-txt)', msg:'Fique em ambientes fechados sempre que puder.',
+  { max:100, name:'Moderado', ar:'moderado', color:'var(--lv-moderada)', ink:'var(--lv-moderada-txt)', msg:'Pessoas muito sensíveis podem sentir algum desconforto.',
+    advice:['Pessoas sensíveis: reduzam esforço longo ao ar livre.','Mantenha-se hidratado.','Observe sintomas em crianças e idosos.'] },
+  { max:150, name:'Ruim p/ sensíveis', ar:'ruim p/ sensíveis', color:'var(--lv-ruim)', ink:'var(--lv-ruim-txt)', msg:'Crianças, idosos, gestantes e quem tem asma ou doença do coração podem ter efeitos na saúde.',
+    advice:['Grupos de risco: evitem esforço ao ar livre.','Use máscara PFF2 ao sair.','Feche janelas nas horas de mais fumaça.','Beba água com frequência.'] },
+  { max:200, name:'Ruim', ar:'ruim', color:'var(--lv-muito-ruim)', ink:'var(--lv-muito-ruim-txt)', msg:'Todos podem sentir efeitos. Evite esforço ao ar livre.',
     advice:['Saia só se necessário, com máscara PFF2.','Crianças, idosos e gestantes: fiquem em casa.','Mantenha portas e janelas fechadas.','Use soro fisiológico nos olhos e no nariz.'] },
-  { max:Infinity, name:'Péssima', ar:'péssimo', color:'var(--lv-pessima)', ink:'var(--lv-pessima-txt)', msg:'Proteja-se: evite sair de casa.',
-    advice:['Permaneça em local fechado e protegido.','Use máscara PFF2 se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] }
+  { max:300, name:'Muito ruim', ar:'muito ruim', color:'var(--lv-pessima)', ink:'var(--lv-pessima-txt)', msg:'Alerta de saúde: fique em ambientes fechados.',
+    advice:['Permaneça em local fechado e protegido.','Use máscara PFF2 se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] },
+  { max:Infinity, name:'Perigoso', ar:'perigoso', color:'var(--lv-perigoso)', ink:'var(--lv-perigoso-txt)', msg:'Emergência de saúde: evite sair de casa.',
+    advice:['Não saia de casa se não for necessário.','Use máscara PFF2 bem ajustada se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] }
 ];
+/* PM2,5 (µg/m³) -> índice US AQI, faixas da EPA de 2024 (as mesmas que o PurpleAir usa) */
+function pmParaAqi(pm){
+  if (!Number.isFinite(pm) || pm < 0) return NaN;
+  const F = [[0,9,0,50],[9.1,35.4,51,100],[35.5,55.4,101,150],[55.5,125.4,151,200],[125.5,225.4,201,300],[225.5,325.4,301,500]];
+  const c = Math.floor(pm * 10) / 10, f = F.find(x => c <= x[1]) || F.at(-1);
+  return Math.round(f[2] + (Math.min(c, 500.4) - f[0]) * (f[3] - f[2]) / (f[1] - f[0]));
+}
 const levelOf = v => LEVELS.find(l => v <= l.max);
 const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = n => n.toLocaleString('pt-BR', { minimumFractionDigits:1, maximumFractionDigits:1 });
@@ -1047,10 +1060,10 @@ function aqiParaPm25(aqi){
 function marcarEscala(v){
   const pin = document.getElementById('scalePin');
   if (!Number.isFinite(v)){ pin.hidden = true; return; }
-  const faixas = [0, 25, 50, 75, 125, 250];
-  let i = faixas.findIndex((f, k) => k > 0 && v <= f); if (i < 0) i = 5;
+  const faixas = [0, 50, 100, 150, 200, 300, 500];
+  let i = faixas.findIndex((f, k) => k > 0 && v <= f); if (i < 0) i = 6;
   const ini = faixas.at(i - 1), fim = faixas.at(i);
-  const pos = Math.min(99, ((i - 1) + Math.min(1, (v - ini) / (fim - ini))) * 20);
+  const pos = Math.min(99, ((i - 1) + Math.min(1, (v - ini) / (fim - ini))) * (100 / 6));
   pin.style.left = pos + '%'; pin.hidden = false;
 }
 function haQuanto(d){
@@ -1076,18 +1089,21 @@ function renderAirIndisponivel(){
 }
 
 function setRing(el, v, lvl){
-  const pct = Math.min(100, (v / 200) * 100);
+  const pct = Math.min(100, (v / 300) * 100);
   el.style.setProperty('--c', lvl.color);
   el.style.setProperty('--p', pct + '%');
 }
 
 function renderAir(data){
+  // Os sensores medem PM2,5 em µg/m³; mostramos o índice US AQI, igual ao mapa do PurpleAir
+  const paraIndice = x => Object.assign({}, x, { pm: x.pm25, pm25: pmParaAqi(x.pm25) });
+  data = Object.assign({}, data, { stations: (data.stations || []).map(paraIndice), sensores: data.sensores && data.sensores.map(paraIndice) });
   document.getElementById('demoFlag').classList.remove('show');
   const porBairro = ['selva', 'waqi', 'purpleair'].includes(data.fonte);
   document.getElementById('bairrosBox').hidden = !porBairro;
   document.getElementById('airSource').textContent = porBairro
     ? (data.fonte === 'selva' ? 'Fonte: rede de sensores Selva/UEA.'
-       : data.fonte === 'purpleair' ? `Fonte: ${data.nSensores} sensores PurpleAir em Manaus (PM2,5, média de 10 min). Bairro e zona definidos pela localização aproximada do sensor; zonas dos distritos de saúde.`
+       : data.fonte === 'purpleair' ? `Fonte: ${data.nSensores} sensores PurpleAir em Manaus (índice AQI de PM2,5, média de 10 min, como no mapa do PurpleAir). Bairro e zona definidos pela localização aproximada do sensor; zonas dos distritos de saúde.`
        : `Fonte: ${data.stations.length} sensores do World Air Quality Index (aqicn.org). PM2,5 aproximado a partir do índice.`)
     : 'Estimativa para Manaus (PM2,5) por modelo de satélite e clima. Fonte: Open-Meteo / Copernicus CAMS. Dados por bairro em breve.';
   const st = data.stations.filter(s => Number.isFinite(s.pm25));
@@ -1190,8 +1206,8 @@ function pintarZonas(zonas){
       return;
     }
     const l = levelOf(z.pm25), cor = corCss(l.color), v = Math.round(z.pm25), n = z.xs.length;
-    pol.setStyle({ fillColor:cor }).bindPopup(`<strong>Zona ${nome}: ar ${l.ar}</strong><br>${v} µg/m³ de PM2,5, média de ${n === 1 ? '1 sensor' : n + ' sensores'}.<br>${l.msg}`);
-    rot.setContent(`<strong><em>Zona </em>${nome}</strong><span>${v} µg/m³<em> · ${l.name}</em></span>`);
+    pol.setStyle({ fillColor:cor }).bindPopup(`<strong>Zona ${nome}: ar ${l.ar}</strong><br>Índice ${v} (AQI de PM2,5), média de ${n === 1 ? '1 sensor' : n + ' sensores'}.<br>${l.msg}`);
+    rot.setContent(`<strong><em>Zona </em>${nome}</strong><span>${v}<em> · ${l.name}</em></span>`);
     rot.getElement() && rot.getElement().style.setProperty('--c', cor);
   });
 }
