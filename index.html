@@ -406,9 +406,9 @@
           <div class="scale">
             <div style="background:var(--lv-boa);color:var(--lv-boa-txt)">Bom</div>
             <div style="background:var(--lv-moderada);color:var(--lv-moderada-txt)">Moderado</div>
-            <div style="background:var(--lv-ruim);color:var(--lv-ruim-txt)">Ruim p/ sensíveis</div>
-            <div style="background:var(--lv-muito-ruim);color:var(--lv-muito-ruim-txt)">Ruim</div>
-            <div style="background:var(--lv-pessima);color:var(--lv-pessima-txt)">Muito ruim</div>
+            <div style="background:var(--lv-ruim);color:var(--lv-ruim-txt)">Ruim</div>
+            <div style="background:var(--lv-muito-ruim);color:var(--lv-muito-ruim-txt)">Muito Ruim</div>
+            <div style="background:var(--lv-pessima);color:var(--lv-pessima-txt)">Péssimo</div>
             <div style="background:var(--lv-perigoso);color:var(--lv-perigoso-txt)">Perigoso</div>
           </div>
           <div class="scale-labels"><span>0 a 50</span><span>51 a 100</span><span>101 a 150</span><span>151 a 200</span><span>201 a 300</span><span>301+</span></div>
@@ -429,7 +429,7 @@
         <h2 class="mini-h">Mapa do ar por zona</h2>
         <p class="note" style="margin:0">A cor de cada zona é a média dos sensores que estão nela.</p>
         <div id="zonaMap" role="img" aria-label="Mapa de Manaus com a qualidade do ar em cada zona da cidade"></div>
-        <div class="legend legend-niveis"><span><i style="background:var(--lv-boa)"></i>Bom</span><span><i style="background:var(--lv-moderada)"></i>Moderado</span><span><i style="background:var(--lv-ruim)"></i>Ruim p/ sensíveis</span><span><i style="background:var(--lv-muito-ruim)"></i>Ruim</span><span><i style="background:var(--lv-pessima)"></i>Muito ruim</span><span><i style="background:var(--lv-perigoso)"></i>Perigoso</span><span><i style="background:#C9D1D4"></i>Sem sensor</span></div>
+        <div class="legend legend-niveis"><span><i style="background:var(--lv-boa)"></i>Bom</span><span><i style="background:var(--lv-moderada)"></i>Moderado</span><span><i style="background:var(--lv-ruim)"></i>Ruim</span><span><i style="background:var(--lv-muito-ruim)"></i>Muito Ruim</span><span><i style="background:var(--lv-pessima)"></i>Péssimo</span><span><i style="background:var(--lv-perigoso)"></i>Perigoso</span><span><i style="background:#C9D1D4"></i>Sem sensor</span></div>
         <p class="note" id="zonaInfo" style="margin:6px 0 0" aria-live="polite">Carregando…</p>
       </div>
 
@@ -894,11 +894,11 @@ const LEVELS = [
     advice:['Atividades ao ar livre liberadas.','Continue bebendo bastante água.'] },
   { max:100, name:'Moderado', ar:'moderado', color:'var(--lv-moderada)', ink:'var(--lv-moderada-txt)', msg:'Pessoas muito sensíveis podem sentir algum desconforto.',
     advice:['Pessoas sensíveis: reduzam esforço longo ao ar livre.','Mantenha-se hidratado.','Observe sintomas em crianças e idosos.'] },
-  { max:150, name:'Ruim p/ sensíveis', ar:'ruim p/ sensíveis', color:'var(--lv-ruim)', ink:'var(--lv-ruim-txt)', msg:'Crianças, idosos, gestantes e quem tem asma ou doença do coração podem ter efeitos na saúde.',
+  { max:150, name:'Ruim', ar:'ruim', color:'var(--lv-ruim)', ink:'var(--lv-ruim-txt)', msg:'Crianças, idosos, gestantes e quem tem asma ou doença do coração podem ter efeitos na saúde.',
     advice:['Grupos de risco: evitem esforço ao ar livre.','Use máscara PFF2 ao sair.','Feche janelas nas horas de mais fumaça.','Beba água com frequência.'] },
-  { max:200, name:'Ruim', ar:'ruim', color:'var(--lv-muito-ruim)', ink:'var(--lv-muito-ruim-txt)', msg:'Todos podem sentir efeitos. Evite esforço ao ar livre.',
+  { max:200, name:'Muito Ruim', ar:'muito ruim', color:'var(--lv-muito-ruim)', ink:'var(--lv-muito-ruim-txt)', msg:'Todos podem sentir efeitos. Evite esforço ao ar livre.',
     advice:['Saia só se necessário, com máscara PFF2.','Crianças, idosos e gestantes: fiquem em casa.','Mantenha portas e janelas fechadas.','Use soro fisiológico nos olhos e no nariz.'] },
-  { max:300, name:'Muito ruim', ar:'muito ruim', color:'var(--lv-pessima)', ink:'var(--lv-pessima-txt)', msg:'Alerta de saúde: fique em ambientes fechados.',
+  { max:300, name:'Péssimo', ar:'péssimo', color:'var(--lv-pessima)', ink:'var(--lv-pessima-txt)', msg:'Alerta de saúde: fique em ambientes fechados.',
     advice:['Permaneça em local fechado e protegido.','Use máscara PFF2 se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] },
   { max:Infinity, name:'Perigoso', ar:'perigoso', color:'var(--lv-perigoso)', ink:'var(--lv-perigoso-txt)', msg:'Emergência de saúde: evite sair de casa.',
     advice:['Não saia de casa se não for necessário.','Use máscara PFF2 bem ajustada se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] }
