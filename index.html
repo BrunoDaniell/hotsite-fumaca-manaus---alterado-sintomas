@@ -104,6 +104,80 @@
   .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .tag{display:inline-block;font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
   .note{font-size:.88rem;color:var(--ink-soft)}
+  /* Nova ordem da aba: ar + serviços lado a lado, depois zonas, depois focos */
+  .topo-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start;margin-bottom:16px}
+  .topo-grid .quick{margin-top:16px}
+  .rotina{margin:0 0 16px}
+  .rotina-lista{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .rotina-lista a{display:flex;align-items:center;gap:8px;padding:7px 12px 7px 10px;border-radius:12px;background:var(--surface,#fff);box-shadow:0 1px 3px rgba(0,0,0,.08);border-left:4px solid var(--sc);text-decoration:none;color:inherit;font-size:.86rem;font-weight:700;line-height:1.2}
+  .rotina-lista a:hover,.rotina-lista a:focus-visible{box-shadow:0 2px 8px rgba(0,0,0,.14)}
+  .rotina-lista .r-st{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;padding:2px 7px;border-radius:999px;background:var(--sc);color:var(--sct,#1E2F33);flex:none}
+  .rotina-lista .r-data{font-size:.74rem;font-weight:600;color:var(--ink-soft);flex:none}
+  .rotina-mais{display:inline-block;margin-top:8px;font-size:.8rem;font-weight:700}
+  .cidade.cidade-larga{margin:16px 0 0;scroll-margin-top:calc(var(--topo,150px) + 12px)}
+  .ar-card{margin-bottom:16px}
+  @media (min-width:861px){ .cidade-larga .servicos{grid-template-columns:repeat(3,1fr)} .ar-card{display:grid;grid-template-columns:1.1fr 1fr;column-gap:28px;align-items:start} .ar-card .air-hero{grid-row:span 3} }
+  .fire-larga{margin-top:16px}
+  #bairrosBox > .mini-h:first-child{margin-top:0}
+  .fire-larga #fireMap{height:380px}
+  .cidade-sub{margin:2px 0 0;font-size:.8rem;color:var(--ink-soft)}
+  @media (max-width:860px){ .topo-grid{grid-template-columns:1fr} .fire-larga #fireMap{height:300px} }
+  /* Alerta de urgência: uma linha, parado, só aparece quando precisa */
+  .alerta-urgente{display:flex;align-items:center;gap:10px;background:#FCE3E1;border:1.5px solid #E0262C;color:#7A1015;border-radius:14px;padding:10px 12px 10px 14px;margin:0 0 14px}
+  .alerta-urgente p{margin:0;flex:1;font-weight:700;font-size:.95rem;line-height:1.35}
+  .alerta-urgente svg{flex:none}
+  .alerta-fechar{flex:none;width:30px;height:30px;border-radius:50%;border:0;background:transparent;color:inherit;font-size:1.4rem;line-height:1;cursor:pointer}
+  .alerta-fechar:hover{background:rgba(122,16,21,.1)}
+  .alerta-fechar:focus-visible{outline:2px solid #7A1015;outline-offset:2px}
+  /* Bloco "Como está a cidade hoje" */
+  .cidade{margin:0 0 16px;padding:18px 20px}
+  .cidade-topo{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .cidade-topo .mini-h{margin:0}
+  .cidade-quando{font-size:.8rem;color:var(--ink-soft)}
+  .cidade-quando.velho{color:#8A5A00;font-weight:700}
+  .cidade-teste{margin:6px 0 0;font-size:.78rem;color:#8A5A00;background:var(--pmm-laranja-soft);display:inline-block;padding:3px 10px;border-radius:999px}
+  .servicos{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:8px}
+  .servico{background:var(--surface-2);border-radius:14px;padding:12px 14px;border-left:5px solid var(--sc,#9aa)}
+  .servico details{margin:0;background:none;box-shadow:none;border-radius:0}
+  .servico .s-nome{font-weight:800;font-size:.95rem;display:block}
+  .servico .s-status{display:inline-block;margin:6px 0 4px;font-size:.74rem;font-weight:800;letter-spacing:.02em;text-transform:uppercase;padding:2px 9px;border-radius:999px;background:var(--sc);color:var(--sct,#1E2F33)}
+  .servico .s-det{display:block;font-size:.85rem;color:var(--ink-soft)}
+  .servico a{font-size:.82rem;font-weight:700}
+  .st-fechado{--sc:var(--pmm-laranja);--sct:#1E2F33}
+  .st-alterado{--sc:#F2CF3A;--sct:#1E2F33}
+  .st-normal{--sc:#4CB86E;--sct:#0F2E1A}
+  .st-antigo{--sc:#C9D1D4;--sct:#1E2F33}
+  .st-cancelado{--sc:#C62828;--sct:#fff}
+  .cidade-fonte{margin:6px 0 0;font-size:.78rem;color:var(--ink-soft)}
+  .medidas{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+  .medidas h3{margin:0 0 8px;font-size:.98rem;color:var(--pmm-marinho)}
+  .medidas-lista{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .medidas-lista li{display:flex;gap:10px;align-items:baseline;font-size:.9rem}
+  .medidas-lista .m-data{flex:none;font-weight:800;color:var(--primary);font-size:.82rem;min-width:44px}
+  .medidas-lista a{color:var(--ink);text-decoration:none}
+  .medidas-lista a:hover{text-decoration:underline}
+  .medidas-mais{margin:8px 0 0;background:none;box-shadow:none}
+  .medidas-mais summary{padding:6px 0;color:var(--primary);font-size:.88rem}
+  .medidas-mais summary::after{right:4px}
+  .medidas-mais .medidas-lista{margin-top:6px}
+  @media (max-width:860px){
+    /* No celular: uma linha por serviço; toque abre o detalhe */
+    .cidade{padding:14px 14px}
+    .servicos{grid-template-columns:1fr;gap:6px}
+    .servico{padding:0;border-left-width:4px}
+    .servico details{margin:0;background:none;box-shadow:none}
+    .servico summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 40px 10px 12px;font-weight:800;font-size:.92rem}
+    .servico summary::after{right:12px;font-size:1.1rem}
+    .servico .s-status{margin:0;flex:none}
+    .servico .s-corpo{padding:0 12px 10px}
+  }
+  @media (min-width:861px){
+    .servico details > summary{pointer-events:none;list-style:none;padding:0;display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:inherit}
+    .servico details > summary::after{display:none}
+    .servico .s-status{margin:0;flex:none}
+    .servico .s-corpo{margin-top:4px}
+  }
+  .fonte-dados{font-size:.74rem;line-height:1.45;opacity:.9}
   .next{margin-top:26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--sky-soft);border-radius:var(--radius);padding:18px 22px;border-left:5px solid var(--pmm-turquesa)}
   .next p{margin:0;font-weight:700}
 
@@ -318,7 +392,8 @@
   /* Faixa de avisos da Prefeitura (notícias de hoje e de ontem) */
   .avisos{background:var(--pmm-marinho);color:#fff}
   .avisos-row{display:flex;align-items:center;gap:14px;min-height:46px}
-  .avisos-tag{flex:none;background:var(--pmm-laranja);color:var(--ink);font-weight:800;font-size:.82rem;padding:5px 12px;border-radius:999px;white-space:nowrap}
+  .avisos-tag-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .avisos-tag{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0!important;flex:none;background:var(--pmm-laranja);color:var(--ink);font-weight:800;font-size:.82rem;padding:5px 12px;border-radius:999px;white-space:nowrap}
   .avisos-trilho{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
   .avisos-fita{display:inline-flex;gap:44px;white-space:nowrap;padding:12px 0;animation:avisos-rolar var(--dur,40s) linear infinite}
   .avisos-trilho:hover .avisos-fita, .avisos-trilho:focus-within .avisos-fita{animation-play-state:paused!important}
@@ -332,7 +407,14 @@
   .avisos.parado .avisos-fita{animation:none}
   .avisos.parado .avisos-trilho{-webkit-mask-image:none;mask-image:none}
   .avisos.parado .avisos-trilho{overflow-x:hidden}
-  @media (max-width:860px){ .avisos-tag{font-size:.75rem;padding:4px 10px} .avisos-fita a{font-size:.9rem} }
+  @media (max-width:860px){
+    /* No celular o selo vira só o ícone (o texto fica para leitores de tela) */
+    .avisos-tag{padding:0;width:32px;height:32px;justify-content:center;border-radius:50%}
+    .avisos-tag-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .avisos-row{gap:10px;min-height:42px}
+    .avisos-fita{padding:10px 0}
+    .avisos-fita a{font-size:.88rem}
+  }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
   /* A faixa de avisos continua andando (mais devagar) e para ao passar o mouse ou focar com o teclado */
   @media (prefers-reduced-motion:reduce){.avisos:not(.parado) .avisos-fita{animation:avisos-rolar calc(var(--dur,40s) * 1.5) linear infinite!important}.avisos .avisos-trilho:hover .avisos-fita,.avisos .avisos-trilho:focus-within .avisos-fita{animation-play-state:paused!important}}
@@ -370,9 +452,9 @@
   </div>
 </header>
 
-<div class="avisos" id="avisos" role="region" aria-label="Avisos da Prefeitura">
+<div class="avisos" id="avisos" hidden role="region" aria-label="Avisos da Prefeitura">
   <div class="wrap avisos-row">
-    <span class="avisos-tag">Avisos da Prefeitura</span>
+    <span class="avisos-tag" title="Avisos da Prefeitura"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg><span class="avisos-tag-txt">Avisos da Prefeitura</span></span>
     <div class="avisos-trilho" id="avisosTrilho"><div class="avisos-fita" id="avisosFita"><span class="avisos-carregando">Buscando os avisos mais recentes…</span></div></div>
   </div>
 </div>
@@ -382,21 +464,34 @@
 
   <!-- ================= QUALIDADE DO AR (início) ================= -->
   <section class="panel active" id="ar" role="tabpanel" aria-labelledby="tab-ar">
+    <div class="alerta-urgente" id="alertaUrgente" role="alert" hidden>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+      <p id="alertaTexto"></p>
+      <button type="button" class="alerta-fechar" id="alertaFechar" aria-label="Fechar alerta">×</button>
+    </div>
+
+
+
+    <!-- 1) Avisos rápidos: o que está suspenso/adiado (detalhes no fim da aba) -->
+    <nav class="rotina" id="rotina" aria-label="Serviços da Prefeitura alterados pela fumaça" hidden>
+      <ul class="rotina-lista" id="rotinaLista"></ul>
+      <a class="rotina-mais" href="#cidadeHoje">Ver tudo o que está funcionando ↓</a>
+    </nav>
+
+    <!-- 2) O ar agora e o que fazer -->
     <div class="home-head">
       <h1>Como está o ar em Manaus agora</h1>
       <p id="updated"></p>
     </div>
-
     <div class="demo-flag" id="demoFlag" hidden></div>
-
-    <div class="home-grid">
-      <div class="card" aria-live="polite">
+    <div class="card ar-card" aria-live="polite">
         <div class="air-hero" id="airHero">
         <div class="air-main">
-          <div class="ring" id="bigRing"><div><strong id="bigVal">--</strong><span>índice AQI</span></div></div>
+          <div class="ring" id="bigRing"><div><strong id="bigVal">--</strong><span>índice IQAr</span></div></div>
           <div>
             <span class="lvl" id="bigLvl">Carregando…</span>
             <p class="air-msg" id="airMsg"></p>
+            <p class="note" id="bigPm" style="margin:6px 0 0"></p>
           </div>
         </div>
         <ul class="advice" id="advice"></ul>
@@ -404,51 +499,66 @@
         <div class="scale-wrap" aria-hidden="true">
           <span class="scale-pin" id="scalePin" hidden></span>
           <div class="scale">
-            <div style="background:var(--lv-boa);color:var(--lv-boa-txt)">Bom</div>
-            <div style="background:var(--lv-moderada);color:var(--lv-moderada-txt)">Moderado</div>
+            <div style="background:var(--lv-boa);color:var(--lv-boa-txt)">Boa</div>
+            <div style="background:var(--lv-moderada);color:var(--lv-moderada-txt)">Moderada</div>
             <div style="background:var(--lv-ruim);color:var(--lv-ruim-txt)">Ruim</div>
-            <div style="background:var(--lv-muito-ruim);color:var(--lv-muito-ruim-txt)">Muito Ruim</div>
-            <div style="background:var(--lv-pessima);color:var(--lv-pessima-txt)">Péssimo</div>
-            <div style="background:var(--lv-perigoso);color:var(--lv-perigoso-txt)">Perigoso</div>
+            <div style="background:var(--lv-muito-ruim);color:var(--lv-muito-ruim-txt)">Muito ruim</div>
+            <div style="background:var(--lv-pessima);color:var(--lv-pessima-txt)">Péssima</div>
           </div>
-          <div class="scale-labels"><span>0 a 50</span><span>51 a 100</span><span>101 a 150</span><span>151 a 200</span><span>201 a 300</span><span>301+</span></div>
+          <div class="scale-labels"><span>0 a 40</span><span>41 a 80</span><span>81 a 120</span><span>121 a 200</span><span>acima de 200</span></div>
         </div>
-        <p class="pm-explica">Índice de qualidade do ar (AQI) da EPA dos EUA para PM2,5, as partículas finas da fumaça. É o mesmo índice do mapa do PurpleAir.</p>
+        <p class="pm-explica">Índice brasileiro de qualidade do ar (IQAr, Conama) para PM2,5, as partículas finas da fumaça. É o mesmo número da opção "Brazilian PM2.5" no mapa do PurpleAir.</p>
+        <div class="quick">
+      <button class="btn btn-alerta" data-go="sintomas">Estou sentindo algo</button>
+      <button class="btn btn-primary" data-go="usf">Encontrar uma USF</button>
+        </div>
+      </div>
 
+    <!-- 3) O ar no meu bairro / zona -->
+    <div class="home-grid">
+      <div class="card">
         <div id="bairrosBox">
           <h2 class="mini-h" id="rankTitle">Bairros mais afetados</h2>
           <p class="rank-dica" id="rankDica" hidden>Toque numa zona para ver a leitura de cada sensor.</p>
           <ol class="worst" id="stations"></ol>
           <details class="more"><summary id="rankMore">Ver todos os bairros</summary><ol class="worst" id="allStations"></ol></details>
         </div>
-        <p class="note" id="airSource" style="margin:12px 0 0"></p>
+        <p class="note fonte-dados" id="airSource" style="margin:12px 0 0"></p>
       </div>
-
-      <div class="col-mapas">
       <div class="card zona-card">
         <h2 class="mini-h">Mapa do ar por zona</h2>
         <p class="note" style="margin:0">A cor de cada zona é a média dos sensores que estão nela.</p>
         <div id="zonaMap" role="img" aria-label="Mapa de Manaus com a qualidade do ar em cada zona da cidade"></div>
-        <div class="legend legend-niveis"><span><i style="background:var(--lv-boa)"></i>Bom</span><span><i style="background:var(--lv-moderada)"></i>Moderado</span><span><i style="background:var(--lv-ruim)"></i>Ruim</span><span><i style="background:var(--lv-muito-ruim)"></i>Muito Ruim</span><span><i style="background:var(--lv-pessima)"></i>Péssimo</span><span><i style="background:var(--lv-perigoso)"></i>Perigoso</span><span><i style="background:#C9D1D4"></i>Sem sensor</span></div>
+        <div class="legend legend-niveis"><span><i style="background:var(--lv-boa)"></i>Boa</span><span><i style="background:var(--lv-moderada)"></i>Moderada</span><span><i style="background:var(--lv-ruim)"></i>Ruim</span><span><i style="background:var(--lv-muito-ruim)"></i>Muito ruim</span><span><i style="background:var(--lv-pessima)"></i>Péssima</span><span><i style="background:#C9D1D4"></i>Sem sensor</span></div>
         <p class="note" id="zonaInfo" style="margin:6px 0 0" aria-live="polite">Carregando…</p>
       </div>
+    </div>
 
-      <div class="card fire-card">
+    <!-- 4) Contexto: de onde vem a fumaça -->
+    <div class="card fire-card fire-larga">
         <h2 class="mini-h">Focos de queimada na região</h2>
         <p class="note" style="margin:0">A fumaça que chega a Manaus vem desses focos.</p>
         <div id="fireMap" role="img" aria-label="Mapa do Amazonas com os focos de queimada das últimas 48 horas"></div>
         <div class="legend"><span><i style="background:#B8401F"></i>Foco de queimada</span></div>
         <p class="note" id="focosInfo" style="margin:6px 0 0" aria-live="polite">Carregando focos…</p>
-      </div>
-      </div>
     </div>
+
+    <!-- 5) O que está funcionando hoje (detalhes e notas) -->
+    <section class="cidade card cidade-larga" id="cidadeHoje" aria-labelledby="cidadeTit">
+      <div class="cidade-topo">
+        <div><h2 class="mini-h" id="cidadeTit">O que está funcionando hoje</h2><p class="cidade-sub">Serviços da Prefeitura e medidas contra a fumaça</p></div>
+        <span class="cidade-quando" id="cidadeQuando"></span>
+      </div>
+      <p class="cidade-fonte">Conforme as notas oficiais da Prefeitura. Toque em cada item para ler a nota completa.</p>
+      <ul class="servicos" id="servicos"></ul>
+      <div class="medidas">
+        <h3>Medidas da Prefeitura contra a fumaça</h3>
+        <ol class="medidas-lista" id="medidas"></ol>
+        <details class="medidas-mais" id="medidasMaisBox" hidden><summary>Ver todas as medidas</summary><ol class="medidas-lista" id="medidasMais"></ol></details>
+      </div>
+    </section>
 
     <p class="credit-line">Sensores: Universidade do Estado do Amazonas (UEA), rede Selva, Sema, FAS e Ufam, via <a href="https://map.purpleair.com/" target="_blank" rel="noopener">PurpleAir</a>. Reserva: Open-Meteo. Focos de queimada: NASA FIRMS.</p>
-
-    <div class="quick">
-      <button class="btn btn-alerta" data-go="sintomas">Estou sentindo algo</button>
-      <button class="btn btn-primary" data-go="usf">Encontrar uma USF</button>
-    </div>
   </section>
 
   <!-- ================= SINTOMAS ================= -->
@@ -661,9 +771,7 @@
   <div class="wrap grid">
     <div>
       <h4>Respira Manaus</h4>
-      <p style="margin:0">Uma iniciativa da Prefeitura de Manaus para informar e proteger a população durante o período de fumaça.</p>
-      <p class="note" style="margin-top:10px">Qualidade do ar: sensores da UEA (rede Selva), Sema, FAS e Ufam, via PurpleAir. Focos de queimada: NASA FIRMS.</p>
-    </div>
+      <p style="margin:0">Uma iniciativa da Prefeitura de Manaus para informar e proteger a população durante o período de fumaça.</p>    </div>
     <div>
       <h4>Emergências</h4>
       <div class="emerg"><a href="tel:192">Samu 192</a><a href="tel:193">Bombeiros 193</a><a href="tel:199">Defesa Civil 199</a></div>
@@ -888,27 +996,25 @@ function isOpen(u){
   return !!r && t >= r[0] && t < r[1];
 }
 
-/* Níveis do índice de qualidade do ar da EPA dos EUA (US AQI) para PM2,5 — o mesmo do mapa do PurpleAir */
+/* Níveis do índice brasileiro de qualidade do ar (IQAr, Conama 491/2018 e guia do MMA) — o mesmo da opção "Brazilian PM2.5" do PurpleAir */
 const LEVELS = [
-  { max:50,  name:'Bom', ar:'bom', color:'var(--lv-boa)', ink:'var(--lv-boa-txt)', msg:'O ar está bom. Aproveite com tranquilidade.',
+  { max:40,  name:'Boa', ar:'bom', color:'var(--lv-boa)', ink:'var(--lv-boa-txt)', msg:'O ar está bom. Aproveite com tranquilidade.',
     advice:['Atividades ao ar livre liberadas.','Continue bebendo bastante água.'] },
-  { max:100, name:'Moderado', ar:'moderado', color:'var(--lv-moderada)', ink:'var(--lv-moderada-txt)', msg:'Pessoas muito sensíveis podem sentir algum desconforto.',
-    advice:['Pessoas sensíveis: reduzam esforço longo ao ar livre.','Mantenha-se hidratado.','Observe sintomas em crianças e idosos.'] },
-  { max:150, name:'Ruim', ar:'ruim', color:'var(--lv-ruim)', ink:'var(--lv-ruim-txt)', msg:'Crianças, idosos, gestantes e quem tem asma ou doença do coração podem ter efeitos na saúde.',
-    advice:['Grupos de risco: evitem esforço ao ar livre.','Use máscara PFF2 ao sair.','Feche janelas nas horas de mais fumaça.','Beba água com frequência.'] },
-  { max:200, name:'Muito Ruim', ar:'muito ruim', color:'var(--lv-muito-ruim)', ink:'var(--lv-muito-ruim-txt)', msg:'Todos podem sentir efeitos. Evite esforço ao ar livre.',
+  { max:80,  name:'Moderada', ar:'moderado', color:'var(--lv-moderada)', ink:'var(--lv-moderada-txt)', msg:'Pessoas sensíveis podem sentir algum desconforto.',
+    advice:['Grupos de risco: reduzam esforço ao ar livre.','Mantenha-se hidratado.','Observe sintomas em crianças e idosos.'] },
+  { max:120, name:'Ruim', ar:'ruim', color:'var(--lv-ruim)', ink:'var(--lv-ruim-txt)', msg:'Evite esforço prolongado ao ar livre.',
+    advice:['Use máscara PFF2 ao sair.','Evite exercícios ao ar livre.','Feche janelas nas horas de mais fumaça.','Beba água com frequência.'] },
+  { max:200, name:'Muito ruim', ar:'muito ruim', color:'var(--lv-muito-ruim)', ink:'var(--lv-muito-ruim-txt)', msg:'Fique em ambientes fechados sempre que puder.',
     advice:['Saia só se necessário, com máscara PFF2.','Crianças, idosos e gestantes: fiquem em casa.','Mantenha portas e janelas fechadas.','Use soro fisiológico nos olhos e no nariz.'] },
-  { max:300, name:'Péssimo', ar:'péssimo', color:'var(--lv-pessima)', ink:'var(--lv-pessima-txt)', msg:'Alerta de saúde: fique em ambientes fechados.',
-    advice:['Permaneça em local fechado e protegido.','Use máscara PFF2 se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] },
-  { max:Infinity, name:'Perigoso', ar:'perigoso', color:'var(--lv-perigoso)', ink:'var(--lv-perigoso-txt)', msg:'Emergência de saúde: evite sair de casa.',
-    advice:['Não saia de casa se não for necessário.','Use máscara PFF2 bem ajustada se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] }
+  { max:Infinity, name:'Péssima', ar:'péssimo', color:'var(--lv-pessima)', ink:'var(--lv-pessima-txt)', msg:'Proteja-se: evite sair de casa.',
+    advice:['Permaneça em local fechado e protegido.','Use máscara PFF2 se precisar sair.','Atenção a falta de ar, chiado ou dor no peito.','Em caso de urgência, ligue 192.'] }
 ];
-/* PM2,5 (µg/m³) -> índice US AQI, faixas da EPA de 2024 (as mesmas que o PurpleAir usa) */
-function pmParaAqi(pm){
+/* PM2,5 (µg/m³) -> índice IQAr: I = Ii + (If - Ii) / (Cf - Ci) × (C - Ci) */
+function pmParaIqar(pm){
   if (!Number.isFinite(pm) || pm < 0) return NaN;
-  const F = [[0,9,0,50],[9.1,35.4,51,100],[35.5,55.4,101,150],[55.5,125.4,151,200],[125.5,225.4,201,300],[225.5,325.4,301,500]];
-  const c = Math.floor(pm * 10) / 10, f = F.find(x => c <= x[1]) || F.at(-1);
-  return Math.round(f[2] + (Math.min(c, 500.4) - f[0]) * (f[3] - f[2]) / (f[1] - f[0]));
+  const F = [[0,25,0,40],[25,50,40,80],[50,75,80,120],[75,125,120,200],[125,300,200,400]];
+  const f = F.find(x => pm <= x[1]) || F.at(-1);
+  return Math.round(f[2] + (f[3] - f[2]) / (f[1] - f[0]) * (Math.min(pm, 500) - f[0]));
 }
 const levelOf = v => LEVELS.find(l => v <= l.max);
 const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1060,10 +1166,10 @@ function aqiParaPm25(aqi){
 function marcarEscala(v){
   const pin = document.getElementById('scalePin');
   if (!Number.isFinite(v)){ pin.hidden = true; return; }
-  const faixas = [0, 50, 100, 150, 200, 300, 500];
-  let i = faixas.findIndex((f, k) => k > 0 && v <= f); if (i < 0) i = 6;
+  const faixas = [0, 40, 80, 120, 200, 400];
+  let i = faixas.findIndex((f, k) => k > 0 && v <= f); if (i < 0) i = 5;
   const ini = faixas.at(i - 1), fim = faixas.at(i);
-  const pos = Math.min(99, ((i - 1) + Math.min(1, (v - ini) / (fim - ini))) * (100 / 6));
+  const pos = Math.min(99, ((i - 1) + Math.min(1, (v - ini) / (fim - ini))) * 20);
   pin.style.left = pos + '%'; pin.hidden = false;
 }
 function haQuanto(d){
@@ -1075,9 +1181,11 @@ function haQuanto(d){
 }
 
 function renderAirIndisponivel(){
+  if (typeof mostrarAlerta === 'function') mostrarAlerta(-1);
   marcarEscala(NaN);
   document.getElementById('demoFlag').classList.remove('show');
   document.getElementById('bigVal').textContent = '--';
+  document.getElementById('bigPm').textContent = '';
   const bl = document.getElementById('bigLvl');
   bl.textContent = 'Dados indisponíveis'; bl.style.background = '#E3E8E6'; bl.style.color = '';
   const hero = document.getElementById('airHero'); hero.style.setProperty('--c', '#E3E8E6'); hero.style.setProperty('--ci', 'var(--ink)');
@@ -1089,21 +1197,21 @@ function renderAirIndisponivel(){
 }
 
 function setRing(el, v, lvl){
-  const pct = Math.min(100, (v / 300) * 100);
+  const pct = Math.min(100, (v / 250) * 100);
   el.style.setProperty('--c', lvl.color);
   el.style.setProperty('--p', pct + '%');
 }
 
 function renderAir(data){
-  // Os sensores medem PM2,5 em µg/m³; mostramos o índice US AQI, igual ao mapa do PurpleAir
-  const paraIndice = x => Object.assign({}, x, { pm: x.pm25, pm25: pmParaAqi(x.pm25) });
+  // Os sensores medem PM2,5 em µg/m³; o número principal é o índice IQAr (igual ao PurpleAir, opção Brazilian PM2.5)
+  const paraIndice = x => Object.assign({}, x, { pm: x.pm25, pm25: pmParaIqar(x.pm25) });
   data = Object.assign({}, data, { stations: (data.stations || []).map(paraIndice), sensores: data.sensores && data.sensores.map(paraIndice) });
   document.getElementById('demoFlag').classList.remove('show');
   const porBairro = ['selva', 'waqi', 'purpleair'].includes(data.fonte);
   document.getElementById('bairrosBox').hidden = !porBairro;
   document.getElementById('airSource').textContent = porBairro
     ? (data.fonte === 'selva' ? 'Fonte: rede de sensores Selva/UEA.'
-       : data.fonte === 'purpleair' ? `Fonte: ${data.nSensores} sensores PurpleAir em Manaus (índice AQI de PM2,5, média de 10 min, como no mapa do PurpleAir). Bairro e zona definidos pela localização aproximada do sensor; zonas dos distritos de saúde.`
+       : data.fonte === 'purpleair' ? `Fonte: ${data.nSensores} sensores PurpleAir em Manaus · índice IQAr de PM2,5, média de 10 min.`
        : `Fonte: ${data.stations.length} sensores do World Air Quality Index (aqicn.org). PM2,5 aproximado a partir do índice.`)
     : 'Estimativa para Manaus (PM2,5) por modelo de satélite e clima. Fonte: Open-Meteo / Copernicus CAMS. Dados por bairro em breve.';
   const st = data.stations.filter(s => Number.isFinite(s.pm25));
@@ -1113,8 +1221,12 @@ function renderAir(data){
     ? data.sensores.reduce((a, s) => a + s.pm25, 0) / data.sensores.length
     : st.reduce((a, s) => a + s.pm25 * (s.n || 1), 0) / nTot;
   const lvl = levelOf(avg);
+  mostrarAlerta(LEVELS.indexOf(lvl));
 
   document.getElementById('bigVal').textContent = Math.round(avg);
+  const fontePm = (data.sensores && data.sensores.length ? data.sensores : st).filter(x => Number.isFinite(x.pm));
+  const pmMedio = fontePm.length ? fontePm.reduce((a, x) => a + x.pm, 0) / fontePm.length : NaN;
+  document.getElementById('bigPm').textContent = Number.isFinite(pmMedio) ? `Concentração média de PM2,5: ${Math.round(pmMedio)} µg/m³` : '';
   marcarArNoMapa(avg);
   marcarEscala(avg);
   setRing(document.getElementById('bigRing'), avg, lvl);
@@ -1206,8 +1318,8 @@ function pintarZonas(zonas){
       return;
     }
     const l = levelOf(z.pm25), cor = corCss(l.color), v = Math.round(z.pm25), n = z.xs.length;
-    pol.setStyle({ fillColor:cor }).bindPopup(`<strong>Zona ${nome}: ar ${l.ar}</strong><br>Índice ${v} (AQI de PM2,5), média de ${n === 1 ? '1 sensor' : n + ' sensores'}.<br>${l.msg}`);
-    rot.setContent(`<strong><em>Zona </em>${nome}</strong><span>${v}<em> · ${l.name}</em></span>`);
+    pol.setStyle({ fillColor:cor }).bindPopup(`<strong>Zona ${nome}: ar ${l.ar}</strong><br>Índice IQAr ${v}, média de ${n === 1 ? '1 sensor' : n + ' sensores'}.<br>${l.msg}`);
+    rot.setContent(`<strong><em>Zona </em>${nome}</strong><span>Índice ${v}<em> · ${l.name}</em></span>`);
     rot.getElement() && rot.getElement().style.setProperty('--c', cor);
   });
 }
@@ -1603,8 +1715,175 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustarFit
 /* Guarda a altura do topo fixo para as rolagens não esconderem títulos */
 function medirTopo(){ document.documentElement.style.setProperty('--topo', document.getElementById('topoFixo').offsetHeight + 'px'); }
 window.addEventListener('resize', medirTopo); medirTopo(); setTimeout(medirTopo, 800);
-carregarAvisos();
-setInterval(carregarAvisos, AVISOS.ATUALIZA_MS);
+// A faixa de notícias que rolava foi trocada pelo quadro "O que está funcionando hoje" e pelo alerta de urgência
+
+/* ===================== O que está funcionando hoje =====================
+   Montado sozinho a partir das NOTAS e notícias oficiais da Prefeitura sobre a fumaça
+   (portal, Semed e Semsa). Cada cartão mostra o último aviso oficial sobre o tema e leva à nota.
+   Para corrigir ou acrescentar algo na mão, use CIDADE.MANUAL (tem prioridade sobre as notas). */
+const CIDADE = {
+  DIAS: 30,            // procura notas dos últimos 30 dias
+  RECENTE_DIAS: 3,     // nota SEM data citada vale por 3 dias; nota com data ("até 24/10") vale até essa data
+  TEMAS: [
+    { nome:'Aulas da rede municipal', palavras:['aulas', 'atividades escolares', 'unidades de ensino', 'rede municipal de ensino', 'atividades presenciais seguem'] },
+    { nome:'Parques e eventos ao ar livre', palavras:['ar livre', 'parque', 'orla da gloria', 'feirinha'] },
+    { nome:'Faixa Liberada', palavras:['faixa liberada', 'faixas liberadas'] },
+    { nome:'Boi Manaus', palavras:['boi manaus'], ignorar:['feirinha do boi manaus', 'boizinho manaus'] },
+    { nome:'Aniversário de Manaus', palavras:['programacao em comemoracao aos', 'show de aniversario', 'aniversario gospel', 'boizinho manaus'] },
+    { nome:'Atendimento nas sedes da Prefeitura', palavras:['sedes administrativas'] }
+  ],
+  // ex.: { tema:'Faixa Liberada', status:'retomado', detalhe:'A Faixa Liberada volta neste domingo.', data:'2026-10-21', link:'https://www.manaus.am.gov.br/...' }
+  MANUAL: [],
+  MEDIDAS: []
+};
+const STATUS = {
+  cancelado:{ rot:'Cancelado', cls:'st-cancelado', ordem:0 },
+  suspenso: { rot:'Suspenso', cls:'st-fechado', ordem:1 },
+  adiado:   { rot:'Adiado', cls:'st-alterado', ordem:2 },
+  retomado: { rot:'Retomado', cls:'st-normal', ordem:3 },
+  antigo:   { rot:'Sem aviso recente', cls:'st-antigo', ordem:4 }
+};
+function dataCurta(iso){ const [a, m, d] = String(iso).slice(0, 10).split('-'); return d && m ? `${d}/${m}` : ''; }
+const diasDesde = iso => (Date.parse(dataManaus(0)) - Date.parse(String(iso).slice(0, 10))) / 864e5;
+function frases(t){ return t.split(/(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÇ“"])/); }
+function statusDaFrase(f){
+  const t = semAcento(f);
+  if (/retom|\bvolta(m|ra|rao)? a |\bvolta(m|ra|rao)? (neste|nesta|amanha|hoje)|reabert|reabre|normaliz|retorno d[aoe]s?|liberad[oa]s? novamente/.test(t)) return 'retomado';
+  if (/cancelad|nao havera|nao sera(o)? realizad/.test(t)) return 'cancelado';
+  if (/adiad|remarcad|transferid/.test(t)) return 'adiado';
+  if (/suspens|interromp|fechad/.test(t)) return 'suspenso';
+  return '';
+}
+function resumoDaFrase(f){
+  let t = f.replace(/^[A-ZÀ-Ú][a-zà-ú]{2,14}\s+(?=[A-ZÀ-Ú])/, '')   // tira intertítulo colado ("Suspensão As atividades...")
+           .replace(/^A Prefeitura de Manaus,?\s*(por meio d[aoe]s?\s.*?,\s*)?(informa|comunica) que,?\s*/i, '')
+           .replace(/^(Assim como|Bem como|Além disso,?|Também)\s+/i, '')
+           .replace(/^\w/, c => c.toUpperCase());
+  return t.length > 200 ? t.slice(0, 200).replace(/\s+\S*$/, '') + '…' : t;
+}
+/* Datas citadas na frase (21/10, 21/10/2026, 24 de outubro), em AAAA-MM-DD */
+const MESES = ['janeiro','fevereiro','marco','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+function datasDaFrase(f){
+  const t = semAcento(f), ano = dataManaus(0).slice(0, 4), iso = (d, m, a) => `${a || ano}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+  const out = [];
+  t.replace(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{4}))?\b/g, (_, d, m, a) => { if (+m >= 1 && +m <= 12 && +d >= 1 && +d <= 31) out.push(iso(d, m, a)); });
+  t.replace(new RegExp('\\b(\\d{1,2})(?:º|o)? de (' + MESES.join('|') + ')(?: de (\\d{4}))?', 'g'), (_, d, m, a) => { out.push(iso(d, MESES.indexOf(m) + 1, a)); });
+  return out;
+}
+/* "suspenso até 24/10" → '2026-10-24' */
+function dataFinal(f){
+  const t = semAcento(f), m = t.match(/\bate (?:o dia |a |o )?(?:\w+-feira,? |sabado,? |domingo,? |este |esta |o proximo |a proxima )*\(?(\d{1,2}(?:\/\d{1,2}(?:\/\d{4})?| de \w+))/);
+  return m ? (datasDaFrase(m[1])[0] || '') : '';
+}
+/* Busca as publicações dos últimos dias e lê o texto completo das notas sobre a fumaça */
+async function publicacoesFumaca(){
+  const desde = dataManaus(CIDADE.DIAS);
+  const listas = await Promise.all(AVISOS.FONTES.map(base =>
+    fetch(`${base}/wp-json/wp/v2/posts?after=${desde}T00:00:00&per_page=100&_fields=id,date,link,title,excerpt`, { cache:'no-store' })
+      .then(r => r.ok ? r.json() : []).then(l => l.map(p => Object.assign(p, { base }))).catch(() => [])));
+  const vistos = new Set(), itens = [];
+  listas.flat().forEach(p => {
+    const slug = String(p.link || '').replace(/\/$/, '').split('/').pop();
+    if (!p || !p.link || vistos.has(slug)) return; vistos.add(slug);
+    const titulo = textoLimpo(p.title && p.title.rendered), resumo = textoLimpo(p.excerpt && p.excerpt.rendered);
+    const nota = /^nota\b(?! de pesar)/i.test(titulo);
+    itens.push({ id:p.id, base:p.base, data:String(p.date), link:p.link, titulo, texto: titulo + '. ' + resumo, nota });
+  });
+  // notas costumam vir sem resumo: busca o texto completo delas
+  const porBase = {};
+  itens.filter(i => i.nota).forEach(i => { (porBase[i.base] = porBase[i.base] || []).push(i); });
+  await Promise.all(Object.entries(porBase).map(([base, l]) =>
+    fetch(`${base}/wp-json/wp/v2/posts?include=${l.map(i => i.id).join(',')}&per_page=100&_fields=id,content`, { cache:'no-store' })
+      .then(r => r.ok ? r.json() : []).then(cs => cs.forEach(c => { const i = l.find(x => x.id === c.id); if (i) i.texto = textoLimpo(c.content && c.content.rendered); }))
+      .catch(() => {})));
+  return itens.filter(i => AVISOS.PALAVRAS.some(k => semAcento(i.texto).includes(k)))
+              .sort((a, b) => b.data.localeCompare(a.data));
+}
+/* Para cada tema, o aviso oficial mais recente e o status que ele indica */
+function montarTemas(pubs){
+  const cartoes = [];
+  CIDADE.TEMAS.forEach(tema => {
+    const manual = CIDADE.MANUAL.find(m => m.tema === tema.nome);
+    if (manual){ cartoes.push({ nome:tema.nome, status:manual.status, detalhe:manual.detalhe, data:manual.data, link:manual.link }); return; }
+    for (const p of pubs){
+      let t = semAcento(p.texto); (tema.ignorar || []).forEach(x => { t = t.split(x).join(' '); });
+      if (!tema.palavras.some(k => t.includes(k))) continue;
+      const fs = frases(p.texto);
+      const f = fs.find(x => { let s = semAcento(x); (tema.ignorar || []).forEach(y => { s = s.split(y).join(' '); }); return tema.palavras.some(k => s.includes(k)) && statusDaFrase(x); });
+      if (!f) continue;
+      let status = statusDaFrase(f);
+      // a data citada na nota manda: vale até ela passar; sem data, vale por RECENTE_DIAS
+      const hoje = dataManaus(0), datas = datasDaFrase(f), ate = dataFinal(f);
+      if (datas.length ? !datas.some(d => d >= hoje) : diasDesde(p.data) > CIDADE.RECENTE_DIAS) status = 'antigo';
+      cartoes.push({ nome:tema.nome, status, detalhe:resumoDaFrase(f), data:p.data, link:p.link, nota:p.nota, ate: status !== 'antigo' && ate >= hoje ? ate : '' });
+      break;
+    }
+  });
+  CIDADE.MANUAL.filter(m => !CIDADE.TEMAS.some(t => t.nome === m.tema)).forEach(m => cartoes.push({ nome:m.tema, status:m.status, detalhe:m.detalhe, data:m.data, link:m.link }));
+  return cartoes.sort((a, b) => (STATUS[a.status] || STATUS.antigo).ordem - (STATUS[b.status] || STATUS.antigo).ordem);
+}
+const MEDIDA_PALAVRAS = ['distribui', 'mascara', 'pff2', 'fiscaliza', 'multa', 'proib', 'mutirao', 'brigada', 'combate', 'decreto', 'reuniao', 'acao conjunta', 'orienta', 'amplia', 'reforc', 'monitora'];
+function mostrarCidade(cartoes){
+  const ul = document.getElementById('servicos');
+  ul.innerHTML = cartoes.length ? cartoes.map(c => {
+    const st = STATUS[c.status] || STATUS.antigo;
+    const rotulo = c.link ? `<a href="${esc(c.link)}" target="_blank" rel="noopener">${c.status === 'antigo' ? 'Última nota' : (c.nota === false ? 'Notícia' : 'Nota oficial')} de ${dataCurta(c.data)} →</a>` : '';
+    return `<li class="servico ${st.cls}"><details><summary><span class="s-nome">${esc(c.nome)}</span><span class="s-status">${st.rot}</span></summary><div class="s-corpo"><span class="s-det">${esc(c.detalhe || '')}</span>${rotulo}</div></details></li>`;
+  }).join('') : '<li class="servico st-normal"><details open><summary><span class="s-nome">Nenhuma suspensão nas notas recentes</span><span class="s-status">Normal</span></summary><div class="s-corpo"><span class="s-det">A Prefeitura não publicou suspensões por causa da fumaça nos últimos dias.</span></div></details></li>';
+  const ativos = cartoes.filter(c => c.status && c.status !== 'antigo');
+  document.getElementById('rotinaLista').innerHTML = ativos.map(c => {
+    const st = STATUS[c.status];
+    const corpo = `<span class="r-st">${st.rot}</span><span>${esc(c.nome)}</span>${c.ate ? `<span class="r-data">até ${dataCurta(c.ate)}</span>` : (c.data ? `<span class="r-data">nota de ${dataCurta(c.data)}</span>` : '')}`;
+    return `<li class="${st.cls}">${c.link ? `<a href="${esc(c.link)}" target="_blank" rel="noopener" title="${esc(c.detalhe || '')}">${corpo}</a>` : `<a href="#cidadeHoje">${corpo}</a>`}</li>`;
+  }).join('');
+  document.getElementById('rotina').hidden = !ativos.length;
+  const aberto = matchMedia('(min-width:861px)').matches;
+  document.querySelectorAll('#servicos details').forEach(d => { d.open = aberto; });
+  const medidas = CIDADE.MEDIDAS;
+  const li = m => `<li><span class="m-data">${dataCurta(m.data)}</span>${m.link ? `<a href="${esc(m.link)}" target="_blank" rel="noopener">${esc(m.texto)} →</a>` : esc(m.texto)}</li>`;
+  document.getElementById('medidas').innerHTML = medidas.slice(0, 3).map(li).join('') || '<li><a href="https://www.manaus.am.gov.br/" target="_blank" rel="noopener">Veja as notícias no site da Prefeitura →</a></li>';
+  document.getElementById('medidasMais').innerHTML = medidas.slice(3).map(li).join('');
+  document.getElementById('medidasMaisBox').hidden = medidas.length <= 3;
+  document.getElementById('cidadeQuando').textContent = 'Atualizado às ' + new Date().toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit', timeZone:'America/Manaus' });
+}
+async function carregarCidade(){
+  try {
+    const pubs = await publicacoesFumaca();
+    CIDADE.MEDIDAS = pubs.filter(p => !p.nota && MEDIDA_PALAVRAS.some(k => semAcento(p.texto).includes(k)))
+      .slice(0, 10).map(p => ({ data:p.data, texto:p.titulo, link:p.link }));
+    mostrarCidade(montarTemas(pubs));
+  } catch(e){
+    console.warn('O que está funcionando hoje:', e);
+    document.getElementById('servicos').innerHTML = '<li class="servico st-antigo"><details open><summary><span class="s-nome">Não foi possível ler as notas agora</span><span class="s-status">Indisponível</span></summary><div class="s-corpo"><a href="https://www.manaus.am.gov.br/" target="_blank" rel="noopener">Ver no site da Prefeitura →</a></div></details></li>';
+  }
+}
+document.getElementById('rotina').addEventListener('click', e => {
+  const a = e.target.closest('a[href="#cidadeHoje"]'); if (!a) return;
+  e.preventDefault(); document.getElementById('cidadeHoje').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+});
+carregarCidade();
+setInterval(carregarCidade, AVISOS.ATUALIZA_MS);
+matchMedia('(min-width:861px)').addEventListener('change', e => document.querySelectorAll('#servicos details').forEach(d => { d.open = e.matches; }));
+
+/* ===================== Alerta de urgência =====================
+   Aparece só quando precisa: ar muito ruim/péssimo, ou um aviso escrito pela Prefeitura em ALERTA_MANUAL.
+   Quem fechar não vê de novo o mesmo alerta no mesmo dia. */
+const ALERTA_MANUAL = '';   // ex.: 'Aulas presenciais suspensas nesta quinta-feira (22/10) em toda a rede municipal.'
+function mostrarAlerta(lvlIndice){
+  const caixa = document.getElementById('alertaUrgente');
+  let txt = ALERTA_MANUAL;
+  if (!txt && lvlIndice >= 4) txt = 'Ar péssimo agora. Evite sair de casa e, se precisar sair, use máscara PFF2.';
+  else if (!txt && lvlIndice === 3) txt = 'Ar muito ruim agora. Fique em ambientes fechados sempre que puder.';
+  if (!txt){ caixa.hidden = true; return; }
+  const chave = 'alerta-fechado:' + dataManaus(0) + ':' + txt;
+  try { if (localStorage.getItem(chave)) { caixa.hidden = true; return; } } catch(e){}
+  document.getElementById('alertaTexto').textContent = txt;
+  caixa.dataset.chave = chave; caixa.hidden = false;
+}
+document.getElementById('alertaFechar').addEventListener('click', () => {
+  const caixa = document.getElementById('alertaUrgente'); caixa.hidden = true;
+  try { localStorage.setItem(caixa.dataset.chave, '1'); } catch(e){}
+});
 
 loadAir();
 setInterval(loadAir, CONFIG.REFRESH_MS);
